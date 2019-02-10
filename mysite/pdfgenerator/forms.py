@@ -7,7 +7,7 @@ class ProcurationForm(forms.Form):
     procurantlastname = forms.CharField(label="Nom de famille de la personne faisant la procuration")
     procurantlistofname = forms.CharField(label="Liste des prénoms de la personne faisant la procuration")
     procuranttelephone = forms.RegexField(label="Numéro de téléphone (+33 suivi de 9 chiffres)", regex=r'^\+33\d{9}$')
-    procurantdob = forms.DateField(label="Date de naissance de la personne faisant la procuration", widget=forms.SelectDateWidget()years=range(1900, 3000))
+    procurantdob = forms.DateField(label="Date de naissance de la personne faisant la procuration", widget=forms.SelectDateWidget(years=range(1900, 3000)))
     procurantpob = forms.CharField(label="Lieu (Département) de naissance de la personne faisant la procuration")
     procurantaddress1 = forms.CharField(label="Numéro de voie, type de voie, nom de la voie")
     procurantaddress2 = forms.CharField(label="Code postal et Ville")
