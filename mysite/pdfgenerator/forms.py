@@ -50,3 +50,24 @@ class FreeProcuration(ProcurationForm):
 class ImpotsProcuration(ProcurationForm):
     procurantimpots = forms.CharField(label="Ville dont on dépond pour les impots")
     procurantfiscal = forms.CharField(label="Numéro fiscal")
+
+class RelanceProcurationForm(ProcurationForm):
+    datepremiercourrier = forms.DateField(label="Date du premier courrier", widget=forms.SelectDateWidget(years=range(2019, 3000)))
+
+class CPAMRelanceProcuration(RelanceProcurationForm, CPAMProcuration):
+    pass
+
+class EcoleRelanceProcuration(RelanceProcurationForm, EcoleProcuration):
+    pass
+
+class BanqueRelanceProcuration(RelanceProcurationForm, BanqueProcuration):
+    pass
+
+class EntrepriseRelanceProcuration(RelanceProcurationForm, EntrepriseProcuration):
+    pass
+
+class FreeRelanceProcuration(RelanceProcurationForm, FreeProcuration):
+    pass
+
+class ImpotsRelanceProcuration(RelanceProcurationForm, ImpotsProcuration):
+    pass

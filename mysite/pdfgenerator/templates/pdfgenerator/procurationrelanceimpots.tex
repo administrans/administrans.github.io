@@ -60,10 +60,10 @@
 
 % Mettre ici le nom de la ville dont la personne faisant la
 % procuration d\'{e}pend d'un point de vue des imp\^{o}ts
-\newcommand{\ProcurantImpots}{Ville du centre des impots}
+\newcommand{\ProcurantImpots}{ {{- form.cleaned_data["procurantimpots"] -}} }
 
 % Mettre ici le num\'{e}ro fiscal de la personne faisant la procuration
-\newcommand{\ProcurantFiscal}{num\'{e}ro fiscal}
+\newcommand{\ProcurantFiscal}{ {{- form.cleaned_data["procurantfiscal"] -}} }
 
 % Mettre ici le type d'accord souhait\'{e} pour la personne faisant
 % la procuration.
@@ -76,21 +76,20 @@
 %\newcommand{\ProcurantEcole}{ {{- form.cleaned_data["procurantecole"] -}} }
 
 % Mettre ici le nom de la banque de la personne faisant la procuration
-\newcommand{\ProcurantBanque}{ {{- form.cleaned_data["procurantbanque"] -}} }
+%\newcommand{\ProcurantBanque}{ {{- form.cleaned_data["procurantbanque"] -}} }
 
 % Mettre ici le nom de l'entreprise \`{a} laquelle la personne faisant
 % la procuration veut faire un changement
-\newcommand{\ProcurantEntreprise}{Nom de l'entreprise}
+%\newcommand{\ProcurantEntreprise}{ {{- form.cleaned_data["procurantentreprise"] -}} }
 
 % Mettre ici le num\'{e}ro de contrat de l'entreprise cit\'{e}e au dessus
-\newcommand{\ProcurantContrat}{Num\'{e}ro de contrat}
+%\newcommand{\ProcurantContrat}{ {{- form.cleaned_data["procurantcontrat"] -}} }
 
 % Date de fin de la procuration
 \newcommand{\FinProc}{ {{- form.cleaned_data["finprocuration"] -}} }
 \newcommand{\DebutProc}{ {{- form.cleaned_data["debutprocuration"] -}} }
 % Date d'envoi du premier courrier
 \newcommand{\DateCourrier}{ {{- form.cleaned_data["datepremiercourrier"] -}} }
-
 %-------------------------------------------------------------------------
 %   Partie sur le. procur\'{e}.e
 %-------------------------------------------------------------------------
@@ -152,7 +151,7 @@
 %-----------------------------------------------%
 % Le blabla pas int\'{e}ressant                     %
 %-----------------------------------------------%
-\begin{letter}{\`{A} l'attention du service client de \ProcurantBanque}
+\begin{letter}{\`{A} 'attention du Service des Imp\^{o}ts des Particuliers de \ProcurantImpots}
 
     \date{le \DebutProc}
     \name{\ProcurantId}
@@ -171,7 +170,7 @@
 % \`{a} vous de jouer !                             %
 %-----------------------------------------------%
 %-% remplacer par votre lettre de motivation
-    Je \if\ProcurantGender0 sous-sign\'{e}e \else sous-sign\'{e} \fi \ProcurantFullId, \if\ProcurantGender0 n\'{e}e \else n\'{e} \fi le \ProcurantDOB {} \`{a} \ProcurantPOB, demeurant au \ProcurantAddresseRue {} \ProcurantAddresseVille agissant en tant que mandant d\'{e}clare donner pouvoir \`{a} la pr\'{e}sente \`{a} \PersonFullId, \if\PersonGender0 n\'{e}e \else n\'{e} \fi le \PersonDOB {} \`{a} \PersonPOB, demeurant au \PersonAddresseRue {} \PersonAddresseVille aupr\`{e}s du service client de \ProcurantBanque.
+    Je \if\ProcurantGender0 sous-sign\'{e}e \else sous-sign\'{e} \fi \ProcurantFullId, \if\ProcurantGender0 n\'{e}e \else n\'{e} \fi le \ProcurantDOB {} \`{a} \ProcurantPOB, demeurant au \ProcurantAddresseRue {} \ProcurantAddresseVille agissant en tant que mandant d\'{e}clare donner pouvoir \`{a} la pr\'{e}sente \`{a} \PersonFullId, \if\PersonGender0 n\'{e}e \else n\'{e} \fi le \PersonDOB {} \`{a} \PersonPOB, demeurant au \PersonAddresseRue {} \PersonAddresseVille aupr\`{e}s du Service des Imp\^{o}ts des Particuliers de \ProcurantImpots.
 
     \medskip
 
@@ -186,7 +185,7 @@
 
 
 
-\begin{letter}{\`{A} l'attention du service client de \ProcurantBanque}
+\begin{letter}{\`{A} l'attention du Service des Imp\^{o}ts des Particuliers de \ProcurantImpots}
 
     \date{le \DebutProc}
     \name{\PersonId}
@@ -204,11 +203,11 @@
 % à vous de jouer !                             %
 %-----------------------------------------------%
 %-% \`{À} remplacer par votre lettre de motivation
-    Je suis \if\PersonGender0 mandat\'{e}e \else mandat\'{e} \fi par \ProcurantFullId qui a r\'{e}cemment obtenu son changement de pr\'{e}nom à l'\'{E}tat-Civil afin d'effectuer les d\'{e}marches de changement de pr\'{e}nom et de civilit\'{e} dans les registres du service client de \ProcurantBanque.
+    Je suis \if\PersonGender0 mandat\'{e}e \else mandat\'{e} \fi par \ProcurantFullId qui a r\'{e}cemment obtenu son changement de pr\'{e}nom à l'\'{E}tat-Civil afin d'effectuer les d\'{e}marches de changement de pr\'{e}nom et de civilit\'{e} dans les registres du Service des Imp\^{o}ts des Particuliers de \ProcurantImpots.
 
     \medskip
 
-    \ProcurantId, est \if\ProcurantGender0 connue \else connu \fi de vos services sous le nom de \ProcurantOldId.
+    \ProcurantId, est \if\ProcurantGender0 connue \else connu \fi de vos services sous le nom de \ProcurantOldId {} et a pour numéro fiscal \ProcurantFiscal..
 
     \medskip
 

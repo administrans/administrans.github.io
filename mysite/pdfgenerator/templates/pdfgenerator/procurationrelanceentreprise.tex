@@ -76,14 +76,14 @@
 %\newcommand{\ProcurantEcole}{ {{- form.cleaned_data["procurantecole"] -}} }
 
 % Mettre ici le nom de la banque de la personne faisant la procuration
-\newcommand{\ProcurantBanque}{ {{- form.cleaned_data["procurantbanque"] -}} }
+%\newcommand{\ProcurantBanque}{ {{- form.cleaned_data["procurantbanque"] -}} }
 
 % Mettre ici le nom de l'entreprise \`{a} laquelle la personne faisant
 % la procuration veut faire un changement
-\newcommand{\ProcurantEntreprise}{Nom de l'entreprise}
+\newcommand{\ProcurantEntreprise}{ {{- form.cleaned_data["procurantentreprise"] -}} }
 
 % Mettre ici le num\'{e}ro de contrat de l'entreprise cit\'{e}e au dessus
-\newcommand{\ProcurantContrat}{Num\'{e}ro de contrat}
+\newcommand{\ProcurantContrat}{ {{- form.cleaned_data["procurantcontrat"] -}} }
 
 % Date de fin de la procuration
 \newcommand{\FinProc}{ {{- form.cleaned_data["finprocuration"] -}} }
@@ -152,7 +152,7 @@
 %-----------------------------------------------%
 % Le blabla pas int\'{e}ressant                     %
 %-----------------------------------------------%
-\begin{letter}{\`{A} l'attention du service client de \ProcurantBanque}
+\begin{letter}{\`{A} 'attention du service client de \ProcurantEntreprise}
 
     \date{le \DebutProc}
     \name{\ProcurantId}
@@ -171,7 +171,7 @@
 % \`{a} vous de jouer !                             %
 %-----------------------------------------------%
 %-% remplacer par votre lettre de motivation
-    Je \if\ProcurantGender0 sous-sign\'{e}e \else sous-sign\'{e} \fi \ProcurantFullId, \if\ProcurantGender0 n\'{e}e \else n\'{e} \fi le \ProcurantDOB {} \`{a} \ProcurantPOB, demeurant au \ProcurantAddresseRue {} \ProcurantAddresseVille agissant en tant que mandant d\'{e}clare donner pouvoir \`{a} la pr\'{e}sente \`{a} \PersonFullId, \if\PersonGender0 n\'{e}e \else n\'{e} \fi le \PersonDOB {} \`{a} \PersonPOB, demeurant au \PersonAddresseRue {} \PersonAddresseVille aupr\`{e}s du service client de \ProcurantBanque.
+    Je \if\ProcurantGender0 sous-sign\'{e}e \else sous-sign\'{e} \fi \ProcurantFullId, \if\ProcurantGender0 n\'{e}e \else n\'{e} \fi le \ProcurantDOB {} \`{a} \ProcurantPOB, demeurant au \ProcurantAddresseRue {} \ProcurantAddresseVille agissant en tant que mandant d\'{e}clare donner pouvoir \`{a} la pr\'{e}sente \`{a} \PersonFullId, \if\PersonGender0 n\'{e}e \else n\'{e} \fi le \PersonDOB {} \`{a} \PersonPOB, demeurant au \PersonAddresseRue {} \PersonAddresseVille aupr\`{e}s du service client de \ProcurantEntreprise.
 
     \medskip
 
@@ -186,7 +186,7 @@
 
 
 
-\begin{letter}{\`{A} l'attention du service client de \ProcurantBanque}
+\begin{letter}{\`{A} l'attention du service client de \ProcurantEntreprise}
 
     \date{le \DebutProc}
     \name{\PersonId}
@@ -204,11 +204,11 @@
 % à vous de jouer !                             %
 %-----------------------------------------------%
 %-% \`{À} remplacer par votre lettre de motivation
-    Je suis \if\PersonGender0 mandat\'{e}e \else mandat\'{e} \fi par \ProcurantFullId qui a r\'{e}cemment obtenu son changement de pr\'{e}nom à l'\'{E}tat-Civil afin d'effectuer les d\'{e}marches de changement de pr\'{e}nom et de civilit\'{e} dans les registres du service client de \ProcurantBanque.
+    Je suis \if\PersonGender0 mandat\'{e}e \else mandat\'{e} \fi par \ProcurantFullId qui a r\'{e}cemment obtenu son changement de pr\'{e}nom à l'\'{E}tat-Civil afin d'effectuer les d\'{e}marches de changement de pr\'{e}nom et de civilit\'{e} dans les registres du service client de \ProcurantEntreprise.
 
     \medskip
 
-    \ProcurantId, est \if\ProcurantGender0 connue \else connu \fi de vos services sous le nom de \ProcurantOldId.
+    \ProcurantId, est \if\ProcurantGender0 connue \else connu \fi de vos services sous le nom de \ProcurantOldId {} et dispose d'un contrat chez vous (\ProcurantContrat).
 
     \medskip
 
@@ -216,13 +216,14 @@
 
     \medskip
 
-    De plus, je vous demandais de bien vouloir changer sa civilit\'{e} de \if\ProcurantGender0 \og Monsieur \fg{} à \og Madame \fg{} \else \og Madame \fg{} à \og Monsieur \fg{} \fi dans vos registres, et ce pr\'{e}alablement à toute d\'{e}cision de changement de mention de sexe à l'\'{E}tat-Civil, puisque qu'il s'agit d'une personne transgenre.
+    De plus, je vous demandais bien vouloir changer sa civilit\'{e} de \if\ProcurantGender0 \og Monsieur \fg{} à \og Madame \fg{} \else \og Madame \fg{} à \og Monsieur \fg{} \fi dans vos registres, et ce pr\'{e}alablement à toute d\'{e}cision de changement de mention de sexe à l'\'{E}tat-Civil, puisque qu'il s'agit d'une personne transgenre.
 
     \medskip
 
     \Civilite
 
     \medskip
+
 
     \textbf{Faute d'un prompt retour de votre part, je me verrais \if\PersonGender0 contrainte \else contraint \fi de saisir le D\'{e}fenseur des Droits, d'une part, et la CNIL, d'autre part.}
 

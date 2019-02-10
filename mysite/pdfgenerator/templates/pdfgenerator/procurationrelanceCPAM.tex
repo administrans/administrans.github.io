@@ -40,7 +40,7 @@
 
 % Mettre ici le nom du d\'{e}partement où habites la personne
 % cela est utilis\'{e} pour la caisse de CPAM dont elle d\'{e}pend
-%\newcommand{\ProcurantDepartement}{ {{- form.cleaned_data["procurantdepartement"] -}} }
+\newcommand{\ProcurantDepartement}{ {{- form.cleaned_data["procurantdepartement"] -}} }
 
 % Mettre ici la date de naissance de la personne faisant la procuration
 \newcommand{\ProcurantDOB}{ {{- form.cleaned_data["procurantdob"] -}} }
@@ -56,7 +56,7 @@
 
 % Mettre ici le num\'{e}ro de s\'{e}curit\'{e} sociale de la personne faisant
 % la procuration
-%\newcommand{\ProcurantSecu}{ {{- form.cleaned_data["procurantss"] -}} }
+\newcommand{\ProcurantSecu}{ {{- form.cleaned_data["procurantss"] -}} }
 
 % Mettre ici le nom de la ville dont la personne faisant la
 % procuration d\'{e}pend d'un point de vue des imp\^{o}ts
@@ -73,10 +73,10 @@
 
 % Mettre ici le nom de l'\'{e}cole/universit\'{e}/autre \`{a} laquelle la demande
 % de rectification et d'information est demand\'{e}e
-%\newcommand{\ProcurantEcole}{ {{- form.cleaned_data["procurantecole"] -}} }
+\newcommand{\ProcurantEcole}{Nom de l'\'{e}cole}
 
 % Mettre ici le nom de la banque de la personne faisant la procuration
-\newcommand{\ProcurantBanque}{ {{- form.cleaned_data["procurantbanque"] -}} }
+\newcommand{\ProcurantBanque}{Nom de la banque}
 
 % Mettre ici le nom de l'entreprise \`{a} laquelle la personne faisant
 % la procuration veut faire un changement
@@ -152,7 +152,7 @@
 %-----------------------------------------------%
 % Le blabla pas int\'{e}ressant                     %
 %-----------------------------------------------%
-\begin{letter}{\`{A} l'attention du service client de \ProcurantBanque}
+\begin{letter}{\`{A} l'attention de la CPAM du \ProcurantDepartement}
 
     \date{le \DebutProc}
     \name{\ProcurantId}
@@ -171,7 +171,7 @@
 % \`{a} vous de jouer !                             %
 %-----------------------------------------------%
 %-% remplacer par votre lettre de motivation
-    Je \if\ProcurantGender0 sous-sign\'{e}e \else sous-sign\'{e} \fi \ProcurantFullId, \if\ProcurantGender0 n\'{e}e \else n\'{e} \fi le \ProcurantDOB {} \`{a} \ProcurantPOB, demeurant au \ProcurantAddresseRue {} \ProcurantAddresseVille agissant en tant que mandant d\'{e}clare donner pouvoir \`{a} la pr\'{e}sente \`{a} \PersonFullId, \if\PersonGender0 n\'{e}e \else n\'{e} \fi le \PersonDOB {} \`{a} \PersonPOB, demeurant au \PersonAddresseRue {} \PersonAddresseVille aupr\`{e}s du service client de \ProcurantBanque.
+    Je \if\ProcurantGender0 sous-sign\'{e}e \else sous-sign\'{e} \fi \ProcurantFullId, \if\ProcurantGender0 n\'{e}e \else n\'{e} \fi le \ProcurantDOB {} \`{a} \ProcurantPOB, demeurant au \ProcurantAddresseRue {} \ProcurantAddresseVille agissant en tant que mandant d\'{e}clare donner pouvoir \`{a} la pr\'{e}sente \`{a} \PersonFullId, \if\PersonGender0 n\'{e}e \else n\'{e} \fi le \PersonDOB {} \`{a} \PersonPOB, demeurant au \PersonAddresseRue {} \PersonAddresseVille aupr\`{e}s de la CPAM du \ProcurantDepartement.
 
     \medskip
 
@@ -186,7 +186,7 @@
 
 
 
-\begin{letter}{\`{A} l'attention du service client de \ProcurantBanque}
+\begin{letter}{\`{A} l'attention de la CPAM du \ProcurantDepartement}
 
     \date{le \DebutProc}
     \name{\PersonId}
@@ -204,19 +204,19 @@
 % à vous de jouer !                             %
 %-----------------------------------------------%
 %-% \`{À} remplacer par votre lettre de motivation
-    Je suis \if\PersonGender0 mandat\'{e}e \else mandat\'{e} \fi par \ProcurantFullId qui a r\'{e}cemment obtenu son changement de pr\'{e}nom à l'\'{E}tat-Civil afin d'effectuer les d\'{e}marches de changement de pr\'{e}nom et de civilit\'{e} dans les registres du service client de \ProcurantBanque.
+    Je suis \if\PersonGender0 mandat\'{e}e \else mandat\'{e} \fi par \ProcurantFullId qui a r\'{e}cemment obtenu son changement de pr\'{e}nom à l'\'{E}tat-Civil afin d'effectuer les d\'{e}marches de changement de pr\'{e}nom et de civilit\'{e} dans les registres de la CPAM du \ProcurantDepartement.
 
     \medskip
 
-    \ProcurantId, est \if\ProcurantGender0 connue \else connu \fi de vos services sous le nom de \ProcurantOldId.
+    \ProcurantId, est \if\ProcurantGender0 connue \else connu \fi de vos services sous le nom de \ProcurantOldId {} et a le num\'{e}ro de S\'{e}curit\'{e} Sociale \ProcurantSecu.
 
     \medskip
 
-    En vertu de la d\'{e}cision de changement de pr\'{e}nom d\'{e}livr\'{e}e par l'\'{E}tat-Civil, je vous priais de bien vouloir changer son pr\'{e}nom dans vos registres.
+    En vertu de la d\'{e}cision de changement de pr\'{e}nom d\'{e}livr\'{e}e par l'\'{E}tat-Civil, je vous ai demand\'{e} de bien vouloir changer son pr\'{e}nom dans vos registres dans un courrier en date du \DateCourrier.
 
     \medskip
 
-    De plus, je vous demandais de bien vouloir changer sa civilit\'{e} de \if\ProcurantGender0 \og Monsieur \fg{} à \og Madame \fg{} \else \og Madame \fg{} à \og Monsieur \fg{} \fi dans vos registres, et ce pr\'{e}alablement à toute d\'{e}cision de changement de mention de sexe à l'\'{E}tat-Civil, puisque qu'il s'agit d'une personne transgenre.
+    De plus, je vous priais de bien vouloir changer sa civilit\'{e} de \if\ProcurantGender0 \og Monsieur \fg{} à \og Madame \fg{} \else \og Madame \fg{} à \og Monsieur \fg{} \fi dans vos registres, et ce pr\'{e}alablement à toute d\'{e}cision de changement de mention de sexe à l'\'{E}tat-Civil, puisque qu'il s'agit d'une personne transgenre.
 
     \medskip
 
@@ -224,8 +224,8 @@
 
     \medskip
 
-    \textbf{Faute d'un prompt retour de votre part, je me verrais \if\PersonGender0 contrainte \else contraint \fi de saisir le D\'{e}fenseur des Droits, d'une part, et la CNIL, d'autre part.}
 
+    \textbf{Faute d'un prompt retour de votre part, je me verrais \if\PersonGender0 contrainte \else contraint \fi de saisir le D\'{e}fenseur des Droits, d'une part, et la CNIL, d'autre part.}
 %-----------------------------------------------%
 % Le blabla pas int\'{e}ressant                     %
 %-----------------------------------------------%
