@@ -13,9 +13,9 @@ class ProcurationForm(forms.Form):
     procurantaddress2 = forms.CharField(label="Code postal et Ville")
     procurantlocation = forms.CharField(label="Lieu où est faite la procuration")
     procurantemail = forms.EmailField(label="Email procurant")
-    procurantgender = forms.ChoiceField(choices=((0, "féminin"), (1, "masculin")))
+    procurantgender = forms.ChoiceField(label="Accords de la personne faisant la procuration", choices=((0, "féminin"), (1, "masculin")))
     procurantdeadname = forms.CharField(label="Deadname de la personne faisant la procuration (seulement le prénom)")
-    debutprocuration = forms.DateField(label="Date début procuration", widget=forms.SelectDateWidget(years=range(1900, 3000)))
+    debutprocuration = forms.DateField(label="Début de la procuration", widget=forms.SelectDateWidget(years=range(1900, 3000)))
     finprocuration = forms.DateField(label="Fin de la procuration", widget=forms.SelectDateWidget())
     personfirstname = forms.CharField(label="Prénom de la personne a qui est faite la procuration")
     personlastname = forms.CharField(label="Nom de famille de la personne a qui est faite la procuration")
@@ -27,7 +27,7 @@ class ProcurationForm(forms.Form):
     personemail = forms.EmailField(label="Email procurant")
     personaddress1 = forms.CharField(label="Numéro de voie, type de voie, nom de la voie")
     personaddress2 = forms.CharField(label="Code postal et Ville")
-    persongender = forms.ChoiceField(choices=((0, "féminin"), (1, "masculin")))
+    persongender = forms.ChoiceField(label="Accord de la personne", choices=((0, "féminin"), (1, "masculin")))
 
 
 class CPAMProcuration(ProcurationForm):
