@@ -1,0 +1,4 @@
+django-tex
+jinja2-django-tags
+django-datetime-widget
+django-phonenumber-field
