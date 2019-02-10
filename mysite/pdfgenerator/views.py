@@ -11,6 +11,9 @@ def list_letters_type(request):
 def list_procuration_type(request):
     return render(request, "pdfgenerator/list_procuration_type.html")
 
+def list_procuration_relance_type(request):
+    return render(request, "pdfgenerator/list_procuration_relance_type.html")
+
 def form_CPAM_procuration(request):
     template_name = "pdfgenerator/form_CPAM_Procuration.html"
     latex_name = "pdfgenerator/procurationCPAM.tex"

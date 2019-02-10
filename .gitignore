@@ -1,0 +1,11 @@
+*localsettings.py
+*.aux
+*.odt
+*.pdf
+*.log
+*.tns
+*.ins
+db.sqlite3
+*__pycache__*
+*lettre_.*\.tex
+*procuration_.*\.tex

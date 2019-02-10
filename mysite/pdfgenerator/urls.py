@@ -10,6 +10,7 @@ urlpatterns = [
     url(r"^procuration/entreprise/$", views.form_entreprise_procuration, name="form_entreprise_procuration"),
     url(r"^procuration/free/$", views.form_free_procuration, name="form_free_procuration"),
     url(r"^procuration/impots/$", views.form_impots_procuration, name="form_impots_procuration"),
+    url(r"^procuration/relance/$", views.list_procuration_relance_type, name="list_procuration_relance_type"),
     url(r"^procuration/relance/cpam/$", views.form_CPAM_relance_procuration, name="from_CPAM_relance_procuration"),
     url(r"^procuration/relance/banque/$", views.form_banque_relance_procuration, name="from_banque_relance_procuration"),
     url(r"^procuration/relance/ecole/$", views.form_ecole_relance_procuration, name="from_ecole_relance_procuration"),
