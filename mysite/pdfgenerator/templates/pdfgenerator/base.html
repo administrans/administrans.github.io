@@ -11,24 +11,47 @@
 
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script> 
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Add a gray background color and some padding to the footer */
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
+  </style>
     </head>
     <body class="center">
-        <header class="txtcenter mts">Veuillez choisir un mode de génération de fichiers</header>
 
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Trans Administratif</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li><a href={% url 'list_procuration_type' %}>Par Procuration</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
 
-        <div class="w80 center mts">
-
-            <div class="fl w70 pas">
+        <div class="container">
 
                 {% block content %}{% endblock %}
 
-            </div>
         </div>
 
-        <footer class="clear base mts">
-            <p>
-            Footer
-            </p>
-        </footer>
+<footer class="container-fluid text-center">
+  <p>En cas d'erreur maria AT climent-pommeret DOT red</p>
+</footer>
     </body>
 </html>
