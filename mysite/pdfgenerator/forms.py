@@ -3,7 +3,7 @@ from django import forms
 from django.contrib.admin import widgets
 
 class ProcurationForm(forms.Form):
-    procurantfirstname = forms.CharField(label="Prenom de la personne faisant la procuration")
+    procurantfirstname = forms.CharField(label="Prénom de la personne faisant la procuration")
     procurantlastname = forms.CharField(label="Nom de famille de la personne faisant la procuration")
     procurantlistofname = forms.CharField(label="Liste des prénoms de la personne faisant la procuration")
     procuranttelephone = forms.RegexField(label="Numéro de téléphone (+33 suivi de 9 chiffres)", regex=r'^\+33\d{9}$')
@@ -17,11 +17,11 @@ class ProcurationForm(forms.Form):
     procurantdeadname = forms.CharField(label="Deadname de la personne faisant la procuration (seulement le prénom)")
     debutprocuration = forms.DateField(label="Début de la procuration", widget=forms.SelectDateWidget(years=range(1900, 3000)))
     finprocuration = forms.DateField(label="Fin de la procuration", widget=forms.SelectDateWidget())
-    personfirstname = forms.CharField(label="Prénom de la personne a qui est faite la procuration")
-    personlastname = forms.CharField(label="Nom de famille de la personne a qui est faite la procuration")
-    personlistofname = forms.CharField(label="Liste des prénoms de la personne a qui est faite la procuration")
-    persondob = forms.DateField(label="Date de naissance de la personne a qui est faite la procuration", widget=forms.SelectDateWidget(years=range(1900, 3000)))
-    personpob = forms.CharField(label="<Lieu (Département)> de naissance de la personne a qui est faite la procuration")
+    personfirstname = forms.CharField(label="Prénom de la personne à qui est faite la procuration")
+    personlastname = forms.CharField(label="Nom de famille de la personne à qui est faite la procuration")
+    personlistofname = forms.CharField(label="Liste des prénoms de la personne à qui est faite la procuration")
+    persondob = forms.DateField(label="Date de naissance de la personne à qui est faite la procuration", widget=forms.SelectDateWidget(years=range(1900, 3000)))
+    personpob = forms.CharField(label="<Lieu (Département)> de naissance de la personne à qui est faite la procuration")
     persontelephone = forms.RegexField(label="Numéro de téléphone (+33 suivi de 9 chiffres)", regex=r'^\+33\d{9}$')
     personlocation = forms.CharField(label="Lieu où est faite la lettre")
     personemail = forms.EmailField(label="Email procurant")
