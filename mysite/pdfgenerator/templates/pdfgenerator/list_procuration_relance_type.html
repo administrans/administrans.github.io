@@ -1,29 +1,47 @@
 {% extends 'pdfgenerator/base.html' %}
 
 {% block content %}
-<article>
-    <header><a href={% url 'form_CPAM_relance_procuration' %}>Relance CPAM</a></header>
-    <p>Pour tout ce qui a trait à la CPAM</p>
-</article>
+<div class="row row-margin-custom">
+    <div class="col-sm-4">
+        <article>
+            <header><a href={% url 'form_CPAM_relance_procuration' %}>Relance CPAM</a></header>
+            <p>Pour tout ce qui a trait à la CPAM</p>
+        </article>
+    </div>
 
-<article>
-    <header><a href={% url 'form_banque_relance_procuration' %}>Relance Banque</a></header>
-    <p>Pour tout ce qui a trait à la Banque</p>
-</article>
-<article>
-    <header><a href={% url 'form_ecole_relance_procuration' %}>Relance École/Université</a></header>
-    <p>Pour tout ce qui a trait aux services scolarité d'une École</p>
-</article>
-<article>
-    <header><a href={% url 'form_free_relance_procuration' %}>Relance Free</a></header>
-    <p>Pour tout ce qui a trait au service client de Free</p>
-</article>
-<article>
-    <header><a href={% url 'form_entreprise_relance_procuration' %}>Relance entreprise avec un numéro de contrat</a></header>
-    <p>Pour tout ce qui a trait à une entreprise dont on dispose un numéro de contrat</p>
-</article>
-<article>
-    <header><a href={% url 'form_impots_relance_procuration' %}>Relance Impôts</a></header>
-    <p>Pour tout ce qui a trait à une entreprise dont on dispose un numéro de contrat</p>
-</article>
+    <div class="col-sm-4">
+        <article>
+            <header><a href={% url 'form_banque_relance_procuration' %}>Relance Banque</a></header>
+            <p>Pour tout ce qui a trait à la Banque</p>
+        </article>
+    </div>
+
+    <div class="col-sm-4">
+        <article>
+            <header><a href={% url 'form_ecole_relance_procuration' %}>Relance École/Université</a></header>
+             <p>Pour tout ce qui a trait aux services scolarité d'une École</p>
+    </article>
+    </div>
+</div>
+
+<div class="row row-margin-custom">
+    <div class="col-sm-4">
+        <article>
+            <header><a href={% url 'form_free_relance_procuration' %}>Relance Free</a></header>
+            <p>Pour tout ce qui a trait au service client de Free</p>
+        </article>
+    </div>
+    <div class="col-sm-4">
+        <article>
+            <header><a href={% url 'form_entreprise_relance_procuration' %}>Relance entreprise avec un numéro de contrat</a></header>
+            <p>Pour tout ce qui a trait à une entreprise dont on dispose un numéro de contrat</p>
+        </article>
+    </div>
+    <div class="col-sm-4">
+        <article>
+            <header><a href={% url 'form_impots_relance_procuration' %}>Relance Impôts</a></header>
+            <p>Pour tout ce qui a trait à une entreprise dont on dispose un numéro de contrat</p>
+        </article>
+    </div>
+</div>
 {% endblock %}
