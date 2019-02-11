@@ -41,3 +41,8 @@ Déploiement
 
 [Regardez ici par exemple](https://maria.climent-pommeret.red/fr/blog/deploying-a-django-application/)
 
+
+Contribuer ?
+------------
+
+OUI SVP ! Comme je peux pas ouvrir à tout va le gitlab, envoyez-moi un mail (avec un sujet explicite) at maria AT climent-pommeret DOT red, je vous créerais un compte !
