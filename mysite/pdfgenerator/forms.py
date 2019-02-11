@@ -81,7 +81,7 @@ class StandaloneForm(forms.Form):
     pob = forms.CharField(label="<Lieu (Département)> de naissance ")
     address1 = forms.CharField(label="Numéro de voie, type de voie, nom de la voie")
     address2 = forms.CharField(label="Code postal et Ville")
-    location = forms.CharField(label="Lieu où est faite la procuration")
+    location = forms.CharField(label="Lieu où est faite la lettre")
     email = forms.EmailField(label="Email ")
     gender = forms.ChoiceField(label="Accords ", choices=((0, "féminin"), (1, "masculin")))
     deadname = forms.CharField(label="Deadname  (seulement le prénom)")
