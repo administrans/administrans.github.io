@@ -48,7 +48,7 @@ class FreeProcuration(ProcurationForm):
     pass
 
 class ImpotsProcuration(ProcurationForm):
-    procurantimpots = forms.CharField(label="Ville dont on dépond pour les impots")
+    procurantimpots = forms.CharField(label="Ville dont on dépend pour les impots")
     procurantfiscal = forms.CharField(label="Numéro fiscal")
 
 class RelanceProcurationForm(ProcurationForm):
@@ -105,6 +105,6 @@ class FreeStandalone(StandaloneForm):
     pass
 
 class ImpotsStandalone(StandaloneForm):
-    impots = forms.CharField(label="Ville dont on dépond pour les impots")
+    impots = forms.CharField(label="Ville dont on dépend pour les impots")
     fiscal = forms.CharField(label="Numéro fiscal")
 
