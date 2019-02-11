@@ -5,6 +5,19 @@
 | Maria Climent-Pommeret | Licence MIT |
 
 
+Comment cela fonctionne
+-----------------------
+
+Pour l'instant, sont gérées :
+- les lettres polies de demande de changement de prénom et de civilité
+- les lettres de relance en cas d'absence de réponse (satisfaisante)
+
+Les différents modes :
+- par procuration (génère une procuration + la lettre de demande à faire envoyer
+par un.e cis de l'entourage qui pourra gérer les tracas administratifs, pour pas
+que vous ayez a gérer vous même cette merde)
+- [to come] les lettres si vous souhaitez le faire vous même.
+
 Checklist des papiers à changer
 -------------------------------
 
@@ -21,7 +34,7 @@ Si changement de prénom à l'EC
 - opérateur téléphonique/Internet
 - carte d'électeur.rice
 
-Si changement de mention de sexe à l'État-Civil :
+Si changement de mention de sexe à l'État-Civil (pas encore pris en charge) :
 - CNI/passeport
 - permis de conduire
 - numéro INSEE
