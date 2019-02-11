@@ -47,7 +47,6 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'mysite.urls'
 
 TEMPLATES = [
-
     {
         'NAME': 'tex',
         'BACKEND': 'django_tex.engine.TeXEngine',
@@ -55,6 +54,7 @@ TEMPLATES = [
         'OPTIONS': {
             'extensions': [
                 'jdj_tags.extensions.DjangoCompat',
+                'jdj_tags.extensions.DjangoStatic',
                 ]
             }
     },

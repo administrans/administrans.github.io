@@ -5,6 +5,19 @@ from django_tex.views import render_to_pdf
 from .forms import CPAMProcuration, BanqueProcuration, EcoleProcuration, EntrepriseProcuration, FreeProcuration, ImpotsProcuration
 from .forms import CPAMRelanceProcuration, BanqueRelanceProcuration, EcoleRelanceProcuration, EntrepriseRelanceProcuration, FreeRelanceProcuration, ImpotsRelanceProcuration
 from .forms import CPAMStandalone, BanqueStandalone, EcoleStandalone, EntrepriseStandalone, FreeStandalone, ImpotsStandalone
+#from django.contrib.staticfiles.storage import staticfiles_storage
+#from django.urls import reverse
+#
+#from jinja2 import Environment
+#
+#
+#def environment(**options):
+#    env = Environment(**options)
+#    env.globals.update({
+#        'static': staticfiles_storage.url,
+#        'url': reverse,
+#    })
+#    return env
 
 def list_letters_type(request):
     return render(request, "pdfgenerator/list_letters_type.html")
