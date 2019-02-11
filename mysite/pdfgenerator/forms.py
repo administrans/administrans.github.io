@@ -71,3 +71,40 @@ class FreeRelanceProcuration(RelanceProcurationForm, FreeProcuration):
 
 class ImpotsRelanceProcuration(RelanceProcurationForm, ImpotsProcuration):
     pass
+
+class StandaloneForm(forms.Form):
+    firstname = forms.CharField(label="Prénom ")
+    lastname = forms.CharField(label="Nom de famille ")
+    listofname = forms.CharField(label="Liste des prénoms ")
+    telephone = forms.RegexField(label="Numéro de téléphone (+33 suivi de 9 chiffres)", regex=r'^\+33\d{9}$')
+    dob = forms.DateField(label="Date de naissance ", widget=forms.SelectDateWidget(years=range(1900, 3000)))
+    pob = forms.CharField(label="<Lieu (Département)> de naissance ")
+    address1 = forms.CharField(label="Numéro de voie, type de voie, nom de la voie")
+    address2 = forms.CharField(label="Code postal et Ville")
+    location = forms.CharField(label="Lieu où est faite la procuration")
+    email = forms.EmailField(label="Email ")
+    gender = forms.ChoiceField(label="Accords ", choices=((0, "féminin"), (1, "masculin")))
+    deadname = forms.CharField(label="Deadname  (seulement le prénom)")
+    date = forms.DateField(label="Date du courrier", widget=forms.SelectDateWidget(years=range(1900, 3000)))
+
+class CPAMStandalone(StandaloneForm):
+    departement = forms.CharField(label="Département de la caisse de CPAM ")
+    ss = forms.IntegerField(label="Numéro de sécu")
+
+class EcoleStandalone(StandaloneForm):
+    ecole = forms.CharField(label="École/Université ")
+
+class BanqueStandalone(StandaloneForm):
+    banque = forms.CharField(label="Banque ")
+
+class EntrepriseStandalone(StandaloneForm):
+    entreprise = forms.CharField(label="Entreprise ")
+    contrat = forms.CharField(label="Numéro de contrat")
+
+class FreeStandalone(StandaloneForm):
+    pass
+
+class ImpotsStandalone(StandaloneForm):
+    impots = forms.CharField(label="Ville dont on dépond pour les impots")
+    fiscal = forms.CharField(label="Numéro fiscal")
+

@@ -88,23 +88,9 @@
 % Date de fin de la procuration
 \newcommand{\FinProc}{ {{- form.cleaned_data["finprocuration"] -}} }
 \newcommand{\DebutProc}{ {{- form.cleaned_data["debutprocuration"] -}} }
-% Date d'envoi du premier courrier \`{a} Free (utile pour la relance)
-\newcommand{\DateCourrierFree}{XX mois XXXX}
+% Date d'envoi du premier courrier
+\newcommand{\DateCourrier}{ {{- form.cleaned_data["datepremiercourrier"] -}} }
 
-% Date d'envoi du premier courrier aux Impôts (utile pour la relance)
-\newcommand{\DateCourrierImpots}{XX mois XXXX}
-
-% Date d'envoi du premier courrier \`{a} la CPAM (utile pour la relance)
-\newcommand{\DateCourrierCPAM}{XX mois XXXX}
-
-% Date d'envoi du premier courrier \`{a} l'\'{e}cole (utile pour la relance)
-\newcommand{\DateCourrierEcole}{XX mois XXXX}
-
-% Date d'envoi du premier courrier \`{a} la banque (utile pour la relance)
-\newcommand{\DateCourrierBanque}{XX mois XXXX}
-
-% Date d'envoi du premier courrier \`{a} l'entreprise (utile pour la relance)
-\newcommand{\DateCourrierEntreprise}{XX mois XXXX}
 %-------------------------------------------------------------------------
 %   Partie sur le. procur\'{e}.e
 %-------------------------------------------------------------------------
@@ -211,7 +197,7 @@
     \signature{\PersonId}
     \email{\PersonEmail}
 
-\conc{Demande de changement de pr\'{e}nom et de civilit\'{e} d'une personne transgenre}
+\conc{Relance de demande de changement de pr\'{e}nom et de civilit\'{e} d'une personne transgenre}
     \opening{Madame, Monsieur,}
 %-----------------------------------------------%
 % Le corps de la lettre de motivation           %
@@ -226,15 +212,19 @@
 
     \medskip
 
-    En vertu de la d\'{e}cision de changement de pr\'{e}nom d\'{e}livr\'{e}e par l'\'{E}tat-Civil, je vous prie de bien vouloir changer son pr\'{e}nom dans vos registres.
+    En vertu de la d\'{e}cision de changement de pr\'{e}nom d\'{e}livr\'{e}e par l'\'{E}tat-Civil, je vous priais de bien vouloir changer son pr\'{e}nom dans vos registres.
 
     \medskip
 
-    De plus, je vous prie de bien vouloir changer sa civilit\'{e} de \if\ProcurantGender0 \og Monsieur \fg{} à \og Madame \fg{} \else \og Madame \fg{} à \og Monsieur \fg{} \fi dans vos registres, et ce pr\'{e}alablement à toute d\'{e}cision de changement de mention de sexe à l'\'{E}tat-Civil, puisque qu'il s'agit d'une personne transgenre.
+    De plus, je vous demandais de bien vouloir changer sa civilit\'{e} de \if\ProcurantGender0 \og Monsieur \fg{} à \og Madame \fg{} \else \og Madame \fg{} à \og Monsieur \fg{} \fi dans vos registres, et ce pr\'{e}alablement à toute d\'{e}cision de changement de mention de sexe à l'\'{E}tat-Civil, puisque qu'il s'agit d'une personne transgenre.
 
     \medskip
 
     \Civilite
+
+    \medskip
+
+    \textbf{Faute d'un prompt retour de votre part, je me verrais \if\PersonGender0 contrainte \else contraint \fi de saisir le D\'{e}fenseur des Droits, d'une part, et la CNIL, d'autre part.}
 
 %-----------------------------------------------%
 % Le blabla pas int\'{e}ressant                     %

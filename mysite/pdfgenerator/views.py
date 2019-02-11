@@ -4,12 +4,17 @@ from django_tex.views import render_to_pdf
 
 from .forms import CPAMProcuration, BanqueProcuration, EcoleProcuration, EntrepriseProcuration, FreeProcuration, ImpotsProcuration
 from .forms import CPAMRelanceProcuration, BanqueRelanceProcuration, EcoleRelanceProcuration, EntrepriseRelanceProcuration, FreeRelanceProcuration, ImpotsRelanceProcuration
+from .forms import CPAMStandalone, BanqueStandalone, EcoleStandalone, EntrepriseStandalone, FreeStandalone, ImpotsStandalone
 
 def list_letters_type(request):
     return render(request, "pdfgenerator/list_letters_type.html")
 
 def list_procuration_type(request):
     return render(request, "pdfgenerator/list_procuration_type.html")
+
+
+def list_standalone_type(request):
+    return render(request, "pdfgenerator/list_standalone_type.html")
 
 def list_procuration_relance_type(request):
     return render(request, "pdfgenerator/list_procuration_relance_type.html")
@@ -145,5 +150,73 @@ def form_impots_relance_procuration(request):
             return render_to_pdf(request, latex_name, {'form': form}, filename="procurationrelanceimpots.pdf")
     else:
         form = ImpotsRelanceProcuration()
+    return render(request, template_name, {'form': form})
+
+
+def form_CPAM_standalone(request):
+    template_name = "pdfgenerator/form_CPAM_Standalone.html"
+    latex_name = "pdfgenerator/standaloneCPAM.tex"
+    if request.method == "POST":
+        form = CPAMStandalone(request.POST)
+        if form.is_valid():
+            return render_to_pdf(request, latex_name, {'form': form}, filename="standaloneCPAM.pdf")
+    else:
+        form = CPAMStandalone()
+    return render(request, template_name, {'form': form})
+
+def form_ecole_standalone(request):
+    template_name = "pdfgenerator/form_ecole_Standalone.html"
+    latex_name = "pdfgenerator/standaloneecole.tex"
+    if request.method == "POST":
+        form = EcoleStandalone(request.POST)
+        if form.is_valid():
+            return render_to_pdf(request, latex_name, {'form': form}, filename="standaloneecole.pdf")
+    else:
+        form = EcoleStandalone()
+    return render(request, template_name, {'form': form})
+
+def form_banque_standalone(request):
+    template_name = "pdfgenerator/form_banque_Standalone.html"
+    latex_name = "pdfgenerator/standalonebanque.tex"
+    if request.method == "POST":
+        form = BanqueStandalone(request.POST)
+        if form.is_valid():
+            return render_to_pdf(request, latex_name, {'form': form}, filename="standalonebanque.pdf")
+    else:
+        form = BanqueStandalone()
+    return render(request, template_name, {'form': form})
+
+def form_entreprise_standalone(request):
+    template_name = "pdfgenerator/form_entreprise_Standalone.html"
+    latex_name = "pdfgenerator/standaloneentreprise.tex"
+    if request.method == "POST":
+        form = EntrepriseStandalone(request.POST)
+        if form.is_valid():
+            return render_to_pdf(request, latex_name, {'form': form}, filename="standaloneentreprise.pdf")
+    else:
+        form = EntrepriseStandalone()
+    return render(request, template_name, {'form': form})
+
+def form_free_standalone(request):
+    template_name = "pdfgenerator/form_free_Standalone.html"
+    latex_name = "pdfgenerator/standalonefree.tex"
+    if request.method == "POST":
+        form = FreeStandalone(request.POST)
+        if form.is_valid():
+            return render_to_pdf(request, latex_name, {'form': form}, filename="standalonefree.pdf")
+    else:
+        form = FreeStandalone()
+    return render(request, template_name, {'form': form})
+
+
+def form_impots_standalone(request):
+    template_name = "pdfgenerator/form_impots_Standalone.html"
+    latex_name = "pdfgenerator/standaloneimpots.tex"
+    if request.method == "POST":
+        form = ImpotsStandalone(request.POST)
+        if form.is_valid():
+            return render_to_pdf(request, latex_name, {'form': form}, filename="standaloneimpots.pdf")
+    else:
+        form = ImpotsStandalone()
     return render(request, template_name, {'form': form})
 
