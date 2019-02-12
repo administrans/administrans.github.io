@@ -67,3 +67,4 @@ Un grand merci à toutes ces personnes qui ont fait des tests, bugs reports, mer
 
 - [Alice Climent-Pommeret](https://alice.climent-pommeret.red/fr)
 - Aurore Moisy-Mabille
+- Misc
