@@ -66,3 +66,4 @@ Ont contribué
 Un grand merci à toutes ces personnes qui ont fait des tests, bugs reports, merge requests, corrections orthographiques et montré du soutien \o/ :
 
 - [Alice Climent-Pommeret](https://alice.climent-pommeret.red/fr)
+- Aurore Moisy-Mabille
