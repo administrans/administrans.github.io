@@ -5,6 +5,7 @@ from django_tex.views import render_to_pdf
 from .forms import CPAMProcuration, BanqueProcuration, EcoleProcuration, EntrepriseProcuration, FreeProcuration, ImpotsProcuration
 from .forms import CPAMRelanceProcuration, BanqueRelanceProcuration, EcoleRelanceProcuration, EntrepriseRelanceProcuration, FreeRelanceProcuration, ImpotsRelanceProcuration
 from .forms import CPAMStandalone, BanqueStandalone, EcoleStandalone, EntrepriseStandalone, FreeStandalone, ImpotsStandalone
+from .forms import ChgmtPrenomForm
 #from django.contrib.staticfiles.storage import staticfiles_storage
 #from django.urls import reverse
 #
@@ -31,6 +32,17 @@ def list_standalone_type(request):
 
 def list_procuration_relance_type(request):
     return render(request, "pdfgenerator/list_procuration_relance_type.html")
+
+def form_chgmtprenom(request):
+    template_name = "pdfgenerator/form_chgmtprenom.html"
+    latex_name = "pdfgenerator/chgmtprenom.tex"
+    if request.method == "POST":
+        form = ChgmtPrenomForm(request.POST)
+        if form.is_valid():
+            return render_to_pdf(request, latex_name, {'form': form}, filename="chgmtprenom.pdf")
+    else:
+        form = ChgmtPrenomForm()
+    return render(request, template_name, {'form': form})
 
 def form_CPAM_procuration(request):
     template_name = "pdfgenerator/form_CPAM_Procuration.html"

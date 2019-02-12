@@ -2,6 +2,31 @@
 from django import forms
 from django.contrib.admin import widgets
 
+class ChgmtPrenomForm(forms.Form):
+    procurantfirstname = forms.CharField(label="Prénom (le vrai hein) de la personne trans")
+    procurantlastname = forms.CharField(label="Nom de famille de la personne trans")
+    procurantlistofname = forms.CharField(label="Liste des prénoms (les vrais) de la personne trans")
+    procurantdob = forms.DateField(label="Date de naissance de la personne trans", widget=forms.SelectDateWidget(years=range(1900, 3000)))
+    procurantpob = forms.CharField(label="<Lieu (Département)> de naissance de la personne trans")
+    procurantaddress1 = forms.CharField(label="Numéro de voie, type de voie, nom de la voie")
+    procurantaddress2 = forms.CharField(label="Code postal et Ville")
+    procurantgender = forms.ChoiceField(label="Accords de la personne", choices=((0, "féminin"), (1, "masculin")))
+    procurantville = forms.CharField(label="Ville dont la personne dépend pour l'État-Civil")
+    personignoredeadname = forms.ChoiceField(label="La personne faisant l'attestation ignore le deadname", choices=((0, "oui"), (1, "non")))
+    procurantdeadname = forms.CharField(label="Deadname de la personne (seulement le prénom) (et seulement si la personne connait le deadname)", required=False)
+    date = forms.DateField(label="Date de l'attestation", widget=forms.SelectDateWidget())
+    personfirstname = forms.CharField(label="Prénom de la personne qui fait l'attestation")
+    personlastname = forms.CharField(label="Nom de famille de la personne qui fait l'attestation")
+    personlistofname = forms.CharField(label="Liste des prénoms de la personne qui fait l'attestation")
+    persondob = forms.DateField(label="Date de naissance de la personne qui fait l'attestation", widget=forms.SelectDateWidget(years=range(1900, 3000)))
+    personpob = forms.CharField(label="<Lieu (Département)> de naissance de la personne qui fait l'attestation")
+    persontelephone = forms.RegexField(label="Numéro de téléphone (+33 suivi de 9 chiffres)", regex=r'^\+33\d{9}$')
+    personlocation = forms.CharField(label="Lieu où est faite la lettre")
+    personemail = forms.EmailField(label="Email procurant")
+    personaddress1 = forms.CharField(label="Numéro de voie, type de voie, nom de la voie")
+    personaddress2 = forms.CharField(label="Code postal et Ville")
+    persongender = forms.ChoiceField(label="Accord de la personne", choices=((0, "féminin"), (1, "masculin")))
+
 class ProcurationForm(forms.Form):
     procurantfirstname = forms.CharField(label="Prénom de la personne faisant la procuration")
     procurantlastname = forms.CharField(label="Nom de famille de la personne faisant la procuration")

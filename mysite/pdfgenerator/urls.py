@@ -24,4 +24,5 @@ urlpatterns = [
     url(r"^standalone/entreprise/$", views.form_entreprise_standalone, name="form_entreprise_standalone"),
     url(r"^standalone/free/$", views.form_free_standalone, name="form_free_standalone"),
     url(r"^standalone/impots/$", views.form_impots_standalone, name="form_impots_standalone"),
+    url(r"^chgmtprenom/$", views.form_chgmtprenom, name="form_chgmtprenom"),
 ]
