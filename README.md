@@ -59,3 +59,10 @@ Contribuer ?
 ------------
 
 OUI SVP ! Comme je peux pas ouvrir à tout va le gitlab, envoyez-moi un mail (avec un sujet explicite) at maria AT climent-pommeret DOT red, je vous créerais un compte !
+
+Ont contribué
+-------------
+
+Un grand merci à toutes ces personnes qui ont fait des tests, bugs reports, merge requests, corrections orthographiques et montré du soutien \o/ :
+
+- [Alice Climent-Pommeret](https://alice.climent-pommeret.red/fr)
