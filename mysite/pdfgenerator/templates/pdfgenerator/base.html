@@ -8,7 +8,15 @@
  <link rel="stylesheet" href={% static 'css/bootstrap.min.css' %}>
 
   <style>
-    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    body {
+      display: flex;
+      min-height: 100vh;
+      flex-direction: column;
+    }
+    main {
+      flex: 1;
+    }
+    /* Remove the navbar's default margin-bottom and rounded borders */
     .navbar {
       margin-bottom: 0;
       border-radius: 0;
@@ -43,13 +51,13 @@
   </div>
 </nav>
 
-        <div class="container">
+        <main class="container">
 
                 {% block content %}{% endblock %}
 
-        </div>
+        </main>
 
-<footer class="container-fluid text-center">
+<footer class="text-center">
   <p>En cas d'erreur maria AT climent-pommeret DOT red</p>
 
   <p>Btw, le code (absolument dégueu, c'est du quick and dirty) est <a href="https://gitlab.climent-pommeret.red/Chopopope/site-transadministratif">ici</a>. (Please don't judge)</p>
