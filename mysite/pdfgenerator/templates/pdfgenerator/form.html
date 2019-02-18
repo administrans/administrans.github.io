@@ -1,15 +1,21 @@
 {% extends 'pdfgenerator/base.html' %}
 
 {% block content %}
-    <h1>Nouvelle procuration pour une École/Université</h1>
+    <h1>{{ title }}</h1>
 <div class="container">
 <form class="form-horizontal" method="post">{% csrf_token %}
     <fieldset>
-        <legend>Génération de la procuration</legend>
+        <legend>
+            {% if category == 'procuration' %}
+                Génération de la procuration
+            {% else %}
+                Génération de la lettre
+            {% endif %}
+        </legend>
         {% for field in form %}
             {% if field.errors %}
                 <div class="form-group error">
-                    <label class="form-label">{{ field.label }}</label> 
+                    <label class="form-label">{{ field.label }}</label>
                     <div class="forms">{{ field }}
                         <span class="help-inline">
                             {% for error in  field.errors %}{{ error }}{% endfor %}
