@@ -60,6 +60,53 @@ Contribuer ?
 
 OUI SVP ! Comme je peux pas ouvrir à tout va le gitlab, envoyez-moi un mail (avec un sujet explicite) at maria AT climent-pommeret DOT red, je vous créerais un compte !
 
+Pour contribuer au code, en dehors des petites modifications qui peuvent être faites
+directement via l'éditeur intégré à Gitlab (Web IDE), il vous faudra installer
+une copie locale du projet.
+
+Pour cela les dépendances système requises sont:
+
+- git
+- python3.7
+- python3-venv
+- texlive-full
+
+Commencez par forker le dépôt en visitant https://gitlab.climent-pommeret.red/Chopopope/site-transadministratif/forks/new.
+
+Ensuite, clonez ce nouveau dépôt avec git:
+
+    git clone https://gitlab.climent-pommeret.red/<pseudo GitLab>/site-transadministratif.git
+
+(remplacez `<pseudo GitLab>` par votre pseudo Gitlab).
+
+Placez-vous dans le dossier nouvellement créé:
+
+    cd site-transadministratif
+
+À ce stade, vous avez récupéré le code source du projet, félicitations !
+
+Il vous reste à configurer et faire fonctionner votre copie locale.
+
+La première étape est de créer un environnement virtuel python afin d'installer les dépendances du projet:
+
+    python3 -m venv virtualenv
+
+Ensuite, installez les dépendances python requises pour faire fonctionne le projet:
+
+    virtualenv/bin/pip install -r requirements.txt
+
+Créez votre fichier de configuration:
+
+    cp mysite/mysite/localsettings.py.dist mysite/mysite/localsettings.py
+
+Éditez le fichier `mysite/mysite/localsettings.py` et ajoutez une valeur pour `SECRET_KEY`, par exemple `SECRET_KEY = 'dev'`.
+
+Lancez le serveur de développement:
+
+    virtualenv/bin/python mysite/manage.py runserver
+
+Le projet est démarré et accessible à l'adresse http://127.0.0.1:8000/ :)
+
 Ont contribué
 -------------
 
