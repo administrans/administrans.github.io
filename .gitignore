@@ -9,3 +9,4 @@ db.sqlite3
 *__pycache__*
 *lettre_.*\.tex
 *procuration_.*\.tex
+virtualenv
