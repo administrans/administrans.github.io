@@ -1,4 +1,4 @@
-pages = [
+forms = [
     {'id': 'cpam', 'title': 'CPAM',
         'description': 'Pour tout ce qui a trait à la CPAM'},
     {'id': 'banque', 'title': 'Banque',
@@ -16,14 +16,14 @@ pages = [
 LISTS = {
     'procuration': {
         'title': 'Courriers par procuration',
-        'pages': pages
+        'forms': forms
     },
     'procuration_relance': {
         'title': 'Courriers de relance par procuration',
-        'pages': pages
+        'forms': forms
     },
     'standalone': {
         'title': 'Courriers sans procuration',
-        'pages': pages
+        'forms': forms
     }
 }
