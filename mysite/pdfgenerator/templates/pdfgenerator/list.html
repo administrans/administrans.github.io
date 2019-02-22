@@ -7,11 +7,11 @@
     {% for form in list.forms[3*row:3*(row + 1)] %}
     <div class="col-sm-4">
         <article>
-						<header><a href="{% url 'form' category=list.category id=form.id %}">{{ form.title }}</a></header>
+            <header><a href="{% url 'form' category=list.category id=form.id %}">{{ form.title }}</a></header>
             <p>{{ form.description }}</p>
         </article>
     </div>
-		{% endfor %}
+    {% endfor %}
 </div>
 {% endfor %}
 {% endblock %}
