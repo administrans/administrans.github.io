@@ -115,4 +115,5 @@ Un grand merci à toutes ces personnes qui ont fait des tests, bugs reports, mer
 - [Alice Climent-Pommeret](https://alice.climent-pommeret.red/fr)
 - Aurore Moisy-Mabille
 - [Eliot Berriot](https://eliotberriot.com/)
+- Une autre [Alice](https://bidule.menf.in/users/alice)
 - Misc

@@ -37,7 +37,7 @@ def register_form(category, id, title, url=None):
     return decorator
 
 
-@register_form(category=None, id="chgmtprenom", title="Nouvelle attestation de changement de prénom")
+@register_form(category='attestation', id="chgmtprenom", title="Nouvelle attestation de changement de prénom")
 class ChgmtPrenomForm(forms.Form):
     procurantfirstname = forms.CharField(label="Prénom (le vrai hein) de la personne trans")
     procurantlastname = forms.CharField(label="Nom de famille de la personne trans")

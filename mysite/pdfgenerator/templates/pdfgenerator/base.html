@@ -42,10 +42,10 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li><a href={% url 'list_procuration_type' %}>Courriers par procuration</a></li>
-        <li><a href={% url 'list_standalone_type' %}>Courriers sans procuration</a></li>
-        <li><a href={% url 'list_procuration_relance_type' %}>Courriers de relance par procuration</a></li>
-        <li><a href={% url 'form_chgmtprenom' %}>Changement de prénom</a></li>
+        {% for category, list in lists %}
+        <li><a href={% url 'list' category=category %}>{{ list.title }}</a></li>
+        {% endfor %}
+        <li><a href={% url 'form' category='attestation' id='chgmtprenom' %}>Changement de prénom</a></li>
       </ul>
     </div>
   </div>
@@ -60,7 +60,7 @@
 <footer class="text-center">
   <p>En cas d'erreur maria AT climent-pommeret DOT red</p>
 
-  <p>Btw, le code (absolument dégueu, c'est du quick and dirty) est <a href="https://gitlab.climent-pommeret.red/Chopopope/site-transadministratif">ici</a>. (Please don't judge)</p>
+  <p>Btw, le code (absolument dégueu, c'est du quick and dirty (m'enfin de moins en moins quand même)) est <a href="https://gitlab.climent-pommeret.red/Chopopope/site-transadministratif">ici</a>. (Please don't judge)</p>
 </footer>
     </body>
 </html>
