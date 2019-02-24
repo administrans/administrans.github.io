@@ -97,7 +97,11 @@ class ChgmtPrenomForm(FieldsetForm):
     personlistofname = forms.CharField(label="Liste des prénoms de la personne qui fait l'attestation")
     persondob = forms.DateField(label="Date de naissance de la personne qui fait l'attestation", widget=forms.SelectDateWidget(years=range(1900, 3000), attrs={'class': 'date-widget form-control'}))
     personpob = forms.CharField(label="Lieu et département de naissance de la personne qui fait l'attestation", widget=forms.TextInput(attrs={'placeholder': 'Nantes (Loire-Atlantique)'}))
-    persontelephone = forms.RegexField(label="Numéro de téléphone (+33 suivi de 9 chiffres)", regex=r'^\+33\d{9}$')
+    persontelephone = forms.RegexField(
+        label="Numéro de téléphone",
+        regex=r'^\+33\d{9}$',
+        widget=forms.TextInput(attrs={'placeholder': '+33612345678'})
+    )
     personlocation = forms.CharField(label="Lieu où est faite la lettre")
     personemail = forms.EmailField(label="Email procurant")
     personaddress1 = forms.CharField(label="Adresse")
@@ -144,7 +148,7 @@ PERSON_IDENTITY_FIELDSETS = Fieldset(
 )
 
 PERSON_CONTACT_FIELDSETS = Fieldset(
-    'person_id',
+    'person_contact',
     legend='Coordonnées de la personne recevant la procuration',
     field_names=[
         'personemail',
@@ -263,37 +267,76 @@ class FreeRelanceProcuration(RelanceProcurationForm, FreeProcuration):
 class ImpotsRelanceProcuration(RelanceProcurationForm, ImpotsProcuration):
     pass
 
+
+IDENTITY_FIELDSETS = Fieldset(
+    'person_id',
+    legend='Identité',
+    field_names=[
+        'firstname',
+        'lastname',
+        'listofname',
+        'deadname',
+        'gender',
+        'dob',
+        'pob',
+    ]
+)
+
+CONTACT_FIELDSETS = Fieldset(
+    'person_contact',
+    legend='Coordonnées',
+    field_names=[
+        'email',
+        'telephone',
+        'address1',
+        'address2',
+    ]
+)
+
+
 class StandaloneForm(FieldsetForm):
-    firstname = forms.CharField(label="Prénom ")
-    lastname = forms.CharField(label="Nom de famille ")
-    listofname = forms.CharField(label="Liste des prénoms ")
-    telephone = forms.RegexField(label="Numéro de téléphone (+33 suivi de 9 chiffres)", regex=r'^\+33\d{9}$')
+    firstname = forms.CharField(label="Prénom")
+    lastname = forms.CharField(label="Nom de famille")
+    listofname = forms.CharField(label="Liste des prénoms")
+    telephone = forms.RegexField(
+        label="Numéro de téléphone",
+        regex=r'^\+33\d{9}$',
+        widget=forms.TextInput(attrs={'placeholder': '+33612345678'})
+    )
     dob = forms.DateField(label="Date de naissance ", widget=forms.SelectDateWidget(years=range(1900, 3000), attrs={'class': 'date-widget form-control'}))
-    pob = forms.CharField(label="Lieu et département de naissance ")
+    pob = forms.CharField(label="Lieu et département de naissance", widget=forms.TextInput(attrs={'placeholder': 'Nantes (Loire-Atlantique)'}))
     address1 = forms.CharField(label="Adresse")
     address2 = forms.CharField(label="Code postal et Ville")
     location = forms.CharField(label="Lieu où est faite la lettre")
-    email = forms.EmailField(label="Email ")
+    email = forms.EmailField(label="Email")
     gender = forms.ChoiceField(label="Accords ", choices=((0, "féminin"), (1, "masculin")))
     deadname = forms.CharField(label="Deadname (prénom)")
     date = forms.DateField(label="Date du courrier", widget=forms.SelectDateWidget(years=range(1900, 3000), attrs={'class': 'date-widget form-control'}))
 
+    class Meta:
+        fieldsets = [
+            IDENTITY_FIELDSETS,
+            CONTACT_FIELDSETS,
+        ]
+
+
+
 @register_form(category='standalone', id="cpam", title="CPAM")
 class CPAMStandalone(StandaloneForm):
-    departement = forms.CharField(label="Département de la caisse de CPAM ")
+    departement = forms.CharField(label="Département de la caisse de CPAM")
     ss = forms.IntegerField(label="Numéro de sécu")
 
 @register_form(category='standalone', id="ecole", title="École/Université")
 class EcoleStandalone(StandaloneForm):
-    ecole = forms.CharField(label="École/Université ")
+    ecole = forms.CharField(label="École/Université")
 
 @register_form(category='standalone', id="banque", title="Banque")
 class BanqueStandalone(StandaloneForm):
-    banque = forms.CharField(label="Banque ")
+    banque = forms.CharField(label="Banque")
 
 @register_form(category='standalone', id="entreprise", title="entreprise avec numéro de contrat")
 class EntrepriseStandalone(StandaloneForm):
-    entreprise = forms.CharField(label="Entreprise ")
+    entreprise = forms.CharField(label="Entreprise")
     contrat = forms.CharField(label="Numéro de contrat")
 
 @register_form(category='standalone', id="free", title="Free")
