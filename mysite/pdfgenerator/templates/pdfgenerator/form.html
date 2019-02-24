@@ -2,7 +2,18 @@
 
 {% block content %}
 <div class="container form-container">
-    <h1>{{ title }}</h1>
+    <h1>
+        {{ title }}
+        <small>
+        {% if category == 'procuration' %}
+            Génération de la procuration
+        {% else %}
+            Génération de la lettre
+        {% endif %}
+        </small>
+    </h1>
+
+
     <form class="form-horizontal" method="post">{% csrf_token %}
         {% if form.errors %}
             <p class="message bg-danger">
