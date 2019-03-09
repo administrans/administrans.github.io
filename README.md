@@ -107,6 +107,14 @@ Lancez le serveur de développement:
 
 Le projet est démarré et accessible à l'adresse http://127.0.0.1:8000/ :)
 
+Lancer les tests
+----------------
+
+Des tests unitaires sont disponibles pour ce projet. Si vous modifier du code, vous pouvez
+les lancer pour vérifier que vous n'avez rien cassé:
+
+    pytest mysite/tests
+
 Ont contribué
 -------------
 
