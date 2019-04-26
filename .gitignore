@@ -10,3 +10,4 @@ db.sqlite3
 *lettre_.*\.tex
 *procuration_.*\.tex
 virtualenv
+.pytest_cache

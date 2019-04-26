@@ -11,52 +11,52 @@
 
 % Mettre ici le prenom de la personne faisant la procuration
 % et entre les {} le nom de famille
-\newcommand{\ProcurantId}{ {{- form.cleaned_data["procurantfirstname"] -}} {} \textsc{ {{- form.cleaned_data["procurantlastname"] -}} }}
+\newcommand{\ProcurantId}{ {{- cleaned_data["procurantfirstname"] -}} {} \textsc{ {{- cleaned_data["procurantlastname"] -}} }}
 
 % Mettre ici la suite des pr\'{e}noms de la personne faisant la procuration
 % et entre les {} le nom de famille
-\newcommand{\ProcurantFullId}{ {{- form.cleaned_data["procurantlistofname"] -}} {} \textsc{ {{- form.cleaned_data["procurantlastname"] -}} } }
+\newcommand{\ProcurantFullId}{ {{- cleaned_data["procurantlistofname"] -}} {} \textsc{ {{- cleaned_data["procurantlastname"] -}} } }
 
 % Mettre ici le num\'{e}ro de t\'{e}l\'{e}phone de la personnne faisant la
 % procuration
-\newcommand{\ProcurantTel}{ {{- form.cleaned_data["procuranttelephone"] -}} }
+\newcommand{\ProcurantTel}{ {{- cleaned_data["procuranttelephone"] -}} }
 
 % Mettre ici le num\'{e}ro, le type de voie et le nom de la voie
 % de la personne faisant la procuration
-\newcommand{\ProcurantAddresseRue}{ {{- form.cleaned_data["procurantaddress1"] -}} }
+\newcommand{\ProcurantAddresseRue}{ {{- cleaned_data["procurantaddress1"] -}} }
 
 % Mettre ici le code postal (les 2 premiers chiffres avant le ~)
 % et entre {} le nom de la ville
-\newcommand{\ProcurantAddresseVille}{ {{- form.cleaned_data["procurantaddress2"] -}} }
+\newcommand{\ProcurantAddresseVille}{ {{- cleaned_data["procurantaddress2"] -}} }
 
 % Ne pas toucher
 \newcommand{\ProcurantAddressFull}{\ProcurantId\\\ProcurantAddresseRue\\\ProcurantAddresseVille}
 
 % Mettre entre {} le nom de la ville où est r\'{e}dig\'{e}e la procuration
-\newcommand{\ProcurantLocation}{\textsc{ {{- form.cleaned_data["procurantlocation"] -}} }}
+\newcommand{\ProcurantLocation}{\textsc{ {{- cleaned_data["procurantlocation"] -}} }}
 
 % Mettre ici l'adresse mail de la personne faisant la procuration
-\newcommand{\ProcurantEmail}{ {{- form.cleaned_data["procurantemail"] -}} }
+\newcommand{\ProcurantEmail}{ {{- cleaned_data["procurantemail"] -}} }
 
 % Mettre ici le nom du d\'{e}partement où habites la personne
 % cela est utilis\'{e} pour la caisse de CPAM dont elle d\'{e}pend
-\newcommand{\ProcurantDepartement}{ {{- form.cleaned_data["procurantdepartement"] -}} }
+\newcommand{\ProcurantDepartement}{ {{- cleaned_data["procurantdepartement"] -}} }
 
 % Mettre ici la date de naissance de la personne faisant la procuration
-\newcommand{\ProcurantDOB}{ {{- form.cleaned_data["procurantdob"] -}} }
+\newcommand{\ProcurantDOB}{ {{- cleaned_data["procurantdob"] -}} }
 
 % Mettre ici la ville de naissance et entre () le d\'{e}partement de
 % naissance de la personne faisant la procuration
-\newcommand{\ProcurantPOB}{ {{- form.cleaned_data["procurantpob"] -}} }
+\newcommand{\ProcurantPOB}{ {{- cleaned_data["procurantpob"] -}} }
 
 % Malheureusement, pour des raisons d'idenfication, il faut mettre
 % le deadname de la personne faisant la procuration et son nom de
 % famille
-\newcommand{\ProcurantOldId}{ {{- form.cleaned_data["procurantdeadname"] -}} {} \textsc{ {{- form.cleaned_data["procurantlastname"] -}} }}
+\newcommand{\ProcurantOldId}{ {{- cleaned_data["procurantdeadname"] -}} {} \textsc{ {{- cleaned_data["procurantlastname"] -}} }}
 
 % Mettre ici le num\'{e}ro de s\'{e}curit\'{e} sociale de la personne faisant
 % la procuration
-\newcommand{\ProcurantSecu}{ {{- form.cleaned_data["procurantss"] -}} }
+\newcommand{\ProcurantSecu}{ {{- cleaned_data["procurantss"] -}} }
 
 % Mettre ici le nom de la ville dont la personne faisant la
 % procuration d\'{e}pend d'un point de vue des imp\^{o}ts
@@ -69,7 +69,7 @@
 % la procuration.
 % 0 = femme trans
 % 1 = homme trans
-\newcommand{\ProcurantGender}{ {{- form.cleaned_data["procurantgender"] -}} } % 0 = femme, 1 = homme
+\newcommand{\ProcurantGender}{ {{- cleaned_data["procurantgender"] -}} } % 0 = femme, 1 = homme
 
 % Mettre ici le nom de l'\'{e}cole/universit\'{e}/autre \`{a} laquelle la demande
 % de rectification et d'information est demand\'{e}e
@@ -86,10 +86,10 @@
 \newcommand{\ProcurantContrat}{Num\'{e}ro de contrat}
 
 % Date de fin de la procuration
-\newcommand{\FinProc}{ {{- form.cleaned_data["finprocuration"] -}} }
-\newcommand{\DebutProc}{ {{- form.cleaned_data["debutprocuration"] -}} }
+\newcommand{\FinProc}{ {{- cleaned_data["finprocuration"] -}} }
+\newcommand{\DebutProc}{ {{- cleaned_data["debutprocuration"] -}} }
 % Date d'envoi du premier courrier
-\newcommand{\DateCourrier}{ {{- form.cleaned_data["datepremiercourrier"] -}} }
+\newcommand{\DateCourrier}{ {{- cleaned_data["datepremiercourrier"] -}} }
 
 %-------------------------------------------------------------------------
 %   Partie sur le. procur\'{e}.e
@@ -97,41 +97,41 @@
 
 % Mettre ici le pr\'{e}nom et le nom de famille entre {} de la personne
 % faisant la d\'{e}marche
-\newcommand{\PersonId}{ {{- form.cleaned_data["personfirstname"] -}} {} \textsc{ {{- form.cleaned_data["personlastname"] -}} }}
+\newcommand{\PersonId}{ {{- cleaned_data["personfirstname"] -}} {} \textsc{ {{- cleaned_data["personlastname"] -}} }}
 
 % Mettre ici tous les pr\'{e}noms de la personne faisant la d\'{e}marche et
 % le nom de famille entre {}
-\newcommand{\PersonFullId}{ {{- form.cleaned_data["personlistofname"] -}} {} \textsc{ {{- form.cleaned_data["personlastname"] -}} }}
+\newcommand{\PersonFullId}{ {{- cleaned_data["personlistofname"] -}} {} \textsc{ {{- cleaned_data["personlastname"] -}} }}
 
 % Mettre ici le num\'{e}ro de t\'{e}l\'{e}phone
-\newcommand{\PersonTel}{ {{- form.cleaned_data["persontelephone"] -}} }
+\newcommand{\PersonTel}{ {{- cleaned_data["persontelephone"] -}} }
 
 % Mettre ici : num\'{e}ro de la voie, type de voie, nom de la voie
-\newcommand{\PersonAddresseRue}{ {{- form.cleaned_data["personaddress1"] -}} }
+\newcommand{\PersonAddresseRue}{ {{- cleaned_data["personaddress1"] -}} }
 
 % Mettre ici le code postal et la ville
-\newcommand{\PersonAddresseVille}{ {{- form.cleaned_data["personaddress2"] -}} }
+\newcommand{\PersonAddresseVille}{ {{- cleaned_data["personaddress2"] -}} }
 
 % Ne pas toucher
 \newcommand{\PersonAddressFull}{\PersonId\\\PersonAddresseRue\\\PersonAddresseVille}
 
 % Mettre ici le nom de la ville d'où est \'{e}crit le courrier
-\newcommand{\PersonLocation}{\textsc{ {{- form.cleaned_data["personlocation"] -}} }}
+\newcommand{\PersonLocation}{\textsc{ {{- cleaned_data["personlocation"] -}} }}
 
 % Mettre ici le mail de la personne faisant les d\'{e}marches
-\newcommand{\PersonEmail}{ {{- form.cleaned_data["personemail"] -}} }
+\newcommand{\PersonEmail}{ {{- cleaned_data["personemail"] -}} }
 
 % Mettre ici la date de naissance de la personne faisant les d\'{e}marches
-\newcommand{\PersonDOB}{ {{- form.cleaned_data["persondob"] -}} }
+\newcommand{\PersonDOB}{ {{- cleaned_data["persondob"] -}} }
 
 % Mettre ici la ville et d\'{e}partement de naissance de la personne faisant
 % les d\'{e}marches
-\newcommand{\PersonPOB}{ {{- form.cleaned_data["personpob"] -}} }
+\newcommand{\PersonPOB}{ {{- cleaned_data["personpob"] -}} }
 
 % Pour les accords
 % 0 = feminin
 % 1 = masculun
-\newcommand{\PersonGender}{ {{- form.cleaned_data["persongender"] -}} } % 0 = femme, 1 = homme
+\newcommand{\PersonGender}{ {{- cleaned_data["persongender"] -}} } % 0 = femme, 1 = homme
 
 
 

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
 from django_tex.views import render_to_pdf
+from django import http
 
 from .forms import CPAMProcuration, BanqueProcuration, EcoleProcuration, EntrepriseProcuration, FreeProcuration, ImpotsProcuration
 from .forms import CPAMRelanceProcuration, BanqueRelanceProcuration, EcoleRelanceProcuration, EntrepriseRelanceProcuration, FreeRelanceProcuration, ImpotsRelanceProcuration
@@ -30,7 +31,10 @@ def list_letters_type(request):
     return render(request, "pdfgenerator/list_letters_type.html", context({}))
 
 def list(request, category):
-    list = lists.LISTS[category]
+    try:
+        list = lists.LISTS[category]
+    except KeyError:
+        raise http.Http404
     list['category'] = category
     return render(request, "pdfgenerator/list.html", context({"list": list}))
 
@@ -44,7 +48,12 @@ def form(request, category, id):
         form = form_class(request.POST)
         form_context['form'] = form
         if form.is_valid():
-            return render_to_pdf(request, latex_name, {'form': form}, filename="{}.pdf".format(form_id))
+            return render_to_pdf(
+                request,
+                latex_name,
+                {'cleaned_data': form.cleaned_data},
+                filename="{}.pdf".format(form_id)
+            )
     else:
         form = form_class()
         form_context['form'] = form
