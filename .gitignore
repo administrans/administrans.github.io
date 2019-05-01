@@ -5,9 +5,11 @@
 *.log
 *.tns
 *.ins
+.*.swp
 db.sqlite3
 *__pycache__*
 *lettre_.*\.tex
 *procuration_.*\.tex
 virtualenv
 .pytest_cache
+

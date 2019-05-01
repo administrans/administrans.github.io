@@ -3,8 +3,6 @@ from django import forms
 from django.contrib.admin import widgets
 
 REGISTERED_FORMS = {}
-
-
 class Fieldset(object):
     def __init__(self, id, field_names, legend):
         self.id = id
@@ -77,35 +75,65 @@ def register_form(category, id, title, url=None):
 
     return decorator
 
+# Dict matching a usual char to it's escaped equivalent in TeX
+SPECIAL_CHARS = {
+        "_" : "\\_"
+        # /!\ Warning the following charecter is *not* the simple quote
+        ,"'" : "’"
+        # Escaping double quote isn't that simple
+        #,'"' : '\\"'
+        }
+
+def sanitizeStringForTex(string_value):
+    # Escape backlash and avoid injection
+    value = string_value.replace("\\", "\\textbackslash ")
+    for key in SPECIAL_CHARS:
+        value = value.replace(key, SPECIAL_CHARS[key])
+    return value
+
+# CharField subclass that cleans the value so it is properly rendered by TeX
+class CharFieldTex(forms.CharField):
+    def clean(self, val):
+        cleaned_data = super().clean(val)
+        cleaned_data = sanitizeStringForTex(cleaned_data)
+        return cleaned_data
+
+# EmailField subclass that cleans the value so it is properly rendered by TeX
+class EmailFieldTex(forms.EmailField):
+    def clean(self, val):
+        cleaned_data = super().clean(val)
+        cleaned_data = sanitizeStringForTex(cleaned_data)
+        return cleaned_data
+
 
 @register_form(category='attestation', id="chgmtprenom", title="Nouvelle attestation de changement de prénom")
 class ChgmtPrenomForm(FieldsetForm):
-    procurantfirstname = forms.CharField(label="Prénom (le vrai hein) de la personne trans")
-    procurantlastname = forms.CharField(label="Nom de famille de la personne trans")
-    procurantlistofname = forms.CharField(label="Liste des prénoms (les vrais) de la personne trans")
+    procurantfirstname = CharFieldTex(label="Prénom (le vrai hein) de la personne trans")
+    procurantlastname = CharFieldTex(label="Nom de famille de la personne trans")
+    procurantlistofname = CharFieldTex(label="Liste des prénoms (les vrais) de la personne trans")
     procurantdob = forms.DateField(label="Date de naissance de la personne trans", widget=forms.SelectDateWidget(years=range(1900, 3000), attrs={'class': 'date-widget form-control'}))
-    procurantpob = forms.CharField(label="Lieu et département de naissance de la personne trans", widget=forms.TextInput(attrs={'placeholder': 'Nantes (Loire-Atlantique)'}))
-    procurantaddress1 = forms.CharField(label="Adresse")
-    procurantaddress2 = forms.CharField(label="Code postal et Ville")
+    procurantpob = CharFieldTex(label="Lieu et département de naissance de la personne trans", widget=forms.TextInput(attrs={'placeholder': 'Nantes (Loire-Atlantique)'}))
+    procurantaddress1 = CharFieldTex(label="Adresse")
+    procurantaddress2 = CharFieldTex(label="Code postal et Ville")
     procurantgender = forms.ChoiceField(label="Accords de la personne", choices=((0, "féminin"), (1, "masculin")))
-    procurantville = forms.CharField(label="Ville dont la personne dépend pour l'État-Civil")
+    procurantville = CharFieldTex(label="Ville dont la personne dépend pour l'État-Civil")
     personignoredeadname = forms.ChoiceField(label="La personne faisant l'attestation ignore le deadname", choices=((0, "oui"), (1, "non")))
-    procurantdeadname = forms.CharField(label="Deadname de la personne (seulement le prénom) (et seulement si la personne connait le deadname)", required=False)
+    procurantdeadname = CharFieldTex(label="Deadname de la personne (seulement le prénom) (et seulement si la personne connait le deadname)", required=False)
     date = forms.DateField(label="Date de l'attestation", widget=forms.SelectDateWidget(attrs={'class': 'date-widget form-control'}))
-    personfirstname = forms.CharField(label="Prénom de la personne qui fait l'attestation")
-    personlastname = forms.CharField(label="Nom de famille de la personne qui fait l'attestation")
-    personlistofname = forms.CharField(label="Liste des prénoms de la personne qui fait l'attestation")
+    personfirstname = CharFieldTex(label="Prénom de la personne qui fait l'attestation")
+    personlastname = CharFieldTex(label="Nom de famille de la personne qui fait l'attestation")
+    personlistofname = CharFieldTex(label="Liste des prénoms de la personne qui fait l'attestation")
     persondob = forms.DateField(label="Date de naissance de la personne qui fait l'attestation", widget=forms.SelectDateWidget(years=range(1900, 3000), attrs={'class': 'date-widget form-control'}))
-    personpob = forms.CharField(label="Lieu et département de naissance de la personne qui fait l'attestation", widget=forms.TextInput(attrs={'placeholder': 'Nantes (Loire-Atlantique)'}))
+    personpob = CharFieldTex(label="Lieu et département de naissance de la personne qui fait l'attestation", widget=forms.TextInput(attrs={'placeholder': 'Nantes (Loire-Atlantique)'}))
     persontelephone = forms.RegexField(
         label="Numéro de téléphone",
         regex=r'^\+33\d{9}$',
         widget=forms.TextInput(attrs={'placeholder': '+33612345678'})
     )
-    personlocation = forms.CharField(label="Lieu où est faite la lettre")
-    personemail = forms.EmailField(label="Email procurant")
-    personaddress1 = forms.CharField(label="Adresse")
-    personaddress2 = forms.CharField(label="Code postal et Ville")
+    personlocation = CharFieldTex(label="Lieu où est faite la lettre")
+    personemail = EmailFieldTex(label="Email procurant")
+    personaddress1 = CharFieldTex(label="Adresse")
+    personaddress2 = CharFieldTex(label="Code postal et Ville")
     persongender = forms.ChoiceField(label="Accord de la personne", choices=((0, "féminin"), (1, "masculin")))
 
 
@@ -169,38 +197,38 @@ PROCURATION_FIELDSETS = Fieldset(
 )
 
 class ProcurationForm(FieldsetForm):
-    procurantfirstname = forms.CharField(label="Prénom")
-    procurantlastname = forms.CharField(label="Nom de famille")
-    procurantlistofname = forms.CharField(label="Liste des prénoms", widget=forms.TextInput(attrs={'placeholder': 'Corentin, Sebastien, Pierre'}))
+    procurantfirstname = CharFieldTex(label="Prénom")
+    procurantlastname = CharFieldTex(label="Nom de famille")
+    procurantlistofname = CharFieldTex(label="Liste des prénoms", widget=forms.TextInput(attrs={'placeholder': 'Corentin, Sebastien, Pierre'}))
     procuranttelephone = forms.RegexField(
         label="Numéro de téléphone",
         regex=r'^\+33\d{9}$',
         widget=forms.TextInput(attrs={'placeholder': '+33612345678'})
     )
     procurantdob = forms.DateField(label="Date de naissance", widget=forms.SelectDateWidget(years=range(1900, 3000), attrs={'class': 'date-widget form-control'}))
-    procurantpob = forms.CharField(label="Lieu et département de naissance", widget=forms.TextInput(attrs={'placeholder': 'Nantes (Loire-Atlantique)'}))
-    procurantaddress1 = forms.CharField(label="Adresse")
-    procurantaddress2 = forms.CharField(label="Code postal et Ville")
-    procurantlocation = forms.CharField(label="Lieu où est faite la procuration")
-    procurantemail = forms.EmailField(label="Email")
+    procurantpob = CharFieldTex(label="Lieu et département de naissance", widget=forms.TextInput(attrs={'placeholder': 'Nantes (Loire-Atlantique)'}))
+    procurantaddress1 = CharFieldTex(label="Adresse")
+    procurantaddress2 = CharFieldTex(label="Code postal et Ville")
+    procurantlocation = CharFieldTex(label="Lieu où est faite la procuration")
+    procurantemail = EmailFieldTex(label="Email")
     procurantgender = forms.ChoiceField(label="Accords", choices=((0, "féminin"), (1, "masculin")))
-    procurantdeadname = forms.CharField(label="Deadname (prénom)")
+    procurantdeadname = CharFieldTex(label="Deadname (prénom)")
     debutprocuration = forms.DateField(label="Début de la procuration", widget=forms.SelectDateWidget(years=range(1900, 3000), attrs={'class': 'date-widget form-control'}))
     finprocuration = forms.DateField(label="Fin de la procuration", widget=forms.SelectDateWidget(attrs={'class': 'date-widget form-control'}))
-    personfirstname = forms.CharField(label="Prénom")
-    personlastname = forms.CharField(label="Nom de famille")
-    personlistofname = forms.CharField(label="Liste des prénoms", widget=forms.TextInput(attrs={'placeholder': 'Émilie, Delphine, Coralie'}))
+    personfirstname = CharFieldTex(label="Prénom")
+    personlastname = CharFieldTex(label="Nom de famille")
+    personlistofname = CharFieldTex(label="Liste des prénoms", widget=forms.TextInput(attrs={'placeholder': 'Émilie, Delphine, Coralie'}))
     persondob = forms.DateField(label="Date de naissance", widget=forms.SelectDateWidget(years=range(1900, 3000), attrs={'class': 'date-widget form-control'}))
-    personpob = forms.CharField(label="Lieu et département de naissance", widget=forms.TextInput(attrs={'placeholder': 'Nantes (Loire-Atlantique)'}))
+    personpob = CharFieldTex(label="Lieu et département de naissance", widget=forms.TextInput(attrs={'placeholder': 'Nantes (Loire-Atlantique)'}))
     persontelephone = forms.RegexField(
         label="Numéro de téléphone",
         regex=r'^\+33\d{9}$',
         widget=forms.TextInput(attrs={'placeholder': '+33612345678'})
     )
-    personlocation = forms.CharField(label="Lieu où est faite la lettre")
-    personemail = forms.EmailField(label="Email")
-    personaddress1 = forms.CharField(label="Adresse")
-    personaddress2 = forms.CharField(label="Code postal et Ville")
+    personlocation = CharFieldTex(label="Lieu où est faite la lettre")
+    personemail = EmailFieldTex(label="Email")
+    personaddress1 = CharFieldTex(label="Adresse")
+    personaddress2 = CharFieldTex(label="Code postal et Ville")
     persongender = forms.ChoiceField(label="Accord", choices=((0, "féminin"), (1, "masculin")))
 
     class Meta:
@@ -214,22 +242,22 @@ class ProcurationForm(FieldsetForm):
 
 @register_form(category='procuration', id="cpam", title="Nouvelle procuration pour la CPAM")
 class CPAMProcuration(ProcurationForm):
-    procurantdepartement = forms.CharField(label="Département de la caisse de CPAM de la personne faisant la procuration")
+    procurantdepartement = CharFieldTex(label="Département de la caisse de CPAM de la personne faisant la procuration")
     procurantss = forms.IntegerField(label="Numéro de sécu")
 
 @register_form(category='procuration', id="ecole", title="Nouvelle procuration pour une École/Université")
 class EcoleProcuration(ProcurationForm):
-    procurantecole = forms.CharField(label="École/Université de la personne faisant la procuration")
+    procurantecole = CharFieldTex(label="École/Université de la personne faisant la procuration")
 
 
 @register_form(category='procuration', id="banque", title="Nouvelle procuration pour une Banque")
 class BanqueProcuration(ProcurationForm):
-    procurantbanque = forms.CharField(label="Banque de la personne faisant la procuration")
+    procurantbanque = CharFieldTex(label="Banque de la personne faisant la procuration")
 
 @register_form(category='procuration', id="entreprise", title="Nouvelle procuration pour une entreprise avec numéro de contrat")
 class EntrepriseProcuration(ProcurationForm):
-    procurantentreprise = forms.CharField(label="Entreprise de la personne faisant la procuration")
-    procurantcontrat = forms.CharField(label="Numéro de contrat")
+    procurantentreprise = CharFieldTex(label="Entreprise de la personne faisant la procuration")
+    procurantcontrat = CharFieldTex(label="Numéro de contrat")
 
 @register_form(category='procuration', id="free", title="Nouvelle procuration pour Free")
 class FreeProcuration(ProcurationForm):
@@ -237,8 +265,8 @@ class FreeProcuration(ProcurationForm):
 
 @register_form(category='procuration', id="impots", title="Nouvelle procuration pour les impôts")
 class ImpotsProcuration(ProcurationForm):
-    procurantimpots = forms.CharField(label="Ville dont on dépend pour les impots")
-    procurantfiscal = forms.CharField(label="Numéro fiscal")
+    procurantimpots = CharFieldTex(label="Ville dont on dépend pour les impots")
+    procurantfiscal = CharFieldTex(label="Numéro fiscal")
 
 class RelanceProcurationForm(ProcurationForm):
     datepremiercourrier = forms.DateField(label="Date du premier courrier", widget=forms.SelectDateWidget(years=range(2019, 3000), attrs={'class': 'date-widget form-control'}))
@@ -295,22 +323,22 @@ CONTACT_FIELDSETS = Fieldset(
 
 
 class StandaloneForm(FieldsetForm):
-    firstname = forms.CharField(label="Prénom")
-    lastname = forms.CharField(label="Nom de famille")
-    listofname = forms.CharField(label="Liste des prénoms")
+    firstname = CharFieldTex(label="Prénom")
+    lastname = CharFieldTex(label="Nom de famille")
+    listofname = CharFieldTex(label="Liste des prénoms")
     telephone = forms.RegexField(
         label="Numéro de téléphone",
         regex=r'^\+33\d{9}$',
         widget=forms.TextInput(attrs={'placeholder': '+33612345678'})
     )
     dob = forms.DateField(label="Date de naissance ", widget=forms.SelectDateWidget(years=range(1900, 3000), attrs={'class': 'date-widget form-control'}))
-    pob = forms.CharField(label="Lieu et département de naissance", widget=forms.TextInput(attrs={'placeholder': 'Nantes (Loire-Atlantique)'}))
-    address1 = forms.CharField(label="Adresse")
-    address2 = forms.CharField(label="Code postal et Ville")
-    location = forms.CharField(label="Lieu où est faite la lettre")
-    email = forms.EmailField(label="Email")
+    pob = CharFieldTex(label="Lieu et département de naissance", widget=forms.TextInput(attrs={'placeholder': 'Nantes (Loire-Atlantique)'}))
+    address1 = CharFieldTex(label="Adresse")
+    address2 = CharFieldTex(label="Code postal et Ville")
+    location = CharFieldTex(label="Lieu où est faite la lettre")
+    email = EmailFieldTex(label="Email")
     gender = forms.ChoiceField(label="Accords ", choices=((0, "féminin"), (1, "masculin")))
-    deadname = forms.CharField(label="Deadname (prénom)")
+    deadname = CharFieldTex(label="Deadname (prénom)")
     date = forms.DateField(label="Date du courrier", widget=forms.SelectDateWidget(years=range(1900, 3000), attrs={'class': 'date-widget form-control'}))
 
     class Meta:
@@ -323,21 +351,21 @@ class StandaloneForm(FieldsetForm):
 
 @register_form(category='standalone', id="cpam", title="CPAM")
 class CPAMStandalone(StandaloneForm):
-    departement = forms.CharField(label="Département de la caisse de CPAM")
+    departement = CharFieldTex(label="Département de la caisse de CPAM")
     ss = forms.IntegerField(label="Numéro de sécu")
 
 @register_form(category='standalone', id="ecole", title="École/Université")
 class EcoleStandalone(StandaloneForm):
-    ecole = forms.CharField(label="École/Université")
+    ecole = CharFieldTex(label="École/Université")
 
 @register_form(category='standalone', id="banque", title="Banque")
 class BanqueStandalone(StandaloneForm):
-    banque = forms.CharField(label="Banque")
+    banque = CharFieldTex(label="Banque")
 
 @register_form(category='standalone', id="entreprise", title="entreprise avec numéro de contrat")
 class EntrepriseStandalone(StandaloneForm):
-    entreprise = forms.CharField(label="Entreprise")
-    contrat = forms.CharField(label="Numéro de contrat")
+    entreprise = CharFieldTex(label="Entreprise")
+    contrat = CharFieldTex(label="Numéro de contrat")
 
 @register_form(category='standalone', id="free", title="Free")
 class FreeStandalone(StandaloneForm):
@@ -345,5 +373,5 @@ class FreeStandalone(StandaloneForm):
 
 @register_form(category='standalone', id="impots", title="Impôts")
 class ImpotsStandalone(StandaloneForm):
-    impots = forms.CharField(label="Ville dont on dépend pour les impots")
-    fiscal = forms.CharField(label="Numéro fiscal")
+    impots = CharFieldTex(label="Ville dont on dépend pour les impots")
+    fiscal = CharFieldTex(label="Numéro fiscal")
