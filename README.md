@@ -43,7 +43,7 @@ Si changement de mention de sexe à l'État-Civil (pas encore pris en charge) :
 Requirements
 ------------
 
-- Python>=3.7
+- Python>=3.6 (Latest tested with)
 - django-tex
 - jinja2-django-tags
 - texlive-full (pour la génération du PDF à partir de .tex)
