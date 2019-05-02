@@ -125,3 +125,4 @@ Un grand merci à toutes ces personnes qui ont fait des tests, bugs reports, mer
 - [Eliot Berriot](https://eliotberriot.com/)
 - Une autre [Alice](https://bidule.menf.in/users/alice)
 - Misc
+- [Freyja Wildes](https://social.art-software.fr/@freyja_wildes)
