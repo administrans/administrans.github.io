@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
 from django_tex.views import render_to_pdf
+from django_tex.exceptions import TexError
 from django import http
+import traceback
 
 from .forms import CPAMProcuration, BanqueProcuration, EcoleProcuration, EntrepriseProcuration, FreeProcuration, ImpotsProcuration
 from .forms import CPAMRelanceProcuration, BanqueRelanceProcuration, EcoleRelanceProcuration, EntrepriseRelanceProcuration, FreeRelanceProcuration, ImpotsRelanceProcuration
@@ -9,19 +11,6 @@ from .forms import CPAMStandalone, BanqueStandalone, EcoleStandalone, Entreprise
 from .forms import ChgmtPrenomForm
 from . import forms
 from . import lists
-#from django.contrib.staticfiles.storage import staticfiles_storage
-#from django.urls import reverse
-#
-#from jinja2 import Environment
-#
-#
-#def environment(**options):
-#    env = Environment(**options)
-#    env.globals.update({
-#        'static': staticfiles_storage.url,
-#        'url': reverse,
-#    })
-#    return env
 
 def context(obj):
     obj['lists'] = lists.LISTS.items()
@@ -48,12 +37,20 @@ def form(request, category, id):
         form = form_class(request.POST)
         form_context['form'] = form
         if form.is_valid():
-            return render_to_pdf(
-                request,
-                latex_name,
-                {'cleaned_data': form.cleaned_data},
-                filename="{}.pdf".format(form_id)
-            )
+            try:
+                return render_to_pdf(
+                    request,
+                    latex_name,
+                    {'cleaned_data': form.cleaned_data},
+                    filename="{}.pdf".format(form_id)
+                )
+            except TexError:
+                print(traceback.format_exc())
+                form.add_error(None, "Une erreur s'est produite lors de la génération du PDF")
+            except:
+                print(traceback.format_exc())
+                form.add_error(None, "Une erreur inconnue s'est produite, merci de contacter les"
+                        + " administrateur.rice.s")
     else:
         form = form_class()
         form_context['form'] = form

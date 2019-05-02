@@ -3,79 +3,43 @@
     <head>
         <meta charset="UTF-8">
         <title>Trans Administratif</title>
- <!-- Latest compiled and minified CSS -->
- <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"> -->
- <link rel="stylesheet" href={% static 'css/bootstrap.min.css' %}>
-
-  <style>
-    body {
-      display: flex;
-      min-height: 100vh;
-      flex-direction: column;
-    }
-    main {
-      flex: 1;
-      padding: 2em 0;
-    }
-    /* Remove the navbar's default margin-bottom and rounded borders */
-    .navbar {
-      margin-bottom: 0;
-      border-radius: 0;
-    }
-    .row-margin-custom { margin-top: 2.0em; }
-    /* Add a gray background color and some padding to the footer */
-    .form-container {
-      max-width: 600px;
-    }
-    .message {
-      padding: 1em;
-      margin: 0.5em 0;
-    }
-    select.date-widget {
-      width: 33.33%;
-      display: inline-block;
-    }
-    fieldset {
-      margin: 2em 0;
-    }
-    footer {
-      background-color: #f2f2f2;
-      padding: 25px;
-    }
-  </style>
+        <!-- Latest compiled and minified CSS -->
+        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"> -->
+        <link rel="stylesheet" href={% static 'css/bootstrap.min.css' %}>
+        <link rel="stylesheet" href={% static 'css/main.css' %}>
     </head>
     <body class="center">
 
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href={% url 'list_letters_type' %}>Trans Administratif</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        {% for category, list in lists %}
-        <li><a href={% url 'list' category=category %}>{{ list.title }}</a></li>
-        {% endfor %}
-        <li><a href={% url 'form' category='attestation' id='chgmtprenom' %}>Changement de prénom</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href={% url 'list_letters_type' %}>Trans Administratif</a>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        {% for category, list in lists %}
+                        <li><a href={% url 'list' category=category %}>{{ list.title }}</a></li>
+                        {% endfor %}
+                        <li><a href={% url 'form' category='attestation' id='chgmtprenom' %}>Changement de prénom</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
 
         <main class="container">
 
-                {% block content %}{% endblock %}
+            {% block content %}{% endblock %}
 
         </main>
 
-<footer class="text-center">
-  <p>En cas d'erreur maria AT climent-pommeret DOT red</p>
+        <footer class="text-center">
+            <p>En cas d'erreur maria AT climent-pommeret DOT red</p>
 
-  <p>Btw, le code (absolument dégueu, c'est du quick and dirty (m'enfin de moins en moins quand même)) est <a href="https://gitlab.climent-pommeret.red/Chopopope/site-transadministratif">ici</a>. (Please don't judge)</p>
-</footer>
+            <p>Btw, le code (absolument dégueu, c'est du quick and dirty (m'enfin de moins en moins quand même)) est <a href="https://gitlab.climent-pommeret.red/Chopopope/site-transadministratif">ici</a>. (Please don't judge)</p>
+        </footer>
     </body>
 </html>
