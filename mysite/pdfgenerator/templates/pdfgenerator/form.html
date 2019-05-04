@@ -50,10 +50,12 @@
         <div class="form-actions">
 	        <div class="memoryControls">
                 <button type="button" class="btn btn-secondary" name="save" title="{{ strings.toggleSaveFull }}">
-                    <span class="toggleable enable">{{ strings.enableMemory }}</span>
-                    <span class="toggleable disable">{{ strings.disableMemory }}</span>
+                    <span class="toggleable enable"><i class="icon pawprint"></i>{{ strings.enableMemory}}</span>
+                    <span class="toggleable disable"><i class="icon pawprint"></i>{{ strings.disableMemory }}</span>
                 </button>
-                <button type="button" class="btn btn-secondary" name="forget" title="{{ strings.clearDataFull }}">{{ strings.clearData }}</button>
+                <button type="button" class="btn btn-secondary" name="forget" title="{{ strings.clearDataFull }}">
+                    <i class="icon wave"></i>{{ strings.clearData }}
+                </button>
 	        </div>
             <button type="submit" class="btn btn-primary">Générer</button>
         </div>
