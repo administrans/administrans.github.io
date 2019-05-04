@@ -14,7 +14,7 @@
     </h1>
 
 
-    <form class="form-horizontal" method="post">{% csrf_token %}
+    <form class="memory form-horizontal" method="post">{% csrf_token %}
         {% if form.errors and not form.non_field_errors() %}
             <p class="message bg-danger">
                 Le formulaire contient des erreurs. Merci de les corriger.
@@ -48,7 +48,14 @@
             </fieldset>
         {% endfor %}
         <div class="form-actions">
-            <button type="submit" class="btn btn-primary" >Générer</button>
+	        <div class="memoryControls">
+                <button type="button" class="btn btn-secondary" name="save" title="{{ strings.toggleSaveFull }}">
+                    <span class="toggleable enable">{{ strings.enableMemory }}</span>
+                    <span class="toggleable disable">{{ strings.disableMemory }}</span>
+                </button>
+                <button type="button" class="btn btn-secondary" name="forget" title="{{ strings.clearDataFull }}">{{ strings.clearData }}</button>
+	        </div>
+            <button type="submit" class="btn btn-primary">Générer</button>
         </div>
     </form>
 </div>

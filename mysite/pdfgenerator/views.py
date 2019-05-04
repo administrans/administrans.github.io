@@ -11,9 +11,11 @@ from .forms import CPAMStandalone, BanqueStandalone, EcoleStandalone, Entreprise
 from .forms import ChgmtPrenomForm
 from . import forms
 from . import lists
+from . import strings
 
 def context(obj):
     obj['lists'] = lists.LISTS.items()
+    obj['strings'] = strings.STRINGS
     return obj
 
 def list_letters_type(request):
