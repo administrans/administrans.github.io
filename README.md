@@ -101,6 +101,10 @@ Créez votre fichier de configuration:
 
 Éditez le fichier `mysite/mysite/localsettings.py` et ajoutez une valeur pour `SECRET_KEY`, par exemple `SECRET_KEY = 'dev'`.
 
+Appliquez les migrations
+
+    virtualenv/bin/python mysite/manage.py migrate
+
 Lancez le serveur de développement:
 
     virtualenv/bin/python mysite/manage.py runserver
