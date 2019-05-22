@@ -75,6 +75,19 @@ main {
     margin: 0.5em 0;
 }
 
+.icon.pawprint:before {
+    /* 1F43E */
+    content: "🐾︎";
+    margin: 0px 5px;
+}
+
+.icon.wave:before {
+    /* 1F30A */
+    content: "🌊︎";
+    margin: 0px 5px;
+}
+
+
 select.date-widget {
     width: 33.33%;
     display: inline-block;
