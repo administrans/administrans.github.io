@@ -18,6 +18,9 @@ def context(obj):
     obj['strings'] = strings.STRINGS
     return obj
 
+def description_cec(request):
+    return render(request, "pdfgenerator/description_cec.html", context({}))
+
 def list_letters_type(request):
     return render(request, "pdfgenerator/list_letters_type.html", context({}))
 

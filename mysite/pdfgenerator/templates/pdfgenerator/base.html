@@ -32,6 +32,7 @@
                         <li><a href={% url 'list' category=category %}>{{ list.title }}</a></li>
                         {% endfor %}
                         <li><a href={% url 'form' category='attestation' id='chgmtprenom' %}>Changement de prénom</a></li>
+			<li><a href={% url 'description_cec' %}>CEC</a></li>
                     </ul>
                     <ul id="memory" class="nav navbar-nav">
                         <li><span title="{{ strings.enableMemory }}" class="icon" id="save">&#128062;&#xfe0e;</span></li>
