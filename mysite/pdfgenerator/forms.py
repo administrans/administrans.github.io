@@ -110,7 +110,7 @@ class EmailFieldTex(forms.EmailField):
 class ChgmtPrenomForm(FieldsetForm):
     procurantfirstname = CharFieldTex(label="Prénom (le vrai hein) de la personne trans")
     procurantlastname = CharFieldTex(label="Nom de famille de la personne trans")
-    procurantlistofname = CharFieldTex(label="Liste des prénoms (les vrais) de la personne trans")
+    procurantlistofname = CharFieldTex(label="Liste des prénoms (les vrais) de la personne trans", widget=forms.TextInput(attrs={'placeholder': 'Émilie, Delphine, Coralie'}))
     procurantdob = forms.DateField(label="Date de naissance de la personne trans", widget=forms.SelectDateWidget(years=range(1900, 3000), attrs={'class': 'date-widget form-control'}))
     procurantpob = CharFieldTex(label="Lieu et département de naissance de la personne trans", widget=forms.TextInput(attrs={'placeholder': 'Nantes (Loire-Atlantique)'}))
     procurantaddress1 = CharFieldTex(label="Adresse")
@@ -122,7 +122,7 @@ class ChgmtPrenomForm(FieldsetForm):
     date = forms.DateField(label="Date de l'attestation", widget=forms.SelectDateWidget(attrs={'class': 'date-widget form-control'}))
     personfirstname = CharFieldTex(label="Prénom de la personne qui fait l'attestation")
     personlastname = CharFieldTex(label="Nom de famille de la personne qui fait l'attestation")
-    personlistofname = CharFieldTex(label="Liste des prénoms de la personne qui fait l'attestation")
+    personlistofname = CharFieldTex(label="Liste des prénoms de la personne qui fait l'attestation", widget=forms.TextInput(attrs={'placeholder': 'Corentin, Sebastien, Pierre'}))
     persondob = forms.DateField(label="Date de naissance de la personne qui fait l'attestation", widget=forms.SelectDateWidget(years=range(1900, 3000), attrs={'class': 'date-widget form-control'}))
     personpob = CharFieldTex(label="Lieu et département de naissance de la personne qui fait l'attestation", widget=forms.TextInput(attrs={'placeholder': 'Nantes (Loire-Atlantique)'}))
     persontelephone = forms.RegexField(
@@ -325,7 +325,7 @@ CONTACT_FIELDSETS = Fieldset(
 class StandaloneForm(FieldsetForm):
     firstname = CharFieldTex(label="Prénom")
     lastname = CharFieldTex(label="Nom de famille")
-    listofname = CharFieldTex(label="Liste des prénoms")
+    listofname = CharFieldTex(label="Liste des prénoms", widget=forms.TextInput(attrs={'placeholder': 'Émilie, Delphine, Coralie'}))
     telephone = forms.RegexField(
         label="Numéro de téléphone",
         regex=r'^(\+33|0|0033)\d{9}$',
