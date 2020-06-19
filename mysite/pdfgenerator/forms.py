@@ -131,7 +131,7 @@ class ChgmtPrenomForm(FieldsetForm):
         widget=forms.TextInput(attrs={'placeholder': '+33612345678'})
     )
     personlocation = CharFieldTex(label="Lieu où est faite la lettre")
-    personemail = EmailFieldTex(label="Email procurant")
+    personemail = EmailFieldTex(label="Email de la personne qui fait l'attestation")
     personaddress1 = CharFieldTex(label="Adresse")
     personaddress2 = CharFieldTex(label="Code postal et Ville")
     persongender = forms.ChoiceField(label="Accord de la personne", choices=((0, "féminin"), (1, "masculin")))
