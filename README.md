@@ -33,12 +33,17 @@ Si changement de prénom à l'EC
 - électricité/gaz/eau
 - opérateur téléphonique/Internet
 - carte d'électeur.rice
+- carte bancaire
+- carte vitale
+- Pôle Emploi
+- carte d'étudiant.e
+- diplômes
 
 Si changement de mention de sexe à l'État-Civil (pas encore pris en charge) :
 - CNI/passeport
 - permis de conduire
 - numéro INSEE
-- numéro de sécurité sociale
+- numéro de sécurité sociale et carte vitale
 
 Requirements
 ------------
