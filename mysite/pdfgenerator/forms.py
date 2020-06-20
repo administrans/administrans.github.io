@@ -243,7 +243,7 @@ class ProcurationForm(FieldsetForm):
 @register_form(category='procuration', id="cpam", title="Nouvelle procuration pour la CPAM")
 class CPAMProcuration(ProcurationForm):
     procurantdepartement = CharFieldTex(label="Département de la caisse de CPAM de la personne faisant la procuration")
-    procurantss = forms.IntegerField(label="Numéro de sécu")
+    procurantss = CharFieldTex(label="Numéro de sécu")
 
 @register_form(category='procuration', id="ecole", title="Nouvelle procuration pour une École/Université")
 class EcoleProcuration(ProcurationForm):
@@ -352,7 +352,7 @@ class StandaloneForm(FieldsetForm):
 @register_form(category='standalone', id="cpam", title="CPAM")
 class CPAMStandalone(StandaloneForm):
     departement = CharFieldTex(label="Département de la caisse de CPAM")
-    ss = forms.IntegerField(label="Numéro de sécu")
+    ss = CharFieldTex(label="Numéro de sécu")
 
 @register_form(category='standalone', id="ecole", title="École/Université")
 class EcoleStandalone(StandaloneForm):
