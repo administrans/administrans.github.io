@@ -117,7 +117,7 @@ class ChgmtPrenomForm(FieldsetForm):
     procurantaddress2 = CharFieldTex(label="Code postal et Ville")
     procurantgender = forms.ChoiceField(label="Accords de la personne", choices=((0, "féminin"), (1, "masculin")))
     procurantville = CharFieldTex(label="Ville dont la personne dépend pour l'État-Civil")
-    personignoredeadname = forms.ChoiceField(label="La personne faisant l'attestation ignore le deadname", choices=((0, "oui"), (1, "non")))
+    personignoredeadname = forms.ChoiceField(label="La personne faisant l'attestation ignore le deadname", choices=((0, "oui"), (1, "non")), widget=forms.Select(attrs={'onchange': "if (document.getElementById('id_personignoredeadname').value === '0') { document.getElementById('id_procurantdeadname').setAttribute('disabled', 'disabled'); } else { document.getElementById('id_procurantdeadname').removeAttribute('disabled'); }; return true;"}))
     procurantdeadname = CharFieldTex(label="Deadname de la personne (seulement le prénom) (et seulement si la personne connait le deadname)", required=False)
     date = forms.DateField(label="Date de l'attestation", widget=forms.SelectDateWidget(attrs={'class': 'date-widget form-control'}))
     personfirstname = CharFieldTex(label="Prénom de la personne qui fait l'attestation")
