@@ -242,7 +242,7 @@ class ProcurationForm(FieldsetForm):
 
 @register_form(category='procuration', id="cpam", title="Nouvelle procuration pour la CPAM")
 class CPAMProcuration(ProcurationForm):
-    procurantdepartement = CharFieldTex(label="Département de la caisse de CPAM de la personne faisant la procuration")
+    procurantdepartement = CharFieldTex(label="\"du/de l'/de la\" + département de la caisse de CPAM de la personne faisant la procuration, par ex. \"du Gard\" ou \"de l'Ain\" ou \"de la Gironde\"")
     procurantss = CharFieldTex(label="Numéro de sécu")
 
 @register_form(category='procuration', id="ecole", title="Nouvelle procuration pour une École/Université")
