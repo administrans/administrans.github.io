@@ -16,7 +16,7 @@ Les différents modes :
 - par procuration (génère une procuration + la lettre de demande à faire envoyer
 par un.e cis de l'entourage qui pourra gérer les tracas administratifs, pour pas
 que vous ayez a gérer vous même cette merde)
-- [to come] les lettres si vous souhaitez le faire vous même.
+- les lettres si vous souhaitez le faire vous même.
 
 Checklist des papiers à changer
 -------------------------------
@@ -73,8 +73,9 @@ Pour cela les dépendances système requises sont:
 
 - git
 - python3.7
-- python3-venv
+- python3.7-venv
 - texlive-full
+- python3-pip
 
 Commencez par forker le dépôt en visitant https://gitlab.climent-pommeret.red/Chopopope/site-transadministratif/forks/new.
 
