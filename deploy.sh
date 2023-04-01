@@ -2,4 +2,6 @@
 
 set -euET -o pipefail
 
-ipfs add --recursive --hidden --progress --pin=false -n --ignore-rules-path=.ipfsignore --quieter .
+h="$(ipfs cid base32 "$(ipfs add --recursive --hidden --progress --pin=false --ignore-rules-path=.ipfsignore --quieter .)")"
+echo
+echo "ipfs://$h"
