@@ -201,7 +201,7 @@
 \end{document}
           </pre>
           <div class="form-actions">
-            <button id="genpdf" class="btn btn-primary" type="submit" onClick="genpdf();">Générer</button>
+            <button id="genpdf-button" class="btn btn-primary" type="submit">Générer</button>
           </div>
           <script>
             function genpdf() {
@@ -229,7 +229,7 @@
               });
               console.log('end');
             }
-            document.getElementById("genpdf").addEventListener("click", function(e) {
+            document.getElementById("genpdf-button").addEventListener("click", function(e) {
               genpdf();
               e.preventDefault();
             });
