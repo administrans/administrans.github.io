@@ -223,9 +223,16 @@ Hello
     <script>
       function genpdf() {
         var source_code = document.getElementById('latex_template').innerText;
-        for (var i = 0; i < allFields.length; i++) {
-          source_code = source_code.replaceAll("$" + allFields[i] + "$", document.getElementById(allFields[i]).value);
-        }
+        source_code = source_code.replaceAll(
+          RegExp("\\$(" + allFields.join("|") + ")\\$", "g"),
+          function($field$) {
+            var fieldName = $field$.substring(1, $field$.length-1)
+            return document.getElementById(fieldName).value;
+          }
+        );
+        //for (var i = 0; i < allFields.length; i++) {
+        //  source_code = source_code.replaceAll("$" + allFields[i] + "$", document.getElementById(allFields[i]).value);
+        //}
         console.log(source_code);
         var texlive = new TeXLive("texlive.js/");
         texlive.pdftex.set_TOTAL_MEMORY(80*1024*1024).then(function() {

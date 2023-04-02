@@ -4,7 +4,6 @@ set -euET -o pipefail
 
 convert favicon.png -resize 16x16 favicon.ico || true
 
-if true; then
 (
   cd extra-packages
   for i in *.tds.zip; do
@@ -16,9 +15,8 @@ if true; then
     )
   done
 )
-fi
 
-sed -i -e 's/\\ProvidesClass{lettre}\[/\\ProvidesClass{lettre}%[/' texlive.js/texlive/texmf-dist/tex/latex/lettre/lettre.cls
+#sed -i -e 's/\\ProvidesClass{lettre}\[/\\ProvidesClass{lettre}%[/' texlive.js/texlive/texmf-dist/tex/latex/lettre/lettre.cls
 
 (
   cd texlive.js
