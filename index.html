@@ -2,81 +2,61 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <style>
-    </style>
+    <link rel="stylesheet" href="bootstrap-3.4.1-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="custom.css" />
   </head>
   <body>
     <script src="texlive.js/promisejs/promise.js"></script>
     <script src="texlive.js/pdftex.js"></script>
-    <h1>Trans administratif</h1>
-    <h2>Nouvelle attestation de changement de prénom</h2>
-    <script>
-      allFields = [];
-      function field(info) {
-        document.write('<label for="'+info.id+'">'+info.label+'</label><input type="text" id="'+info.id+'" /><br />');
-        allFields[allFields.length] = info.id;
-      }
-      field({ 'type': "text", 'id': "procurantfirstname", 'label': "Prénom (le vrai hein) de la personne trans" });
-      field({ 'type': "text", 'id': "procurantlastname", 'label': "Nom de famille de la personne trans" });
-      field({ 'type': "text", 'id': "procurantlistofname", 'label': "Liste des prénoms (les vrais) de la personne trans", 'placeholder': "Émilie, Delphine, Coralie" });
-      field({ 'type': "date", 'id': "procurantdob", 'label': "Date de naissance de la personne trans" });
-      field({ 'type': "text", 'id': "procurantpob", 'label': "Lieu et département de naissance de la personne trans", 'placeholder': "Nantes (Loire-Atlantique)" });
-      field({ 'type': "text", 'id': "procurantaddress1", 'label': "Adresse" });
-      field({ 'type': "text", 'id': "procurantaddress2", 'label': "Code postal et Ville" });
-      field({ 'type': "selct", 'id': "procurantgender", 'label': "Accords de la personne", 'choices': ["féminin", "neutre", "masculin"] });
-      field({ 'type': "text", 'id': "procurantville", 'label': "Ville dont la personne dépend pour l'État-Civil" });
-      field({ 'type': "checkbox", 'id': "personignoredeadname", 'label': "La personne faisant l'attestation ignore le deadname" });
-      field({ 'type': "text", 'id': "procurantdeadname", 'label': "Deadname de la personne (seulement le prénom) (et seulement si la personne connait le deadname)" });
-      field({ 'type': "date", 'id': "date", 'label': "Date de l'attestation" });
-      field({ 'type': "text", 'id': "personfirstname", 'label': "Prénom de la personne qui fait l'attestation" });
-      field({ 'type': "text", 'id': "personlastname", 'label': "Nom de famille de la personne qui fait l'attestation" });
-      field({ 'type': "text", 'id': "personlistofname", 'label': "Liste des prénoms de la personne qui fait l'attestation", 'placeholder': "Corentin, Sebastien, Pierre" });
-      field({ 'type': "date", 'id': "persondob", 'label': "Date de naissance de la personne qui fait l'attestation" });
-      field({ 'type': "text", 'id': "personpob", 'label': "Lieu et département de naissance de la personne qui fait l'attestation", 'placeholder': "Nantes (Loire-Atlantique)" });
-      field({ 'type': "text", 'id': "persontelephone", 'label': "Numéro de téléphone", 'placeholder': "+33612345678" }); // regex=r'^(\+33|0|0033)\d{9}$',
-      field({ 'type': "text", 'id': "personlocation", 'label': "Lieu où est faite la lettre" });
-      field({ 'type': "text", 'id': "personemail", 'label': "Email de la personne qui fait l'attestation" });
-      field({ 'type': "text", 'id': "personaddress1", 'label': "Adresse" });
-      field({ 'type': "text", 'id': "personaddress2", 'label': "Code postal et Ville" });
-      field({ 'type': "select", 'id': "persongender", 'label': "Accords de la personne", 'choices': ["féminin", "neutre", "masculin"] });
-    </script>
-    <pre id="latex_template1" style="display:none;">
-\documentclass{article}
-
-%-------------------------------------------------------------------------
-%   Partie sur le. procurant.e
-%-------------------------------------------------------------------------
-
-
-% Mettre ici le prenom de la personne faisant la procuration
-% et entre les {} le nom de famille
-\newcommand{\ProcurantId}{$procurantfirstname$ {} \textsc{ $procurantlastname$ }}
-
-% Mettre ici la suite des pr\'{e}noms de la personne faisant la procuration
-% et entre les {} le nom de famille
-\newcommand{\ProcurantFullId}{ $procurantlistofname$ {} \textsc{ $procurantlastname$ } }
-
-\begin{document}
-Hello \ProcurantId, blah \ProcurantFullId.
-\end{document}
-    </pre>
-    <pre id="latex_template11" style="display:none;">
-\documentclass[12pt,origdate]{lettre}%
-%%%\usepackage[utf8x]{inputenc}
-\usepackage[french]{babel}
-%\usepackage[T1]{fontenc}
-\usepackage{fontenc}
-%\usepackage{mltex}
-\begin{document}
-%-----------------------------------------------%
-% Le blabla pas int\'{e}ressant                     %
-%-----------------------------------------------%
-\begin{letter}{\`{A} l'attention du service d'\'{E}tat-Civil de \PersonLocation}
-Hello
-\end{letter}
-\end{document}
-    </pre>
-    <pre id="latex_template" style="display:none;">
+    <main class="container">
+      <div class="container form-container">
+        <h1>Nouvelle attestation de changement de prénom</h1>
+        <form class="memory form-horizontal">
+          <script>
+            allFields = [];
+            function field(info) {
+              document.write(
+                '<div class="form-group">' +
+                '<label class="col-sm-4 control-label" for="'+info.id+'">' + info.label + '</label>' +
+                '<div class="col-sm-8"><input class="form-control" type="text" id="' + info.id + '" /></div>' +
+                '</div>');
+              allFields[allFields.length] = info.id;
+            }
+          </script>
+          <fieldset>
+            <legend>Informations de la personne trans</legend>
+            <script>
+              field({ 'type': "text", 'id': "procurantfirstname", 'label': "Prénom (le vrai hein) de la personne trans" });
+              field({ 'type': "text", 'id': "procurantlastname", 'label': "Nom de famille de la personne trans" });
+              field({ 'type': "text", 'id': "procurantlistofname", 'label': "Liste des prénoms (les vrais) de la personne trans", 'placeholder': "Émilie, Delphine, Coralie" });
+              field({ 'type': "date", 'id': "procurantdob", 'label': "Date de naissance de la personne trans" });
+              field({ 'type': "text", 'id': "procurantpob", 'label': "Lieu et département de naissance de la personne trans", 'placeholder': "Nantes (Loire-Atlantique)" });
+              field({ 'type': "text", 'id': "procurantaddress1", 'label': "Adresse" });
+              field({ 'type': "text", 'id': "procurantaddress2", 'label': "Code postal et Ville" });
+              field({ 'type': "selct", 'id': "procurantgender", 'label': "Accords de la personne", 'choices': ["féminin", "neutre", "masculin"] });
+              field({ 'type': "text", 'id': "procurantville", 'label': "Ville dont la personne dépend pour l'État-Civil" });
+              field({ 'type': "checkbox", 'id': "personignoredeadname", 'label': "La personne faisant l'attestation ignore le deadname" });
+              field({ 'type': "text", 'id': "procurantdeadname", 'label': "Deadname de la personne (seulement le prénom) (et seulement si la personne connait le deadname)" });
+              field({ 'type': "date", 'id': "date", 'label': "Date de l'attestation" });
+            </script>
+          </fieldset>
+          <fieldset>
+            <legend>Informations de la personne qui fait l'attestation</legend>
+            <script>
+              field({ 'type': "text", 'id': "personfirstname", 'label': "Prénom de la personne qui fait l'attestation" });
+              field({ 'type': "text", 'id': "personlastname", 'label': "Nom de famille de la personne qui fait l'attestation" });
+              field({ 'type': "text", 'id': "personlistofname", 'label': "Liste des prénoms de la personne qui fait l'attestation", 'placeholder': "Corentin, Sebastien, Pierre" });
+              field({ 'type': "date", 'id': "persondob", 'label': "Date de naissance de la personne qui fait l'attestation" });
+              field({ 'type': "text", 'id': "personpob", 'label': "Lieu et département de naissance de la personne qui fait l'attestation", 'placeholder': "Nantes (Loire-Atlantique)" });
+              field({ 'type': "text", 'id': "persontelephone", 'label': "Numéro de téléphone", 'placeholder': "+33612345678" }); // regex=r'^(\+33|0|0033)\d{9}$',
+              field({ 'type': "text", 'id': "personlocation", 'label': "Lieu où est faite la lettre" });
+              field({ 'type': "text", 'id': "personemail", 'label': "Email de la personne qui fait l'attestation" });
+              field({ 'type': "text", 'id': "personaddress1", 'label': "Adresse" });
+              field({ 'type': "text", 'id': "personaddress2", 'label': "Code postal et Ville" });
+              field({ 'type': "select", 'id': "persongender", 'label': "Accords de la personne", 'choices': ["féminin", "neutre", "masculin"] });
+            </script>
+          </fieldset>
+          <pre id="latex_template" style="display:none;">
 \documentclass[12pt,origdate]{lettre}%
 %%%\usepackage[utf8x]{inputenc}
 \usepackage[french]{babel}
@@ -219,37 +199,44 @@ Hello
     \encl{Copie d'une pi\`{e}ce d'identit\'{e} de \PersonId}
 \end{letter}
 \end{document}
-    </pre>
-    <script>
-      function genpdf() {
-        var source_code = document.getElementById('latex_template').innerText;
-        source_code = source_code.replaceAll(
-          RegExp("\\$(" + allFields.join("|") + ")\\$", "g"),
-          function($field$) {
-            var fieldName = $field$.substring(1, $field$.length-1)
-            return document.getElementById(fieldName).value;
-          }
-        );
-        //for (var i = 0; i < allFields.length; i++) {
-        //  source_code = source_code.replaceAll("$" + allFields[i] + "$", document.getElementById(allFields[i]).value);
-        //}
-        console.log(source_code);
-        var texlive = new TeXLive("texlive.js/");
-        texlive.pdftex.set_TOTAL_MEMORY(80*1024*1024).then(function() {
-          texlive.pdftex.on_stdout = console.log;
-          texlive.pdftex.on_stderr = console.log;
-          texlive.pdftex.compile(source_code).then(function(pdf_dataurl) {
-            console.log(pdf_dataurl);
-            if (pdf_dataurl === false) {
-              console.log("compilation error");
-            } else {
-              window.open(pdf_dataurl);
+          </pre>
+          <div class="form-actions">
+            <button id="genpdf" class="btn btn-primary" type="submit" onClick="genpdf();">Générer</button>
+          </div>
+          <script>
+            function genpdf() {
+              var source_code = document.getElementById('latex_template').innerText;
+              source_code = source_code.replaceAll(
+                RegExp("\\$(" + allFields.join("|") + ")\\$", "g"),
+                function($field$) {
+                  var fieldName = $field$.substring(1, $field$.length-1)
+                  return document.getElementById(fieldName).value;
+                }
+              );
+              console.log(source_code);
+              var texlive = new TeXLive("texlive.js/");
+              texlive.pdftex.set_TOTAL_MEMORY(80*1024*1024).then(function() {
+                texlive.pdftex.on_stdout = console.log;
+                texlive.pdftex.on_stderr = console.log;
+                texlive.pdftex.compile(source_code).then(function(pdf_dataurl) {
+                  console.log(pdf_dataurl);
+                  if (pdf_dataurl === false) {
+                    console.log("compilation error");
+                  } else {
+                    window.open(pdf_dataurl);
+                  }
+                });
+              });
+              console.log('end');
             }
-          });
-        });
-      }
-    </script>
-    <input type="button" onClick="genpdf();" value="genpdf" />
+            document.getElementById("genpdf").addEventListener("click", function(e) {
+              genpdf();
+              e.preventDefault();
+            });
+          </script>
+        </form>
+      </div>
+    </main>
   </body>
 </html>
 
