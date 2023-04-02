@@ -12,12 +12,33 @@
     <h2>Nouvelle attestation de changement de prénom</h2>
     <script>
       allFields = [];
-      function field(id, label) {
-        document.write('<label for="'+id+'">'+label+'</label><input type="text" id="'+id+'" /><br />');
-        allFields[allFields.length] = id;
+      function field(info) {
+        document.write('<label for="'+info.id+'">'+info.label+'</label><input type="text" id="'+info.id+'" /><br />');
+        allFields[allFields.length] = info.id;
       }
-      field("procurantfirstname", "Prénom (le vrai hein) de la personne trans");
-      field("procurantlastname", "Nom de famille de la personne trans");
+      field({ 'type': "text", 'id': "procurantfirstname", 'label': "Prénom (le vrai hein) de la personne trans" });
+      field({ 'type': "text", 'id': "procurantlastname", 'label': "Nom de famille de la personne trans" });
+      field({ 'type': "text", 'id': "procurantlistofname", 'label': "Liste des prénoms (les vrais) de la personne trans", 'placeholder': "Émilie, Delphine, Coralie" });
+      field({ 'type': "date", 'id': "procurantdob", 'label': "Date de naissance de la personne trans" });
+      field({ 'type': "text", 'id': "procurantpob", 'label': "Lieu et département de naissance de la personne trans", 'placeholder': "Nantes (Loire-Atlantique)" });
+      field({ 'type': "text", 'id': "procurantaddress1", 'label': "Adresse" });
+      field({ 'type': "text", 'id': "procurantaddress2", 'label': "Code postal et Ville" });
+      field({ 'type': "selct", 'id': "procurantgender", 'label': "Accords de la personne", 'choices': ["féminin", "neutre", "masculin"] });
+      field({ 'type': "text", 'id': "procurantville", 'label': "Ville dont la personne dépend pour l'État-Civil" });
+      field({ 'type': "checkbox", 'id': "personignoredeadname", 'label': "La personne faisant l'attestation ignore le deadname" });
+      field({ 'type': "text", 'id': "procurantdeadname", 'label': "Deadname de la personne (seulement le prénom) (et seulement si la personne connait le deadname)" });
+      field({ 'type': "date", 'id': "date", 'label': "Date de l'attestation" });
+      field({ 'type': "text", 'id': "personfirstname", 'label': "Prénom de la personne qui fait l'attestation" });
+      field({ 'type': "text", 'id': "personlastname", 'label': "Nom de famille de la personne qui fait l'attestation" });
+      field({ 'type': "text", 'id': "personlistofname", 'label': "Liste des prénoms de la personne qui fait l'attestation", 'placeholder': "Corentin, Sebastien, Pierre" });
+      field({ 'type': "date", 'id': "persondob", 'label': "Date de naissance de la personne qui fait l'attestation" });
+      field({ 'type': "text", 'id': "personpob", 'label': "Lieu et département de naissance de la personne qui fait l'attestation", 'placeholder': "Nantes (Loire-Atlantique)" });
+      field({ 'type': "text", 'id': "persontelephone", 'label': "Numéro de téléphone", 'placeholder': "+33612345678" }); // regex=r'^(\+33|0|0033)\d{9}$',
+      field({ 'type': "text", 'id': "personlocation", 'label': "Lieu où est faite la lettre" });
+      field({ 'type': "text", 'id': "personemail", 'label': "Email de la personne qui fait l'attestation" });
+      field({ 'type': "text", 'id': "personaddress1", 'label': "Adresse" });
+      field({ 'type': "text", 'id': "personaddress2", 'label': "Code postal et Ville" });
+      field({ 'type': "select", 'id': "persongender", 'label': "Accords de la personne", 'choices': ["féminin", "neutre", "masculin"] });
     </script>
     <pre id="latex_template" style="display:none;">
 \documentclass{article}
