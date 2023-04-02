@@ -40,7 +40,7 @@
       field({ 'type': "text", 'id': "personaddress2", 'label': "Code postal et Ville" });
       field({ 'type': "select", 'id': "persongender", 'label': "Accords de la personne", 'choices': ["féminin", "neutre", "masculin"] });
     </script>
-    <pre id="latex_template" style="display:none;">
+    <pre id="latex_template1" style="display:none;">
 \documentclass{article}
 
 %-------------------------------------------------------------------------
@@ -50,19 +50,35 @@
 
 % Mettre ici le prenom de la personne faisant la procuration
 % et entre les {} le nom de famille
-\newcommand{\ProcurantId}{$procurantfirstname {} \textsc{ $procurantlastname }}
+\newcommand{\ProcurantId}{$procurantfirstname$ {} \textsc{ $procurantlastname$ }}
 
 % Mettre ici la suite des pr\'{e}noms de la personne faisant la procuration
 % et entre les {} le nom de famille
-\newcommand{\ProcurantFullId}{ $procurantlistofname {} \textsc{ $procurantlastname } }
+\newcommand{\ProcurantFullId}{ $procurantlistofname$ {} \textsc{ $procurantlastname$ } }
 
 \begin{document}
 Hello \ProcurantId, blah \ProcurantFullId.
 \end{document}
     </pre>
+    <pre id="latex_template" style="display:none;">
+\documentclass[12pt,origdate]{lettre}%
+%%%\usepackage[utf8x]{inputenc}
+\usepackage[french]{babel}
+%\usepackage[T1]{fontenc}
+\usepackage{fontenc}
+%\usepackage{mltex}
+\begin{document}
+%-----------------------------------------------%
+% Le blabla pas int\'{e}ressant                     %
+%-----------------------------------------------%
+\begin{letter}{\`{A} l'attention du service d'\'{E}tat-Civil de \PersonLocation}
+Hello
+\end{letter}
+\end{document}
+    </pre>
     <pre id="latex_template2" style="display:none;">
 \documentclass[12pt,origdate]{lettre}%
-\usepackage[utf8x]{inputenc}
+%%%\usepackage[utf8x]{inputenc}
 \usepackage[french]{babel}
 %\usepackage[T1]{fontenc}
 %\usepackage{mltex}
@@ -74,56 +90,56 @@ Hello \ProcurantId, blah \ProcurantFullId.
 
 % Mettre ici le prenom de la personne faisant la procuration
 % et entre les {} le nom de famille
-\newcommand{\ProcurantId}{$procurantfirstname {} \textsc{ $procurantlastname }}
+\newcommand{\ProcurantId}{$procurantfirstname$ {} \textsc{ $procurantlastname$ }}
 
 % Mettre ici la suite des pr\'{e}noms de la personne faisant la procuration
 % et entre les {} le nom de famille
-\newcommand{\ProcurantFullId}{ $procurantlistofname {} \textsc{ $procurantlastname } }
+\newcommand{\ProcurantFullId}{ $procurantlistofname$ {} \textsc{ $procurantlastname$ } }
 
 
 % Mettre ici le num\'{e}ro, le type de voie et le nom de la voie
 % de la personne faisant la procuration
-\newcommand{\ProcurantAddresseRue}{ $procurantaddress1 }
+\newcommand{\ProcurantAddresseRue}{ $procurantaddress1$ }
 
 % Mettre ici le code postal (les 2 premiers chiffres avant le ~)
 % et entre {} le nom de la ville
-\newcommand{\ProcurantAddresseVille}{ $procurantaddress2 }
+\newcommand{\ProcurantAddresseVille}{ $procurantaddress2$ }
 
 % Ne pas toucher
 \newcommand{\ProcurantAddressFull}{\ProcurantId\\\ProcurantAddresseRue\\\ProcurantAddresseVille}
 
 
 % Mettre ici la date de naissance de la personne faisant la procuration
-\newcommand{\ProcurantDOB}{ $procurantdob }
+\newcommand{\ProcurantDOB}{ $procurantdob$ }
 
 % Mettre ici la ville de naissance et entre () le d\'{e}partement de
 % naissance de la personne faisant la procuration
-\newcommand{\ProcurantPOB}{ $procurantpob }
+\newcommand{\ProcurantPOB}{ $procurantpob$ }
 
 % Malheureusement, pour des raisons d'idenfication, il faut mettre
 % le deadname de la personne faisant la procuration et son nom de
 % famille
-\newcommand{\ProcurantOldId}{ $procurantdeadname {} \textsc{ $procurantlastname }}
+\newcommand{\ProcurantOldId}{ $procurantdeadname$ {} \textsc{ $procurantlastname$ }}
 
 % Mettre ici le num\'{e}ro de s\'{e}curit\'{e} sociale de la personne faisant
 % la procuration
-%\newcommand{\ProcurantSecu}{ $procurantss }
+%\newcommand{\ProcurantSecu}{ $procurantss$ }
 
 
 % Mettre ici le type d'accord souhait\'{e} pour la personne faisant
 % la procuration.
 % 0 = femme trans
 % 1 = homme trans
-\newcommand{\ProcurantGender}{ $procurantgender } % 0 = femme, 1 = homme
+\newcommand{\ProcurantGender}{ $procurantgender$ } % 0 = femme, 1 = homme
 
 
-\newcommand{\Date}{ $date }
+\newcommand{\Date}{ $date$ }
 
-\newcommand{\ProcurantVille}{ $procurantville }
-\newcommand{\PersonIgnoreDeadname}{ $personignoredeadname }
+\newcommand{\ProcurantVille}{ $procurantville$ }
+\newcommand{\PersonIgnoreDeadname}{ $personignoredeadname$ }
 % Mettre ici le nom de l'\'{e}cole/universit\'{e}/autre \`{a} laquelle la demande
 % de rectification et d'information est demand\'{e}e
-%\newcommand{\ProcurantEcole}{ $procurantecole }
+%\newcommand{\ProcurantEcole}{ $procurantecole$ }
 
 %-------------------------------------------------------------------------
 %   Partie sur le. procur\'{e}.e
@@ -131,41 +147,41 @@ Hello \ProcurantId, blah \ProcurantFullId.
 
 % Mettre ici le pr\'{e}nom et le nom de famille entre {} de la personne
 % faisant la d\'{e}marche
-\newcommand{\PersonId}{ $personfirstname {} \textsc{ $personlastname }}
+\newcommand{\PersonId}{ $personfirstname$ {} \textsc{ $personlastname$ }}
 
 % Mettre ici tous les pr\'{e}noms de la personne faisant la d\'{e}marche et
 % le nom de famille entre {}
-\newcommand{\PersonFullId}{ $personlistofname {} \textsc{ $personlastname }}
+\newcommand{\PersonFullId}{ $personlistofname$ {} \textsc{ $personlastname$ }}
 
 % Mettre ici le num\'{e}ro de t\'{e}l\'{e}phone
-\newcommand{\PersonTel}{ $persontelephone }
+\newcommand{\PersonTel}{ $persontelephone$ }
 
 % Mettre ici : num\'{e}ro de la voie, type de voie, nom de la voie
-\newcommand{\PersonAddresseRue}{ $personaddress1 }
+\newcommand{\PersonAddresseRue}{ $personaddress1$ }
 
 % Mettre ici le code postal et la ville
-\newcommand{\PersonAddresseVille}{ $personaddress2 }
+\newcommand{\PersonAddresseVille}{ $personaddress2$ }
 
 % Ne pas toucher
 \newcommand{\PersonAddressFull}{\PersonId\\\PersonAddresseRue\\\PersonAddresseVille}
 
 % Mettre ici le nom de la ville d'où est \'{e}crit le courrier
-\newcommand{\PersonLocation}{\textsc{ $personlocation }}
+\newcommand{\PersonLocation}{\textsc{ $personlocation$ }}
 
 % Mettre ici le mail de la personne faisant les d\'{e}marches
-\newcommand{\PersonEmail}{ $personemail }
+\newcommand{\PersonEmail}{ $personemail$ }
 
 % Mettre ici la date de naissance de la personne faisant les d\'{e}marches
-\newcommand{\PersonDOB}{ $persondob }
+\newcommand{\PersonDOB}{ $persondob$ }
 
 % Mettre ici la ville et d\'{e}partement de naissance de la personne faisant
 % les d\'{e}marches
-\newcommand{\PersonPOB}{ $personpob }
+\newcommand{\PersonPOB}{ $personpob$ }
 
 % Pour les accords
 % 0 = feminin
 % 1 = masculun
-\newcommand{\PersonGender}{ $persongender } % 0 = femme, 1 = homme
+\newcommand{\PersonGender}{ $persongender$ } % 0 = femme, 1 = homme
 
 
 \begin{document}
@@ -208,14 +224,14 @@ Hello \ProcurantId, blah \ProcurantFullId.
       function genpdf() {
         var source_code = document.getElementById('latex_template').innerText;
         for (var i = 0; i < allFields.length; i++) {
-          source_code = source_code.replace("$" + allFields[i], document.getElementById(allFields[i]).value);
+          source_code = source_code.replaceAll("$" + allFields[i] + "$", document.getElementById(allFields[i]).value);
         }
         console.log(source_code);
-        var pdftex = new PDFTeX("texlive.js/pdftex-worker.js");
-        pdftex.set_TOTAL_MEMORY(80*1024*1024).then(function() {
-          pdftex.on_stdout = console.log;
-          pdftex.on_stderr = console.log;
-          pdftex.compile(source_code).then(function(pdf_dataurl) {
+        var texlive = new TeXLive("texlive.js/");
+        texlive.pdftex.set_TOTAL_MEMORY(80*1024*1024).then(function() {
+          texlive.pdftex.on_stdout = console.log;
+          texlive.pdftex.on_stderr = console.log;
+          texlive.pdftex.compile(source_code).then(function(pdf_dataurl) {
             console.log(pdf_dataurl);
             if (pdf_dataurl === false) {
               console.log("compilation error");
