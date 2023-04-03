@@ -15,11 +15,35 @@
           <script>
             allFields = [];
             function field(info) {
-              document.write(
-                '<div class="form-group">' +
-                '<label class="col-sm-4 control-label" for="'+info.id+'">' + info.label + '</label>' +
-                '<div class="col-sm-8"><input class="form-control" type="text" id="' + info.id + '" /></div>' +
-                '</div>');
+              var str = '';
+              str += '<div class="form-group">';
+              str += '  <label class="col-sm-4 control-label" for="'+info.id+'">' + info.label + '</label>';
+              str += '  <div class="col-sm-8">';
+              if (typeof(info.placeholder) != 'undefined') {
+                ph = ' placeholder="' + info.placeholder + '"';
+              } else {
+                ph = '';
+              }
+              if (info.type == 'text') {
+                str += '    <input class="form-control" type="text" id="' + info.id + '" ' + ph + '/>';
+              } else if (info.type == 'date') {
+                str += '    <input class="form-control" type="date" id="' + info.id + '" ' + ph + '//>';
+              } else if (info.type == 'select') {
+                str += '    <select class="form-control" id="' + info.id + '">';
+                for (var i = 0; i < info.choices.length; i++) {
+                  str += '      <option value="' + info.choices[i][0] + '">' + info.choices[i][1] + '</option>';
+                }
+                str += '    </select>';
+              } else if (info.type == 'checkbox') {
+                str += '    <select class="form-control" id="' + info.id + '">';
+                str += '      <option value="0">oui</option>';
+                str += '      <option value="1">non</option>';
+                str += '    </select>';
+                /* str += '    <input class="form-control" type="checkbox" id="' + info.id + '" />'; */
+              }
+              str += '  </div>';
+              str += '</div>';
+              document.write(str);
               allFields[allFields.length] = info.id;
             }
           </script>
@@ -33,7 +57,7 @@
               field({ 'type': "text", 'id': "procurantpob", 'label': "Lieu et département de naissance de la personne trans", 'placeholder': "Nantes (Loire-Atlantique)" });
               field({ 'type': "text", 'id': "procurantaddress1", 'label': "Adresse" });
               field({ 'type': "text", 'id': "procurantaddress2", 'label': "Code postal et Ville" });
-              field({ 'type': "selct", 'id': "procurantgender", 'label': "Accords de la personne", 'choices': ["féminin", "neutre", "masculin"] });
+              field({ 'type': "select", 'id': "procurantgender", 'label': "Accords de la personne", 'choices': [[0,"féminin"], [2,"neutre"], [1,"masculin"]] });
               field({ 'type': "text", 'id': "procurantville", 'label': "Ville dont la personne dépend pour l'État-Civil" });
               field({ 'type': "checkbox", 'id': "personignoredeadname", 'label': "La personne faisant l'attestation ignore le deadname" });
               field({ 'type': "text", 'id': "procurantdeadname", 'label': "Deadname de la personne (seulement le prénom) (et seulement si la personne connait le deadname)" });
@@ -53,7 +77,7 @@
               field({ 'type': "text", 'id': "personemail", 'label': "Email de la personne qui fait l'attestation" });
               field({ 'type': "text", 'id': "personaddress1", 'label': "Adresse" });
               field({ 'type': "text", 'id': "personaddress2", 'label': "Code postal et Ville" });
-              field({ 'type': "select", 'id': "persongender", 'label': "Accords de la personne", 'choices': ["féminin", "neutre", "masculin"] });
+              field({ 'type': "select", 'id': "persongender", 'label': "Accords de la personne", 'choices': [[0,"féminin"], [2,"neutre"], [1,"masculin"]] });
             </script>
           </fieldset>
           <pre id="latex_template" style="display:none;">

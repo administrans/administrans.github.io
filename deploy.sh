@@ -37,6 +37,10 @@ printf %s\\n 'Test with:'
 printf \\n
 printf "    ipfs://%s"\\n "$h"
 printf \\n
+printf %s\\n 'or:'
+printf \\n
+printf "    https://%s.ipfs.dweb.link/"\\n "$h"
+printf \\n
 printf %s\\n 'Pin with:'
 printf \\n
 printf "    ipfs pin add %s"\\n "$h"
