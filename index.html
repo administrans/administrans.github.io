@@ -111,22 +111,32 @@
             <button id="genpdf-button" class="btn btn-primary" type="submit">Générer</button>
           </div>
           <script>
+            function logfn(s) {
+              if (s !== '') { console.log(s); }
+            }
+            function utf8Encode(str) {
+              try {
+                return new TextEncoder().encode(str, 'utf-8').reduce((prev, curr) => prev + String.fromCharCode(curr), '');
+              } catch (e) { // no TextEncoder available?
+                return unescape(encodeURIComponent(str)); // monsur.hossa.in/2012/07/20/utf-8-in-javascript.html
+              }
+            }
             function genpdf() {
-              var source_code = document.getElementById('latex_template').innerText;
               fetch("attestation_chgmtprenom.tex").then(res => res.text()).then(function(source_code) {
                 source_code = source_code.replaceAll(
-                  RegExp("\\$(" + allFields.join("|") + ")\\$", "g"),
+                  RegExp("{{- cleaned_data\\[\"(" + allFields.join("|") + ")\"\\] -}}", "g"),
                   function($field$) {
-                    var fieldName = $field$.substring(1, $field$.length-1)
+                    //var fieldName = $field$.substring(1, $field$.length-1)
+                    var fieldName = $field$.match(/{{- cleaned_data\["([-a-zA-Z0-9]*)"\] -}}/)[1];
                     return document.getElementById(fieldName).value;
                   }
                 );
                 console.log(source_code);
                 var texlive = new TeXLive("texlive.js/");
                 texlive.pdftex.set_TOTAL_MEMORY(80*1024*1024).then(function() {
-                  texlive.pdftex.on_stdout = console.log;
-                  texlive.pdftex.on_stderr = console.log;
-                  texlive.pdftex.compile(source_code).then(function(pdf_dataurl) {
+                  texlive.pdftex.on_stdout = logfn;
+                  texlive.pdftex.on_stderr = logfn;
+                  texlive.pdftex.compile(utf8Encode(source_code)).then(function(pdf_dataurl) {
                     console.log(pdf_dataurl);
                     if (pdf_dataurl === false) {
                       console.log("compilation error");
@@ -135,7 +145,6 @@
                     }
                   });
                 });
-                console.log('end');
               });
             }
             document.getElementById("genpdf-button").addEventListener("click", function(e) {
