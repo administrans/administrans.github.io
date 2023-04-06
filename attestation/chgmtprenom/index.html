@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="bootstrap-3.4.1-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="custom.css" />
+  </head>
+  <body>
+    <script src="texlive.js/promisejs/promise.js"></script>
+    <script src="texlive.js/pdftex.js"></script>
+    <script src="site.js"></script>
+    <main class="container">
+      <div class="container form-container">
+        <h1>Nouvelle attestation de changement de prénom <small>Génération de la lettre</small></h1>
+        <form class="memory form-horizontal">
+          <fieldset>
+            <legend>Informations de la personne trans</legend>
+            <script>
+              field({ 'type': "text", 'id': "procurantfirstname", 'label': "Prénom (le vrai hein) de la personne trans" });
+              field({ 'type': "text", 'id': "procurantlastname", 'label': "Nom de famille de la personne trans" });
+              field({ 'type': "text", 'id': "procurantlistofname", 'label': "Liste des prénoms (les vrais) de la personne trans", 'placeholder': "Émilie, Delphine, Coralie" });
+              field({ 'type': "date", 'id': "procurantdob", 'label': "Date de naissance de la personne trans" });
+              field({ 'type': "text", 'id': "procurantpob", 'label': "Lieu et département de naissance de la personne trans", 'placeholder': "Nantes (Loire-Atlantique)" });
+              field({ 'type': "text", 'id': "procurantaddress1", 'label': "Adresse" });
+              field({ 'type': "text", 'id': "procurantaddress2", 'label': "Code postal et Ville" });
+              field({ 'type': "select", 'id': "procurantgender", 'label': "Accords de la personne", 'choices': [[0,"féminin"], [2,"neutre"], [1,"masculin"]] });
+              field({ 'type': "text", 'id': "procurantville", 'label': "Ville dont la personne dépend pour l'État-Civil" });
+              field({ 'type': "checkbox", 'id': "personignoredeadname", 'label': "La personne faisant l'attestation ignore le deadname" });
+              field({ 'type': "text", 'id': "procurantdeadname", 'label': "Deadname de la personne (seulement le prénom) (et seulement si la personne connait le deadname)" });
+              field({ 'type': "date", 'id': "date", 'label': "Date de l'attestation" });
+            </script>
+          </fieldset>
+          <fieldset>
+            <legend>Informations de la personne qui fait l'attestation</legend>
+            <script>
+              field({ 'type': "text", 'id': "personfirstname", 'label': "Prénom de la personne qui fait l'attestation" });
+              field({ 'type': "text", 'id': "personlastname", 'label': "Nom de famille de la personne qui fait l'attestation" });
+              field({ 'type': "text", 'id': "personlistofname", 'label': "Liste des prénoms de la personne qui fait l'attestation", 'placeholder': "Corentin, Sebastien, Pierre" });
+              field({ 'type': "date", 'id': "persondob", 'label': "Date de naissance de la personne qui fait l'attestation" });
+              field({ 'type': "text", 'id': "personpob", 'label': "Lieu et département de naissance de la personne qui fait l'attestation", 'placeholder': "Nantes (Loire-Atlantique)" });
+              field({ 'type': "text", 'id': "persontelephone", 'label': "Numéro de téléphone", 'placeholder': "+33612345678" }); // regex=r'^(\+33|0|0033)\d{9}$',
+              field({ 'type': "text", 'id': "personlocation", 'label': "Lieu où est faite la lettre" });
+              field({ 'type': "text", 'id': "personemail", 'label': "Email de la personne qui fait l'attestation" });
+              field({ 'type': "text", 'id': "personaddress1", 'label': "Adresse" });
+              field({ 'type': "text", 'id': "personaddress2", 'label': "Code postal et Ville" });
+              field({ 'type': "select", 'id': "persongender", 'label': "Accords de la personne", 'choices': [[0,"féminin"], [2,"neutre"], [1,"masculin"]] });
+            </script>
+          </fieldset>
+          <div class="form-actions">
+            <button id="genpdf-button" class="btn btn-primary" type="submit">Générer</button>
+          </div>
+          <script>site_loaded()</script>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>
+

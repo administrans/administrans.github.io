@@ -8,153 +8,56 @@
   <body>
     <script src="texlive.js/promisejs/promise.js"></script>
     <script src="texlive.js/pdftex.js"></script>
-    <nav class="navbar navbar-inverse">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Trans Administratif</a>
-        </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-          <ul class="nav navbar-nav">
-            
-            <li><a href="#procuration/">Courriers par procuration</a></li>
-            
-            <li><a href="#procuration_relance/">Courriers de relance par procuration</a></li>
-            
-            <li><a href="#standalone/">Courriers sans procuration</a></li>
-            
-            <li><a href="#attestation/chgmtprenom/">Changement de prénom</a></li>
-          </ul>
-          <ul id="memory" class="nav navbar-nav">
-            <li><span title="Activer l'enregistrement des données" class="icon" id="save">🐾︎</span></li>
-            <li><span title="Effacer toutes les données" class="icon" id="forget">🌊︎</span></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    <script src="site.js"></script>
     <main class="container">
-      <div class="container form-container">
-        <h1>Nouvelle attestation de changement de prénom <small>Génération de la lettre</small></h1>
-        <form class="memory form-horizontal">
-          <script>
-            allFields = [];
-            function field(info) {
-              var str = '';
-              str += '<div class="form-group">';
-              str += '  <label class="col-sm-4 control-label" for="'+info.id+'">' + info.label + '</label>';
-              str += '  <div class="col-sm-8">';
-              if (typeof(info.placeholder) != 'undefined') {
-                ph = ' placeholder="' + info.placeholder + '"';
-              } else {
-                ph = '';
-              }
-              if (info.type == 'text') {
-                str += '    <input class="form-control" type="text" id="' + info.id + '" ' + ph + '/>';
-              } else if (info.type == 'date') {
-                str += '    <input class="form-control" type="date" id="' + info.id + '" ' + ph + '//>';
-              } else if (info.type == 'select') {
-                str += '    <select class="form-control" id="' + info.id + '">';
-                for (var i = 0; i < info.choices.length; i++) {
-                  str += '      <option value="' + info.choices[i][0] + '">' + info.choices[i][1] + '</option>';
-                }
-                str += '    </select>';
-              } else if (info.type == 'checkbox') {
-                str += '    <select class="form-control" id="' + info.id + '">';
-                str += '      <option value="0">oui</option>';
-                str += '      <option value="1">non</option>';
-                str += '    </select>';
-                /* str += '    <input class="form-control" type="checkbox" id="' + info.id + '" />'; */
-              }
-              str += '  </div>';
-              str += '</div>';
-              document.write(str);
-              allFields[allFields.length] = info.id;
-            }
-          </script>
-          <fieldset>
-            <legend>Informations de la personne trans</legend>
-            <script>
-              field({ 'type': "text", 'id': "procurantfirstname", 'label': "Prénom (le vrai hein) de la personne trans" });
-              field({ 'type': "text", 'id': "procurantlastname", 'label': "Nom de famille de la personne trans" });
-              field({ 'type': "text", 'id': "procurantlistofname", 'label': "Liste des prénoms (les vrais) de la personne trans", 'placeholder': "Émilie, Delphine, Coralie" });
-              field({ 'type': "date", 'id': "procurantdob", 'label': "Date de naissance de la personne trans" });
-              field({ 'type': "text", 'id': "procurantpob", 'label': "Lieu et département de naissance de la personne trans", 'placeholder': "Nantes (Loire-Atlantique)" });
-              field({ 'type': "text", 'id': "procurantaddress1", 'label': "Adresse" });
-              field({ 'type': "text", 'id': "procurantaddress2", 'label': "Code postal et Ville" });
-              field({ 'type': "select", 'id': "procurantgender", 'label': "Accords de la personne", 'choices': [[0,"féminin"], [2,"neutre"], [1,"masculin"]] });
-              field({ 'type': "text", 'id': "procurantville", 'label': "Ville dont la personne dépend pour l'État-Civil" });
-              field({ 'type': "checkbox", 'id': "personignoredeadname", 'label': "La personne faisant l'attestation ignore le deadname" });
-              field({ 'type': "text", 'id': "procurantdeadname", 'label': "Deadname de la personne (seulement le prénom) (et seulement si la personne connait le deadname)" });
-              field({ 'type': "date", 'id': "date", 'label': "Date de l'attestation" });
-            </script>
-          </fieldset>
-          <fieldset>
-            <legend>Informations de la personne qui fait l'attestation</legend>
-            <script>
-              field({ 'type': "text", 'id': "personfirstname", 'label': "Prénom de la personne qui fait l'attestation" });
-              field({ 'type': "text", 'id': "personlastname", 'label': "Nom de famille de la personne qui fait l'attestation" });
-              field({ 'type': "text", 'id': "personlistofname", 'label': "Liste des prénoms de la personne qui fait l'attestation", 'placeholder': "Corentin, Sebastien, Pierre" });
-              field({ 'type': "date", 'id': "persondob", 'label': "Date de naissance de la personne qui fait l'attestation" });
-              field({ 'type': "text", 'id': "personpob", 'label': "Lieu et département de naissance de la personne qui fait l'attestation", 'placeholder': "Nantes (Loire-Atlantique)" });
-              field({ 'type': "text", 'id': "persontelephone", 'label': "Numéro de téléphone", 'placeholder': "+33612345678" }); // regex=r'^(\+33|0|0033)\d{9}$',
-              field({ 'type': "text", 'id': "personlocation", 'label': "Lieu où est faite la lettre" });
-              field({ 'type': "text", 'id': "personemail", 'label': "Email de la personne qui fait l'attestation" });
-              field({ 'type': "text", 'id': "personaddress1", 'label': "Adresse" });
-              field({ 'type': "text", 'id': "personaddress2", 'label': "Code postal et Ville" });
-              field({ 'type': "select", 'id': "persongender", 'label': "Accords de la personne", 'choices': [[0,"féminin"], [2,"neutre"], [1,"masculin"]] });
-            </script>
-          </fieldset>
-          <div class="form-actions">
-            <button id="genpdf-button" class="btn btn-primary" type="submit">Générer</button>
-          </div>
-          <script>
-            function logfn(s) {
-              if (s !== '') { console.log(s); }
-            }
-            function utf8Encode(str) {
-              try {
-                return new TextEncoder().encode(str, 'utf-8').reduce((prev, curr) => prev + String.fromCharCode(curr), '');
-              } catch (e) { // no TextEncoder available?
-                return unescape(encodeURIComponent(str)); // monsur.hossa.in/2012/07/20/utf-8-in-javascript.html
-              }
-            }
-            function genpdf() {
-              fetch("attestation_chgmtprenom.tex").then(res => res.text()).then(function(source_code) {
-                source_code = source_code.replaceAll(
-                  RegExp("{{- cleaned_data\\[\"(" + allFields.join("|") + ")\"\\] -}}", "g"),
-                  function($field$) {
-                    //var fieldName = $field$.substring(1, $field$.length-1)
-                    var fieldName = $field$.match(/{{- cleaned_data\["([-a-zA-Z0-9]*)"\] -}}/)[1];
-                    return document.getElementById(fieldName).value;
-                  }
-                );
-                console.log(source_code);
-                var texlive = new TeXLive("texlive.js/");
-                texlive.pdftex.set_TOTAL_MEMORY(80*1024*1024).then(function() {
-                  texlive.pdftex.on_stdout = logfn;
-                  texlive.pdftex.on_stderr = logfn;
-                  texlive.pdftex.compile(utf8Encode(source_code)).then(function(pdf_dataurl) {
-                    console.log(pdf_dataurl);
-                    if (pdf_dataurl === false) {
-                      console.log("compilation error");
-                    } else {
-                      window.open(pdf_dataurl);
-                    }
-                  });
-                });
-              });
-            }
-            document.getElementById("genpdf-button").addEventListener("click", function(e) {
-              genpdf();
-              e.preventDefault();
-            });
-          </script>
-        </form>
-      </div>
+      <h1>Mais qu'est ce donc ?</h1>
+      <p>
+          Ce site permet de générer des fichiers PDF du dépôt git 
+          <a href="https://gitlab.s1.0x39b.fr/freyja/trans-cec/tree/main/mysite/pdfgenerator/templates/pdfgenerator/latex">localisé ici</a>
+      </p>
+      <p>Des exemples de fichiers générés sont disponibles <a href="https://gitlab.climent-pommeret.red/Chopopope/site-transadministratif/wikis/Exemple-de-fichiers-g%C3%A9n%C3%A9r%C3%A9s">ici</a>.</p>
+      
+      <h1>Que fait-on de vos données ?</h1>
+      <p>Vos données ne sont pas stockées sur le serveur. Elles ne servent qu'à remplir les patrons de lettre.</p>
+      <p>
+          Le stockage des données en local ne concerne que votre navigateur, et les données ne font l'objet
+          d'aucun traitement supplémentaire.
+      </p>
+      
+      <h1>Les erreurs</h1>
+      <p>Si vous cliquez sur "générer" et que vous retombez sur le formulaire : vous avez mal rempli le formulaire, il y a une erreur quelque part !</p>
+      <p>Si vous obtenez une erreur 500 après avoir cliqué sur "générer" : vous avez probablement mis un caractère interdit par LaTeX (_, \, % par exemple)</p>
+      
+      <h1>Une check list ? </h1>
+      Si changement de prénom à l'État-Civil :
+      <ul>
+          <li> carte de transport </li>
+          <li> CNI/passeport </li>
+          <li> permis de conduire </li>
+          <li> impôts </li>
+          <li> médecins </li>
+          <li> mutuelle </li>
+          <li> carte de groupe sanguin/donneur.se d'organes </li>
+          <li> MDPH </li>
+          <li> électricité/gaz/eau </li>
+          <li> opérateur téléphonique/Internet </li>
+          <li> carte d'électeur.rice </li>
+      </ul>
+      Si changement de mention de sexe à l'État-Civil :
+      <ul>
+          <li> CNI/passeport </li>
+          <li> permis de conduire </li>
+          <li> numéro INSEE </li>
+          <li> numéro de sécurité sociale </li>
+      </ul>
     </main>
+
+    <footer class="text-center">
+        <p>En cas d'erreur contacter:
+            <a href="mailto: freyja_wildes+trans-cec@pm.me">Freyja Wildes</a> ou <a href="mailto: trans-cec@suzanne.soy">Suzanne Soy Dupéron</a>.
+        </p>
+
+        <p>Adresse du répositoire <a href="http://gitlab.s1.0x39b.fr/freyja/trans-cec.git">ici</a>.</p>
+    </footer>
   </body>
 </html>
-
