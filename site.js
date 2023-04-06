@@ -87,7 +87,7 @@ function genpdf() {
       }
     );
     console.log(source_code);
-    var texlive = new TeXLive("texlive.js/");
+    var texlive = new TeXLive("../../texlive.js/");
     texlive.pdftex.set_TOTAL_MEMORY(80*1024*1024).then(function() {
       texlive.pdftex.on_stdout = logfn;
       texlive.pdftex.on_stderr = logfn;
