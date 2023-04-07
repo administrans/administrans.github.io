@@ -12,7 +12,7 @@ pages:
   script:
     - apt-get update -qq
     - apt-get install -y -qq imagemagick zip
-    - ./deploy-prepare.sh --no-ipfs
+    - ./deploy.sh --no-ipfs
     - cp -ai . /tmp/gl_pages_public
     - mv -i /tmp/gl_pages_public public
     - echo "The site will be deployed to $CI_PAGES_URL"
