@@ -10,6 +10,7 @@ image: ubuntu
 pages:
   stage: deploy
   script:
+    - sudo apt install imagemagick zip
     - bash ./deploy.sh
     - cp -ai . /tmp/gl_pages_public
     - mv -i /tmp/gl_pages_public public
