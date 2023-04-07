@@ -30,7 +30,7 @@ convert favicon.png -resize 16x16 favicon.ico || true
   done
 )
 
-if test $# -ge 1 && "x$1" == "x--no-ipfs"; then
+if test $# -ge 1 && test "x$1" == "x--no-ipfs"; then
   :
 else
   h="$(ipfs cid base32 "$(ipfs add --recursive --hidden --progress --pin=false --ignore-rules-path=.ipfsignore --quieter .)")"
