@@ -30,18 +30,22 @@ convert favicon.png -resize 16x16 favicon.ico || true
   done
 )
 
-h="$(ipfs cid base32 "$(ipfs add --recursive --hidden --progress --pin=false --ignore-rules-path=.ipfsignore --quieter .)")"
-printf \\n
-printf \\n
-printf %s\\n 'Test with:'
-printf \\n
-printf "    ipfs://%s"\\n "$h"
-printf \\n
-printf %s\\n 'or:'
-printf \\n
-printf "    https://%s.ipfs.dweb.link/"\\n "$h"
-printf \\n
-printf %s\\n 'Pin with:'
-printf \\n
-printf "    ipfs pin add %s"\\n "$h"
-printf \\n
+if test $# -ge 1 && "x$1" == "x--no-ipfs"; then
+  :
+else
+  h="$(ipfs cid base32 "$(ipfs add --recursive --hidden --progress --pin=false --ignore-rules-path=.ipfsignore --quieter .)")"
+  printf \\n
+  printf \\n
+  printf %s\\n 'Test with:'
+  printf \\n
+  printf "    ipfs://%s"\\n "$h"
+  printf \\n
+  printf %s\\n 'or:'
+  printf \\n
+  printf "    https://%s.ipfs.dweb.link/"\\n "$h"
+  printf \\n
+  printf %s\\n 'Pin with:'
+  printf \\n
+  printf "    ipfs pin add %s"\\n "$h"
+  printf \\n
+fi
