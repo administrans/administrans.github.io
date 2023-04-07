@@ -2,13 +2,12 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="bootstrap-3.4.1-dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="custom.css" />
+    <script src="site.js"></script>
+    <script>site_trans_cec.urlbase = '';</script>
+    <script>site_trans_cec.head_stylesheets_scripts();</script>
   </head>
   <body>
-    <script src="texlive.js/promisejs/promise.js"></script>
-    <script src="texlive.js/pdftex.js"></script>
-    <script src="site.js"></script>
+    <script>site_trans_cec.nav();</script>
     <main class="container">
       <h1>Mais qu'est ce donc ?</h1>
       <p>
@@ -51,13 +50,6 @@
           <li> numéro de sécurité sociale </li>
       </ul>
     </main>
-
-    <footer class="text-center">
-        <p>En cas d'erreur contacter:
-            <a href="mailto: freyja_wildes+trans-cec@pm.me">Freyja Wildes</a> ou <a href="mailto: trans-cec@suzanne.soy">Suzanne Soy Dupéron</a>.
-        </p>
-
-        <p>Adresse du répositoire <a href="http://gitlab.s1.0x39b.fr/freyja/trans-cec.git">ici</a>.</p>
-    </footer>
+    <script>site_trans_cec.footer()</script>
   </body>
 </html>
