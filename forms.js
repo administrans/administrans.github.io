@@ -1,6 +1,7 @@
 var ChgmtPrenomForm = {
     path: { category: "attestation", id: "chgmtprenom" },
     pagetitle: "Nouvelle attestation de changement de prénom",
+    pagesubtitle: "Génération de la lettre",
     fieldsets: [
         {
             legend: "Informations de la personne trans",
@@ -36,9 +37,9 @@ var ChgmtPrenomForm = {
             ]
         }
     ]
-};
-
-var procurant_identity_fieldset = {
+  };
+  
+  var procurant_identity_fieldset = {
     legend:'Identité de la personne faisant la procuration',
     fields:[
         { 'type': "text", 'id': "procurantfirstname", 'label': "Prénom" },
@@ -49,9 +50,9 @@ var procurant_identity_fieldset = {
         { 'type': "date", 'id': "procurantdob", 'label': "Date de naissance" },
         { 'type': "text", 'id': "procurantpob", 'label': "Lieu et département (ou pays) de naissance", 'placeholder': "Nantes (Loire-Atlantique)" },
     ]
-};
-
-var procurant_contact_fieldset = {
+  };
+  
+  var procurant_contact_fieldset = {
     legend:'Coordonnées de la personne faisant la procuration',
     fields:[
         { 'type': "text", 'id': "procurantemail", 'label': "Addresse de courriel de la personne qui fait l'attestation" },
@@ -59,9 +60,9 @@ var procurant_contact_fieldset = {
         { 'type': "text", 'id': "procurantaddress1", 'label': "Adresse" },
         { 'type': "text", 'id': "procurantaddress2", 'label': "Code postal et Ville" },
     ]
-};
-
-var person_identity_fieldset = {
+  };
+  
+  var person_identity_fieldset = {
     legend:'Identité de la personne recevant la procuration',
     field:[
         { 'type': "text", 'id': "personfirstname", 'label': "Prénom" },
@@ -71,9 +72,9 @@ var person_identity_fieldset = {
         { 'type': "date", 'id': "persondob", 'label': "Date de naissance" },
         { 'type': "text", 'id': "personpob", 'label': "Lieu et département (ou pays) de naissance", 'placeholder': "Nantes (Loire-Atlantique)" },
     ]
-};
-
-var person_contact_fieldset = {
+  };
+  
+  var person_contact_fieldset = {
     legend:'Coordonnées de la personne recevant la procuration',
     fields:[
         { 'type': "text", 'id': "personemail", 'label': "Addresse de courriel de la personne qui fait l'attestation" },
@@ -81,70 +82,70 @@ var person_contact_fieldset = {
         { 'type': "text", 'id': "personaddress1", 'label': "Adresse" },
         { 'type': "text", 'id': "personaddress2", 'label': "Code postal et Ville" },
     ]
-};
-
-var procuration_fieldset = {
+  };
+  
+  var procuration_fieldset = {
     legend:'Informations relatives à la procuration',
     fields:[
         { 'type': "text", 'id': "procurantlocation", 'label': "Lieu où est faite la procuration" },
         { 'type': "date", 'id': "debutprocuration", 'label': "Début de la procuration" },
         { 'type': "date", 'id': "finprocuration", 'label': "Fin de la procuration" },
     ]
-}
-
-var lettre_fieldset = {
+  }
+  
+  var lettre_fieldset = {
     legend: 'Informations relative à la lettre',
     fields: [
         { 'type': "text", 'id': "personlocation", 'label': "Lieu où est faite la lettre" },
     ]
-}
-
-//class ProcurationForm(FieldsetForm):
-var procuration_page_fieldsets = [
+  }
+  
+  //class ProcurationForm(FieldsetForm):
+  var procuration_page_fieldsets = [
     procurant_identity_fieldset,
     procurant_contact_fieldset,
     person_identity_fieldset,
     person_contact_fieldset,
     procuration_fieldset,
     lettre_fieldset,
-]
-
-var CPAMProcuration = {
+  ]
+  
+  var CPAMProcuration = {
     path: { category: "procuration", id: "cpam" },
     pagetitle: "Nouvelle procuration pour la CPAM",
     fieldsets: procuration_page_fieldsets.concat([{
         legend: "Informations relatives à la CPAM",
         fields: [   { 'type': "text", 'id': "procurantdepartement", 'label': "\"du/de l'/de la\" + département de la caisse de CPAM de la personne faisant la procuration, par ex. \"du Gard\" ou \"de l'Ain\" ou \"de la Gironde\""},
                     { 'type': "text", 'id': "procurantss", label: "Numéro de sécu"}]}])}
-
-var EcoleProcuration = {
+  
+  var EcoleProcuration = {
     path: { category: "procuration", id: "ecole" },
     pagetitle: "Nouvelle procuration pour une École/Université",
     fieldsets: procuration_page_fieldsets.concat([{
         legend: "Informations relatives à l'École/Université",
         fields: [   { 'type': "text", 'id': "procurantecole", 'label': "École/Université de la personne faisant la procuration"}]}])}
-
-var BanqueProcuration = {
+  
+  var BanqueProcuration = {
     path: { category: "procuration", id: "banque" },
     pagetitle: "Nouvelle procuration pour une Banque",
     fieldsets: procuration_page_fieldsets.concat([{
         legend: "Informations relatives à la banque",
         fields: [   { 'type': "text", 'id': "procurantbanque", 'label': "Banque de la personne faisant la procuration"}]}])}
-
-var EntrepriseProcuration = {
+  
+  var EntrepriseProcuration = {
     path: { category: "procuration", id: "entreprise" },
     pagetitle: "Nouvelle procuration pour une entreprise avec numéro de contrat",
     fieldsets: procuration_page_fieldsets.concat([{
         legend: "Informations relatives à la banque",
         fields: [   { 'type': "text", 'id': "procurantentreprise", 'label': "Entreprise de la personne faisant la procuration"},
                     { 'type': "text", 'id': "procurantcontrat", 'label': "Numéro de contrat"}]}])}
-
-var FreeProcuration = {
+  
+  var FreeProcuration = {
     path: { category: "procuration", id: "free" },
     pagetitle: "Nouvelle procuration pour Free",
     fieldsets: procuration_page_fieldsets.concat([])}
-
-var EntreprImpotsProcurationiseProcuration = {
+  
+  var ImpotsProcuration = {
     path: { category: "procuration", id: "impots" },
     pagetitle: "Nouvelle procuration pour les impôts",
     fieldsets: procuration_page_fieldsets.concat([{
@@ -152,32 +153,32 @@ var EntreprImpotsProcurationiseProcuration = {
             fields: [
                 { 'type': "text", 'id': "procurantimpots", 'label': "Ville dont on dépend pour les impots"},
                 { 'type': "text", 'id': "procurantfiscal", 'label': "Numéro fiscal"}]}])}
-
-/*
-class RelanceProcurationForm(ProcurationForm):
-datepremiercourrier = forms.DateField(label="Date du premier courrier", widget=forms.SelectDateWidget(years=range(2019, 3000), attrs={'class': 'date-widget form-control'}))
-
-@register_form(category='procuration_relance', id="cpam", title="Relance procuration pour la CPAM", url='procuration/relance/cpam')
-class CPAMRelanceProcuration(RelanceProcurationForm, CPAMProcuration):
-pass
-
-@register_form(category='procuration_relance', id="ecole", title="Relance une École/Université", url='procuration/relance/ecole')
-class EcoleRelanceProcuration(RelanceProcurationForm, EcoleProcuration):
-pass
-
-@register_form(category='procuration_relance', id="banque", title="Relance pour une Banque", url='procuration/relance/banque')
-class BanqueRelanceProcuration(RelanceProcurationForm, BanqueProcuration):
-pass
-
-@register_form(category='procuration_relance', id="entreprise", title="Relance pour entreprise avec numéro de contrat", url='procuration/relance/entreprise')
-class EntrepriseRelanceProcuration(RelanceProcurationForm, EntrepriseProcuration):
-pass
-
-@register_form(category='procuration_relance', id="free", title="Relance pour Free", url='procuration/relance/free')
-class FreeRelanceProcuration(RelanceProcurationForm, FreeProcuration):
-pass
-
-@register_form(category='procuration_relance', id="impots", title="Relance pour les impôts", url='procuration/relance/impots')
-class ImpotsRelanceProcuration(RelanceProcurationForm, ImpotsProcuration):
-pass
-*/
+  
+  /*
+  class RelanceProcurationForm(ProcurationForm):
+  datepremiercourrier = forms.DateField(label="Date du premier courrier", widget=forms.SelectDateWidget(years=range(2019, 3000), attrs={'class': 'date-widget form-control'}))
+  
+  @register_form(category='procuration_relance', id="cpam", title="Relance procuration pour la CPAM", url='procuration/relance/cpam')
+  class CPAMRelanceProcuration(RelanceProcurationForm, CPAMProcuration):
+  pass
+  
+  @register_form(category='procuration_relance', id="ecole", title="Relance une École/Université", url='procuration/relance/ecole')
+  class EcoleRelanceProcuration(RelanceProcurationForm, EcoleProcuration):
+  pass
+  
+  @register_form(category='procuration_relance', id="banque", title="Relance pour une Banque", url='procuration/relance/banque')
+  class BanqueRelanceProcuration(RelanceProcurationForm, BanqueProcuration):
+  pass
+  
+  @register_form(category='procuration_relance', id="entreprise", title="Relance pour entreprise avec numéro de contrat", url='procuration/relance/entreprise')
+  class EntrepriseRelanceProcuration(RelanceProcurationForm, EntrepriseProcuration):
+  pass
+  
+  @register_form(category='procuration_relance', id="free", title="Relance pour Free", url='procuration/relance/free')
+  class FreeRelanceProcuration(RelanceProcurationForm, FreeProcuration):
+  pass
+  
+  @register_form(category='procuration_relance', id="impots", title="Relance pour les impôts", url='procuration/relance/impots')
+  class ImpotsRelanceProcuration(RelanceProcurationForm, ImpotsProcuration):
+  pass
+  */

@@ -1,5 +1,35 @@
-var site_trans_cec = {
+var site_trans_cec = (function() {
+  var $e = function(tag, attrs, children) {
+    var e = document.createElement(tag);
+    for (attr in attrs) {
+      if (attrs.hasOwnProperty(attr)) {
+        e.setAttribute(attr, attrs[attr])
+      } else {
+        if (console) {
+          console.log('warning: skipping !hasOwnProperty(' + attr + ') in ' + tag + '.')
+        }
+      }
+    }
+    for (var i = 0; i < children.length; i++) {
+      e.appendChild(children[i]);
+    }
+    return e;
+  };
+
+  return {
   urlbase: [],
+
+  body: function(form) {
+    document.write([
+      '<main class="container">',
+      '<div class="container form-container">',
+      '<h1>' + form.pagetitle + '<small>' + form.pagesubtitle + '</small></h1>'].join('\n'));
+      site_trans_cec.form_to_html(form);
+    document.write([
+      '</div>',
+      '</main>'].join('\n'));
+    site_trans_cec.footer();
+  },
 
   head_stylesheets_scripts: function () {
     document.write([
@@ -7,6 +37,7 @@ var site_trans_cec = {
       '<link rel="stylesheet" href="'+site_trans_cec.urlbase+'custom.css" />',
       '<script src="'+site_trans_cec.urlbase+'texlive.js/promisejs/promise.js"></script>',
       '<script src="'+site_trans_cec.urlbase+'texlive.js/pdftex.js"></script>',
+      '<script src="../../forms.js"></script>',
     ].join('\n'));
   },
 
@@ -158,3 +189,4 @@ var site_trans_cec = {
     document.write('</form>');
   }
 }
+})();
