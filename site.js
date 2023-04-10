@@ -135,5 +135,26 @@ var site_trans_cec = {
       e.preventDefault();
       site_trans_cec.genpdf();
     });
+  },
+
+  fieldset_to_html: function(fieldset) {
+    document.write("<fieldset>");
+    document.write("<legend>" + fieldset.legend + "</legend>");
+    for (var i = 0; i < fieldset.fields.length; i++) {
+      site_trans_cec.field(fieldset.fields[i]);
+    }
+    document.write("</fieldset>");
+  },
+
+  form_to_html: function(form) {
+    document.write('<form class="memory form-horizontal">');
+    for (var i = 0; i < form.fieldsets.length; i++) {
+      site_trans_cec.fieldset_to_html(form.fieldsets[i]);
+    }
+    document.write('  <div class="form-actions">');
+    document.write('    <button id="genpdf-button" class="btn btn-primary" type="submit">Générer</button>');
+    document.write('  </div>');
+    document.write('  <script>site_trans_cec.site_loaded()</script>');
+    document.write('</form>');
   }
 }
