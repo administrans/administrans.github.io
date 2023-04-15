@@ -34,7 +34,7 @@ jobs:
         with:
           submodules: 'recursive'
       - name: Download IPFS
-        run: ./install-ipfs.sh
+        run: ./github_install_ipfs.sh
       - name: Update homepage URL
         run: PATH="/tmp/kubo:$PATH" ./github_update_homepage.sh
         env:
