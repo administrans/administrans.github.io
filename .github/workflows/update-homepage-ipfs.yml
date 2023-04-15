@@ -35,3 +35,5 @@ jobs:
         run: ./install-ipfs.sh
       - name: Update homepage URL
         run: PATH="/tmp/kubo:$PATH" ./github_update_homepage.sh
+        env:
+          API_TOKEN_FOR_UPDATE_HOMEPAGE: ${{ secrets.API_TOKEN_FOR_UPDATE_HOMEPAGE }}
