@@ -1,5 +1,5 @@
 # Simple workflow for deploying static content to GitHub Pages
-name: Deploy static content to Pages
+name: Update repo's Homepage field to the latest IPFS CID
 
 on:
   # Runs on pushes targeting the default branch
@@ -12,7 +12,7 @@ on:
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
-  pages: write
+#  pages: write
   id-token: write
 
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
@@ -31,5 +31,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Download IPFS
+        run: ./install-ipfs.sh
       - name: Update homepage URL
-        run: ./github_update_homepage.sh
+        run: PATH="/tmp/kubo:$PATH" ./github_update_homepage.sh
