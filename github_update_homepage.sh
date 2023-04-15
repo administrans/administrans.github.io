@@ -4,6 +4,7 @@ set -euET -o pipefail
 
 ipfs add --recursive --pin=false --ignore-rules-path=.ipfsignore . # debug
 h="$(ipfs cid base32 "$(ipfs add --recursive --hidden --pin=false --ignore-rules-path=.ipfsignore --quieter .)")"
+echo "New homepage URL: https://$h.ipfs.dweb.link/"
 curl -L \
   -X PATCH \
   -H "Accept: application/vnd.github+json" \
