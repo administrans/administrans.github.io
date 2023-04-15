@@ -67,7 +67,7 @@ var site_trans_cec = (function() {
           $e('div', {class:"container form-container"},
             $e('h1', {},
               form.pagetitle,
-              $e('small', {}, form.pagesubtitle)),
+              $e('small', {}, form.pagesubtitle || '')), // TODO: have a pagesubtitle for every page
             site_trans_cec.form_to_html(form))),
         site_trans_cec.footer()),
 

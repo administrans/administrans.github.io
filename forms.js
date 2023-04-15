@@ -71,7 +71,7 @@ site_trans_cec.forms = (function(){
   
   var person_identity_fieldset = {
     legend:'Identité de la personne recevant la procuration',
-    field:[
+    fields:[
       { 'type': "text", 'id': "personfirstname", 'label': "Prénom" },
       { 'type': "text", 'id': "personlastname", 'label': "Nom de famille" },
       { 'type': "text", 'id': "personlistofname", 'label': "Liste des prénoms", 'placeholder': "Émilie, Delphine, Coralie" },
