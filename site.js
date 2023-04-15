@@ -51,13 +51,13 @@ var site_trans_cec = (function() {
         site_trans_cec.nav(),
         $e('main', {class:"container"},
           $e('h1', {}, "Courriers par procuration"), // TODO
-          groupByN(Object.values(site_trans_cec.forms[category]), 3).map((line) =>
+          groupByN(site_trans_cec.forms[category].forms, 3).map((line) =>
             $e('div', {class: "row row-margin-custom"},
-              line.map((cell) =>
+              line.map((form_id) =>
                 $e('div', {class: "col-sm-4"},
                   $e('article', {},
-                    $e('header', {}, $e('a', {href: cell.path.id + "/"}, cell.linktext)),
-                    $e('p', {}, cell.description))))))),
+                    $e('header', {}, $e('a', {href: form_id + "/"}, site_trans_cec.forms[category][form_id].linktext)),
+                    $e('p', {}, site_trans_cec.forms[category][form_id].description))))))),
         site_trans_cec.footer()),
 
     form_to_body: (form) =>
@@ -74,6 +74,7 @@ var site_trans_cec = (function() {
     head_stylesheets_scripts: function () {
       document.write(
         $e('head', {},
+          $e('title', {}, "Adminitrans"),
           $e('link', {rel: "stylesheet", href: site_trans_cec.urlbase+'bootstrap-3.4.1-dist/css/bootstrap.min.css'}),
           $e('link', {rel: "stylesheet", href: site_trans_cec.urlbase+'custom.css'}),
           $e('script', {src: site_trans_cec.urlbase+'texlive.js/promisejs/promise.js'}),
@@ -90,7 +91,7 @@ var site_trans_cec = (function() {
             $e('button', {type:"button", class:"navbar-toggle", 'data-toggle':"collapse", 'data-target':"#myNavBar"},
               $e('span', {class:"icon-bar"}),
               $e('span', {class:"icon-bar"})),
-            $e('a', {class:"navbar-brand", href:site_trans_cec.urlbase+"#"}, "Trans Administratif")),
+            $e('a', {class:"navbar-brand", href:site_trans_cec.urlbase+"#"}, "Adminitrans")),
           $e('div', {class:"collapse navbar-collapse", id:"myNavbar"},
             $e('ul', {class:"nav navbar-nav"},
               $e('li', {}, $e('a', {href:site_trans_cec.urlbase+"procuration/"}, "Courriers par procuration")),
@@ -161,7 +162,7 @@ var site_trans_cec = (function() {
         }
       };
 
-      fetch(site_trans_cec.urlbase + '/templates-latex/'+form.path.category+'_'+form.path.id+'.tex')
+      fetch(site_trans_cec.urlbase + '/templates-latex/'+form.category+'_'+form.id+'.tex')
       .then(res => res.text())
       .then(function(source_code) {
         source_code = source_code.replaceAll(
@@ -204,6 +205,64 @@ var site_trans_cec = (function() {
             btn => btn.addEventListener("click", function(e) {
               e.preventDefault();
               site_trans_cec.genpdf(form);
-            }))))
+            })))),
+
+    gen_file_lines: (category, id) =>
+      [
+        '<!doctype html>',
+        '<html>',
+        '  <head>',
+        '    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />',
+        '    <script src="../../site.js"></script>',
+        '    <script>',
+        "      site_trans_cec.urlbase = '../../';",
+        '      site_trans_cec.head_stylesheets_scripts();',
+        '    </script>',
+        '  </head>',
+        '  <body>',
+        // category and id are supplied by the system, no need to escape them.
+        "    <script>document.body.appendChild(site_trans_cec.body('"+category+"', '"+id+"'));</script>'",
+        '  </body>',
+        '</html>',
+      ],
+
+    gen_file_bash: (category, id) =>
+      (": > " + category + "/" + id + "/index.html\n") +
+      site_trans_cec.gen_file_lines(category, id)
+      .map(line => line.replaceAll("'", "'\\''"))
+      .map(line => "printf %s\\\\n '" + line + "' >> " + category + "/" + id + "/index.html")
+      .join('\n'),
+
+    gen_category_file_lines: (category) =>
+      [
+        '<!doctype html>',
+        '<html>',
+        '  <head>',
+        '    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />',
+        '    <script src="../site.js"></script>',
+        "    <script>site_trans_cec.urlbase = '../';</script>",
+        '    <script>site_trans_cec.head_stylesheets_scripts();</script>',
+        '  </head>',
+        '  <body>',
+        // category is supplied by the system, no need to escape it.
+        "    <script>document.body.appendChild(site_trans_cec.body_category('"+category+"'));</script>",
+        '  </body>',
+        '</html>',
+      ],
+
+    gen_category_file_bash: (category) =>
+      (": > " + category + "/index.html\n") +
+      site_trans_cec.gen_category_file_lines(category)
+      .map(line => line.replaceAll("'", "'\\''"))
+      .map(line => "printf %s\\\\n '" + line + "' >> " + category + "/index.html")
+      .join('\n'),
+
+    gen_site: () =>
+      Object.keys(site_trans_cec.forms).map(category =>
+        (site_trans_cec.gen_category_file_bash(category) + "\n") +
+        site_trans_cec.forms[category].forms.map(form_id =>
+          site_trans_cec.gen_file_bash(category, form_id)
+        ).join('\n')
+      ).join('\n'),
   };
 })();
