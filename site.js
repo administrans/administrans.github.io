@@ -227,10 +227,11 @@ var site_trans_cec = (function() {
       ],
 
     gen_file_bash: (category, id) =>
-      (": > " + category + "/" + id + "/index.html\n") +
+      ("mkdir -p '" + category + "/" + id + "'\n") +
+      (": > '" + category + "/" + id + "/index.html'\n") +
       site_trans_cec.gen_file_lines(category, id)
       .map(line => line.replaceAll("'", "'\\''"))
-      .map(line => "printf %s\\\\n '" + line + "' >> " + category + "/" + id + "/index.html")
+      .map(line => "printf %s\\\\n '" + line + "' >> '" + category + "/" + id + "/index.html'")
       .join('\n'),
 
     gen_category_file_lines: (category) =>
@@ -251,10 +252,11 @@ var site_trans_cec = (function() {
       ],
 
     gen_category_file_bash: (category) =>
-      (": > " + category + "/index.html\n") +
+      ("mkdir -p '" + category + "'\n") +
+      (": > '" + category + "/index.html'\n") +
       site_trans_cec.gen_category_file_lines(category)
       .map(line => line.replaceAll("'", "'\\''"))
-      .map(line => "printf %s\\\\n '" + line + "' >> " + category + "/index.html")
+      .map(line => "printf %s\\\\n '" + line + "' >> '" + category + "/index.html'")
       .join('\n'),
 
     gen_site: () =>
