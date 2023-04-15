@@ -2,6 +2,8 @@
 
 set -euET -o pipefail
 
+cd trans-cec.gitlab.io
+
 h="$(ipfs cid base32 "$(ipfs add --recursive --pin=false --ignore-rules-path=.ipfsignore .)")"
 curl -L \
   -X PATCH \
