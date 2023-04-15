@@ -9,7 +9,6 @@ var site_trans_cec = (function() {
       } else {
         if (console) {
           console.log('warning: skipping !hasOwnProperty(' + attr + ') in ' + tag + '.');
-          console.log(attrs, attr, attrs.hasOwnProperty(attr), typeof(attrs[attr]) != 'undefined', typeof(attrs[attr]));
         }
       }
     }
@@ -30,10 +29,38 @@ var site_trans_cec = (function() {
     return e;
   };
 
+  var groupByN = function(l, n) {
+    var result = [];
+    for (var i = 0; i < l.length; i++) {
+      if (!result[Math.floor(i/n)]) {
+        result[Math.floor(i/n)] = [];
+      }
+      result[Math.floor(i/n)][i%n] = l[i];
+    }
+    return result;
+  }
+
   return {
     urlbase: [],
 
-    body : (form) =>
+    body : (category, id) =>
+      site_trans_cec.form_to_body(site_trans_cec.forms[category][id]),
+
+    body_category: (category) =>
+      $e('div', {}, // TODO: this should be <body> but can't dynamically-generate <body> it seems ?
+        site_trans_cec.nav(),
+        $e('main', {class:"container"},
+          $e('h1', {}, "Courriers par procuration"), // TODO
+          groupByN(Object.values(site_trans_cec.forms[category]), 3).map((line) =>
+            $e('div', {class: "row row-margin-custom"},
+              line.map((cell) =>
+                $e('div', {class: "col-sm-4"},
+                  $e('article', {},
+                    $e('header', {}, $e('a', {href: cell.path.id + "/"}, cell.linktext)),
+                    $e('p', {}, cell.description))))))),
+        site_trans_cec.footer()),
+
+    form_to_body: (form) =>
       $e('div', {}, // TODO: this should be <body> but can't dynamically-generate <body> it seems ?
         site_trans_cec.nav(),
         $e('main', {class:"container"},
@@ -63,7 +90,7 @@ var site_trans_cec = (function() {
             $e('button', {type:"button", class:"navbar-toggle", 'data-toggle':"collapse", 'data-target':"#myNavBar"},
               $e('span', {class:"icon-bar"}),
               $e('span', {class:"icon-bar"})),
-            $e('a', {class:"navbar-brand", href:"'+site_trans_cec.urlbase+'#"}, "Trans Administratif")),
+            $e('a', {class:"navbar-brand", href:site_trans_cec.urlbase+"#"}, "Trans Administratif")),
           $e('div', {class:"collapse navbar-collapse", id:"myNavbar"},
             $e('ul', {class:"nav navbar-nav"},
               $e('li', {}, $e('a', {href:site_trans_cec.urlbase+"procuration/"}, "Courriers par procuration")),
@@ -89,10 +116,14 @@ var site_trans_cec = (function() {
     field: function(info) {
       site_trans_cec.allFields[site_trans_cec.allFields.length] = info.id;
 
-      if (info.type == 'text' || info.type == 'date') {
+      if (info.type == 'text') {
         // note: info.placeholder can be undefined, $e will then omit the attribute
         var input =
           $e('input', {class:"form-control", type:"text", id:info.id, placeholder: info.placeholder})
+      } else if (info.type == 'date') {
+        // note: info.placeholder can be undefined, $e will then omit the attribute
+        var input =
+          $e('input', {class:"date-widget form-control", type:"date", id:info.id, placeholder: info.placeholder})
       } else if (info.type == 'select') {
         var input =
           $e('select', {class:"form-control", id:info.id},
@@ -114,7 +145,7 @@ var site_trans_cec = (function() {
       return elt;
     },
     
-    genpdf: function() {
+    genpdf: function(form) {
       oldGenPdfInnerHtml = document.getElementById("genpdf-button").innerHTML;
       document.getElementById("genpdf-button").innerHTML = '...';
 
@@ -130,7 +161,9 @@ var site_trans_cec = (function() {
         }
       };
 
-      fetch("attestation_chgmtprenom.tex").then(res => res.text()).then(function(source_code) {
+      fetch(site_trans_cec.urlbase + '/templates-latex/'+form.path.category+'_'+form.path.id+'.tex')
+      .then(res => res.text())
+      .then(function(source_code) {
         source_code = source_code.replaceAll(
           RegExp("{{- cleaned_data\\[\"(" + site_trans_cec.allFields.join("|") + ")\"\\] -}}", "g"),
           function($field$) {
@@ -167,9 +200,10 @@ var site_trans_cec = (function() {
         form.fieldsets.map(site_trans_cec.fieldset_to_html),
         $e('div', {class:"form-actions"},
           $e('button', {id:"genpdf-button", class:"btn btn-primary", type:"submit"}, "Générer",
+            // TODO: LISTEN TO OTHER EVENMENTS
             btn => btn.addEventListener("click", function(e) {
               e.preventDefault();
-              site_trans_cec.genpdf();
+              site_trans_cec.genpdf(form);
             }))))
   };
 })();
