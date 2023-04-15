@@ -2,7 +2,7 @@
 
 set -euET -o pipefail
 
-h="$(ipfs cid base32 "$(ipfs add --recursive --hidden --progress --pin=false --ignore-rules-path=.ipfsignore --quieter .)")"
+h="$(ipfs cid base32 "$(ipfs add --recursive --pin=false --ignore-rules-path=.ipfsignore .)")"
 curl -L \
   -X PATCH \
   -H "Accept: application/vnd.github+json" \
