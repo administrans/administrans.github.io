@@ -7,12 +7,12 @@ h="$(ipfs cid base32 "$(ipfs add --recursive --hidden --pin=false --ignore-rules
 echo "After pinning, the new homepage URL will be: https://$h.ipfs.dweb.link/"
 
 # Pin this hash
-(
+#(
   ipfs pin remote service add my-remote-pin "$IPFS_REMOTE_API_ENDPOINT" "$IPFS_REMOTE_TOKEN"
   ipfs swarm connect "$IPFS_SWARM_CONNECT_TO"
   ipfs pin remote add --service=my-remote-pin --name='site-trans-cec-'"$GITHUB_SHA" "$h"
   # Remove all logs to avoid leaking tokens and private URLs:
-) > /dev/null 2>&1
+#) > /dev/null 2>&1
 
 curl -L \
   -X PATCH \
