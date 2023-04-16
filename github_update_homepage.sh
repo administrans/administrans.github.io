@@ -4,7 +4,7 @@ set -euET -o pipefail
 
 echo "Hashing repository contents with IPFS..."
 
-h="$(ipfs cid base32 "$(ipfs add --recursive --hidden --ignore-rules-path=.ipfsignore --quieter .)")"
+h="$(ipfs cid base32 "$(ipfs add --recursive --progress --hidden --ignore-rules-path=.ipfsignore --quieter .)")"
 
 echo "After pinning, the new homepage URL will be: https://$h.ipfs.dweb.link/"
 
