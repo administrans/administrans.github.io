@@ -9,7 +9,9 @@ h="$(ipfs cid base32 "$(ipfs add --recursive --hidden --pin=false --ignore-rules
 echo "After pinning, the new homepage URL will be: https://$h.ipfs.dweb.link/"
 
 # Wait for IPFS daemon to be ready
+tail -f /tmp/ipfs-daemon.logs -n +1 & pid=$!
 while ! grep 'Daemon is ready' /tmp/ipfs-daemon.logs; do sleep 1; done
+kill "$pid"
 
 # Pin this hash
 #(
