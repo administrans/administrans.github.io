@@ -2,9 +2,14 @@
 
 set -euET -o pipefail
 
+ipfs daemon &>/tmp/ipfs-daemon.logs
+
 h="$(ipfs cid base32 "$(ipfs add --recursive --hidden --pin=false --ignore-rules-path=.ipfsignore --quieter .)")"
 
 echo "After pinning, the new homepage URL will be: https://$h.ipfs.dweb.link/"
+
+# Wait for IPFS daemon to be ready
+while ! grep 'Daemon is ready' /tmp/ipfs-daemon.logs; do sleep 1; done
 
 # Pin this hash
 #(
