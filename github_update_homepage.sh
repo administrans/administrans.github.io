@@ -16,13 +16,23 @@ while ! grep 'Daemon is ready' /tmp/ipfs-daemon.logs; do sleep 1; done
 kill "$pid"
 
 # Pin this hash
-#(
+echo "Adding remote pinning service..."
+(
   ipfs pin remote service add my-remote-pin "$IPFS_REMOTE_API_ENDPOINT" "$IPFS_REMOTE_TOKEN"
-  ipfs swarm connect "$IPFS_SWARM_CONNECT_TO"
-  ipfs pin remote add --service=my-remote-pin --name='site-trans-cec-'"$GITHUB_SHA" "$h"
-  # Remove all logs to avoid leaking tokens and private URLs:
-#) > /dev/null 2>&1
+) > /dev/null 2>&1
 
+echo "Connecting to some IPFS node..."
+(
+  ipfs swarm connect "$IPFS_SWARM_CONNECT_TO"
+) > /dev/null 2>&1
+
+echo "Pinning $h on the remote service..."
+(
+  ipfs pin remote add --service=my-remote-pin --name='site-trans-cec-'"$GITHUB_SHA" "$h"
+) > /dev/null 2>&1
+echo "Finished pinning $h on the remote service"
+
+# Update Homepage URL on GitHub
 curl -L \
   -X PATCH \
   -H "Accept: application/vnd.github+json" \
