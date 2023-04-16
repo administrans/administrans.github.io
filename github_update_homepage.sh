@@ -11,7 +11,7 @@ echo "After pinning, the new homepage URL will be: https://$h.ipfs.dweb.link/"
 # Wait for IPFS daemon to be ready
 echo 'Starting IPFS daemon...'
 tail -F /tmp/ipfs-daemon.logs -n +1 & pid=$!
-ipfs daemon >/tmp/ipfs-daemon.logs 2>&1
+ipfs daemon >/tmp/ipfs-daemon.logs 2>&1 &
 while ! grep 'Daemon is ready' /tmp/ipfs-daemon.logs; do sleep 1; date; done
 echo 'IPFS daemon started, killing log tail...'
 kill "$pid"
