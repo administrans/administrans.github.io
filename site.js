@@ -79,6 +79,7 @@ var site_trans_cec = (function() {
           $e('link', {rel: "stylesheet", href: site_trans_cec.urlbase+'custom.css'}),
           $e('script', {src: site_trans_cec.urlbase+'texlive.js/promisejs/promise.js'}),
           $e('script', {src: site_trans_cec.urlbase+'texlive.js/pdftex.js'}),
+          $e('script', {src: site_trans_cec.urlbase+'memory.js'}),
           $e('script', {src: site_trans_cec.urlbase+'forms.js'}),
         ).innerHTML
       );
@@ -200,6 +201,12 @@ var site_trans_cec = (function() {
       $e('form', {class:"memory form-horizontal"},
         form.fieldsets.map(site_trans_cec.fieldset_to_html),
         $e('div', {class:"form-actions"},
+          $e('div', {class:"memoryControls"},
+            $e('button', {type:"button", class:"btn btn-secondary", name:"save", title:"En activant cette option, les données entrées sur ce site seront partagées entre les formulaires. Cela ne marche que pour un même navigateur sur une même machine. N'activez cette option que si vous êtes sur une machine en votre contrôle"},
+              $e('span', {class:"toggleable enable"}, $e('i', {class:"icon pawprint"}), "Activer l'enregistrement des données"),
+              $e('span', {class:"toggleable disable"}, $e('i', {class:"icon pawprint"}), "Désactiver l'enregistrement des données")),
+            $e('button', {type:"button", class:"btn btn-secondary", name:"forget", title:"Toutes les données sauvegardées par ce site dans le cache de votre navigateur seront effacées et les formulaires seront à nouveau vides quand vous les afficherez"},
+              $e('i', {class:"icon wave"}), "Effacer toutes les données")),
           $e('button', {id:"genpdf-button", class:"btn btn-primary", type:"submit"}, "Générer",
             // TODO: LISTEN TO OTHER EVENMENTS
             btn => btn.addEventListener("click", function(e) {
