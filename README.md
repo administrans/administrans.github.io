@@ -1,3 +1,12 @@
+Adminitrans
+===========
+
+https://trans-cec.github.io/
+
+URL IPFS: voir le lien dans l'encart "About" / À propos de.
+
+-------------------
+
 *site-transadministratif* permet de générer des fichiers PDF à partir d'un formulaire Django en utilisant [django-tex](https://pypi.org/project/django-tex/).
 
 | Auteur                 | Licence     |
