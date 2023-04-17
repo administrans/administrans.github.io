@@ -3,7 +3,7 @@ Adminitrans
 
 https://trans-cec.github.io/
 
-URL IPFS: voir le lien dans l'encart "About" / À propos de.
+URL IPFS: voir le lien dans l'encart "About" / "À propos de" sur [GitHub](https://github.com/trans-cec/trans-cec.github.io).
 
 -------------------
 
