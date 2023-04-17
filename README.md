@@ -143,6 +143,7 @@ Un grand merci à toutes ces personnes qui ont fait des tests, bugs reports, mer
 - Aurore Moisy-Mabille
 - [Eliot Berriot](https://eliotberriot.com/)
 - Une autre [Alice](https://bidule.menf.in/users/alice)
+- [Emy Canton](https://github.com/entropyqueen)
 - Misc
 - [Freyja Wildes](https://social.art-software.fr/@freyja_wildes)
 - [Suzanne Soy](https://suzanne.soy)
