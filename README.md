@@ -1,5 +1,5 @@
-Adminitrans
-===========
+Administrans
+============
 
 https://trans-cec.github.io/
 
