@@ -5,8 +5,10 @@ site_trans_cec.forms = (function(){
     category_title: "Attestations",
     forms: [
       { id: "chgmtprenom",
+        linktext: 'Attestation de changement de prénom',
         pagetitle: "Nouvelle attestation de changement de prénom",
         pagesubtitle: "Génération de la lettre",
+        description: "Les personnes vous connaissant peuvent attester de votre nouveau prénom, utile pour le dossier initial",
         fieldsets: [
           {
             legend: "Informations de la personne trans",
