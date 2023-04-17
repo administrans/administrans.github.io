@@ -1,4 +1,20 @@
 var site_trans_cec = (function() {
+  var appendChildrenList = function(e, children) {
+    for (var i = 0; i < children.length; i++) {
+      if (Array.isArray(children[i])) {
+        appendChildrenList(e, children[i]);
+      } else if (children[i] instanceof Function) {
+        children[i](e)
+      } else if (typeof children[i] === 'string' || children[i] instanceof String) {
+        e.appendChild(document.createTextNode(children[i]));
+      } else {
+        e.appendChild(children[i]);
+      }
+    }
+  };
+
+  var appendChildren = (e, child_or_children) => appendChildrenList(e, [child_or_children]);
+
   var $e = function(tag, attrs) { // tag, attrs, children...
     var e = document.createElement(tag);
     for (attr in attrs) {
@@ -12,20 +28,8 @@ var site_trans_cec = (function() {
         }
       }
     }
-    var appendAllChildren = function(children) {
-      for (var i = 0; i < children.length; i++) {
-        if (Array.isArray(children[i])) {
-          appendAllChildren(children[i]);
-        } else if (children[i] instanceof Function) {
-          children[i](e)
-        } else if (typeof children[i] === 'string' || children[i] instanceof String) {
-          e.appendChild(document.createTextNode(children[i]));
-        } else {
-          e.appendChild(children[i]);
-        }
-      }
-    }
-    appendAllChildren(Array.prototype.slice.call(arguments, 2));
+
+    appendChildren(e, Array.prototype.slice.call(arguments, 2));
     return e;
   };
 
@@ -43,14 +47,15 @@ var site_trans_cec = (function() {
   return {
     urlbase: [],
 
+    appendChildren: appendChildren,
+
     body : (category, id) =>
       site_trans_cec.form_to_body(site_trans_cec.forms[category][id]),
 
     body_category: (category) =>
-      $e('div', {}, // TODO: this should be <body> but can't dynamically-generate <body> it seems ?
-        site_trans_cec.nav(),
+      [ site_trans_cec.nav(),
         $e('main', {class:"container"},
-          $e('h1', {}, "Courriers par procuration"), // TODO
+          $e('h1', {}, site_trans_cec.forms[category].category_title),
           groupByN(site_trans_cec.forms[category].forms, 3).map((line) =>
             $e('div', {class: "row row-margin-custom"},
               line.map((form_id) =>
@@ -58,18 +63,18 @@ var site_trans_cec = (function() {
                   $e('article', {},
                     $e('header', {}, $e('a', {href: form_id + "/"}, site_trans_cec.forms[category][form_id].linktext)),
                     $e('p', {}, site_trans_cec.forms[category][form_id].description))))))),
-        site_trans_cec.footer()),
+        site_trans_cec.footer()],
 
     form_to_body: (form) =>
-      $e('div', {}, // TODO: this should be <body> but can't dynamically-generate <body> it seems ?
-        site_trans_cec.nav(),
+      [ site_trans_cec.nav(),
         $e('main', {class:"container"},
           $e('div', {class:"container form-container"},
             $e('h1', {},
               form.pagetitle,
+              $e('br', {}),
               $e('small', {}, form.pagesubtitle || '')), // TODO: have a pagesubtitle for every page
             site_trans_cec.form_to_html(form))),
-        site_trans_cec.footer()),
+        site_trans_cec.footer()],
 
     head_stylesheets_scripts: function () {
       document.write(
@@ -105,11 +110,14 @@ var site_trans_cec = (function() {
     footer: () =>
       $e('footer', {class:"text-center"},
         $e('p', {},
-          "En cas d'erreur contacter: ",
-          $e('a', {href:"mailto: freyja_wildes+trans-cec@pm.me"}, "Freyja Wildes"),
+          "En cas de problèmes, merci de préférer ",
+          $e('a', {href:"https://github.com/entropyqueen/trans-cec/issues/new"}, "remplir une issue sur github"),
+          $e('br', {}),
+          "Ou bien contacter : ",
+          $e('a', {href:"mailto: emy.canton@proton.me"}, "Emy Canton"),
           " ou ",
           $e('a', {href:"mailto: trans-cec@suzanne.soy"}, "Suzanne Soy Dupéron")),
-        $e('p', {}, "Adresse du répositoire ", $e('a', {href:"http://gitlab.s1.0x39b.fr/freyja/trans-cec.git"}, "ici"), ".")),
+        $e('p', {}, "Code source sur : ", $e('a', {href:"https://github.com/trans-cec/trans-cec.github.io"}, "github"), ".")),
 
 
     allFields: [],
@@ -145,13 +153,66 @@ var site_trans_cec = (function() {
       
       return elt;
     },
-    
-    genpdf: function(form) {
-      oldGenPdfInnerHtml = document.getElementById("genpdf-button").innerHTML;
-      document.getElementById("genpdf-button").innerHTML = '...';
 
+    dataurl_to_blob: function(dataurl, mime, form) {
+      var byteString = atob(dataurl.split(',')[1]);
+      var buf = new ArrayBuffer(byteString.length);
+      var buf_view = new Uint8Array(buf);
+      for (var i = 0; i < byteString.length; i++) {
+        buf_view[i] = byteString.charCodeAt(i);
+      }
+      // mime could be extracted from data url
+      var mime = mime || dataurl.split(',')[0].split(':')[1].split(';')[0];
+      //try {
+        return new File([ buf ], site_trans_cec.get_pdf_filename(form), { type: mime });
+      //} catch (e) {
+        // IE doesn't support File constructor, we loose the filename with Blob when opening the PDF (not when saving), no big deal.
+        //return new Blob([ buf ], { type: mime });
+      //}
+    },
+
+    open_pdf: function(form) {
+      var blob = site_trans_cec.dataurl_to_blob(site_trans_cec.pdf_dataurl, "application/pdf", form);
+      window.open(window.URL.createObjectURL(blob));
+      /*
+      var iframe = '<body style="padding: 0; margin: 0; overflow: hidden;"><iframe width="100%" height="100%" src="' + site_trans_cec.pdf_dataurl + '"></iframe></body>'
+      var x = window.open();
+      x.document.open();
+      x.document.write(iframe);
+      x.document.close();
+      */
+    },
+
+    // TODO: name of file should include more details maybe? Especially for "attestation", since the user is likely to make several
+    get_pdf_filename: (form) => 'Adminitrans ' + form.linktext + '.pdf',
+
+    save_pdf: function(form) {
+      var blob = site_trans_cec.dataurl_to_blob(site_trans_cec.pdf_dataurl, "application/pdf", form);
+      var a = $e('a', {href: window.URL.createObjectURL(blob), download: site_trans_cec.get_pdf_filename(form)});
+      a.click();
+    },
+
+    genpdf: function(form) {
+      document.getElementById("gen-pdf-button").innerHTML = 'Génération… 0%';
+      document.getElementById('open-pdf-button').style.display = 'none';
+      document.getElementById('save-pdf-button').style.display = 'none';
+      document.getElementById('gen-pdf-button').setAttribute('type', 'submit');
+
+      var log_lines_counter = 0;
+      var expected_log_lines = 150; // TODO: have this memorized for each form.
       var logfn = function(s) {
-        if (s !== '') { console.log(s); }
+        try {
+          log_lines_counter++;
+          if (log_lines_counter > expected_log_lines) {
+            var progress = 'Génération… (' + log_lines_counter + '/' + expected_log_lines + ')';
+          } else {
+            var progress = 'Génération… ' + Math.floor(log_lines_counter/expected_log_lines*100) + '%';
+          }
+          document.getElementById("gen-pdf-button").innerHTML = progress;
+          if (console && s !== '') { console.log(s); }
+        } catch(e) {
+          if (console) { console.log(e); }
+        }
       };
       
       var utf8Encode = function(str) {
@@ -180,11 +241,18 @@ var site_trans_cec = (function() {
           texlive.pdftex.on_stderr = logfn;
           texlive.pdftex.compile(utf8Encode(source_code)).then(function(pdf_dataurl) {
             console.log(pdf_dataurl);
-            document.getElementById("genpdf-button").innerHTML = oldGenPdfInnerHtml;
+            document.getElementById("gen-pdf-button").innerHTML = "Générer";
             if (pdf_dataurl === false) {
               console.log("compilation error");
             } else {
-              window.open(pdf_dataurl);
+              document.getElementById('open-pdf-button').style.removeProperty('display');
+              document.getElementById('save-pdf-button').style.removeProperty('display');
+              document.getElementById('gen-pdf-button').removeAttribute('type');
+              document.getElementById('open-pdf-button').setAttribute('type', 'submit');
+              document.getElementById('gen-pdf-button').classList.remove('btn-primary');
+              document.getElementById('gen-pdf-button').classList.add('btn-secondary');              
+              site_trans_cec.pdf_dataurl = pdf_dataurl;
+              site_trans_cec.open_pdf(form);
             }
           });
         });
@@ -204,14 +272,30 @@ var site_trans_cec = (function() {
             $e('button', {type:"button", class:"btn btn-secondary", name:"save", title:"En activant cette option, les données entrées sur ce site seront partagées entre les formulaires. Cela ne marche que pour un même navigateur sur une même machine. N'activez cette option que si vous êtes sur une machine en votre contrôle"},
               $e('span', {class:"toggleable enable"}, $e('i', {class:"icon pawprint"}), "Activer l'enregistrement des données"),
               $e('span', {class:"toggleable disable"}, $e('i', {class:"icon pawprint"}), "Désactiver l'enregistrement des données")),
+            " ",
             $e('button', {type:"button", class:"btn btn-secondary", name:"forget", title:"Toutes les données sauvegardées par ce site dans le cache de votre navigateur seront effacées et les formulaires seront à nouveau vides quand vous les afficherez"},
               $e('i', {class:"icon wave"}), "Effacer toutes les données")),
-          $e('button', {id:"genpdf-button", class:"btn btn-primary", type:"submit"}, "Générer",
-            // TODO: LISTEN TO OTHER EVENMENTS
+          $e('button', {id:"gen-pdf-button", class:"btn btn-primary", type:"submit"}, "Générer",
+            // TODO: LISTEN TO OTHER EVENTS
             btn => btn.addEventListener("click", function(e) {
               e.preventDefault();
               site_trans_cec.genpdf(form);
-            })))),
+            })),
+          " ",
+          $e('button', {id:"open-pdf-button", class:"btn btn-primary", style:"display:none"}, "Ouvrir",
+            // TODO: LISTEN TO OTHER EVENTS
+            btn => btn.addEventListener("click", function(e) {
+              e.preventDefault();
+              site_trans_cec.open_pdf(form);
+            })),
+            " ",
+            $e('button', {id:"save-pdf-button", class:"btn btn-secondary", style:"display:none"}, "Enregistrer",
+              // TODO: LISTEN TO OTHER EVENTS
+              btn => btn.addEventListener("click", function(e) {
+                e.preventDefault();
+                site_trans_cec.save_pdf(form);
+              }))
+            )),
 
     gen_file_lines: (category, id) =>
       [
@@ -227,7 +311,7 @@ var site_trans_cec = (function() {
         '  </head>',
         '  <body>',
         // category and id are supplied by the system, no need to escape them.
-        "    <script>document.body.appendChild(site_trans_cec.body('"+category+"', '"+id+"'));</script>'",
+        "    <script>site_trans_cec.appendChildren(document.body, site_trans_cec.body('"+category+"', '"+id+"'));</script>",
         '  </body>',
         '</html>',
       ],
@@ -252,7 +336,7 @@ var site_trans_cec = (function() {
         '  </head>',
         '  <body>',
         // category is supplied by the system, no need to escape it.
-        "    <script>document.body.appendChild(site_trans_cec.body_category('"+category+"'));</script>",
+        "    <script>site_trans_cec.appendChildren(document.body, site_trans_cec.body_category('"+category+"'));</script>",
         '  </body>',
         '</html>',
       ],
