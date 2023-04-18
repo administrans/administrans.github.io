@@ -84,7 +84,8 @@ ipfs cid base32 Qm...BlaBla
 Pour héberger un miroir IPFS, vous pouvez naviguer sur l'adresse IPFS et cliquer sur [icône IPFS] → [Import to Files on My Node], [si votre navigateur le supporte](https://docs.ipfs.tech/install/ipfs-companion/). Ou bien, dans votre ligne de commande, tapez:
 
 ```shell
-# Remplacez bafy...blabla le code obtenu ci-dessus / le code dans l'adresse dans l'encart sur GitHub
+# Remplacez bafy...blabla par le code obtenu ci-dessus
+# ou par le code dans l'adresse dans l'encart sur GitHub
 ipfs pin add --progress bafy...blabla
 ```
 
