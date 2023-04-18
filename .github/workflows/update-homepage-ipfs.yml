@@ -34,9 +34,9 @@ jobs:
         with:
           submodules: 'recursive'
       - name: Download IPFS
-        run: ./github_install_ipfs.sh
+        run: ./.github/github_install_ipfs.sh
       - name: Update homepage URL
-        run: PATH="/tmp/kubo:$PATH" ./github_update_homepage.sh
+        run: PATH="/tmp/kubo:$PATH" ./.github/github_update_homepage.sh
         env:
           API_TOKEN_FOR_UPDATE_HOMEPAGE: ${{ secrets.API_TOKEN_FOR_UPDATE_HOMEPAGE }}
           IPFS_SWARM_CONNECT_TO: ${{ secrets.IPFS_SWARM_CONNECT_TO }}
