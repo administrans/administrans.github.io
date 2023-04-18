@@ -111,7 +111,7 @@ var site_trans_cec = (function() {
       $e('footer', {class:"text-center"},
         $e('p', {},
           "En cas de problèmes, merci de préférer ",
-          $e('a', {href:"https://github.com/entropyqueen/trans-cec/issues/new"}, "remplir une issue sur github"),
+          $e('a', {href:"https://github.com/administrans/administrans.github.io/issues/new"}, "remplir une issue sur github"),
           $e('br', {}),
           "Ou bien contacter : ",
           $e('a', {href:"mailto: emy.canton@proton.me"}, "Emy Canton"),
