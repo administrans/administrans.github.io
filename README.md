@@ -1,18 +1,27 @@
 Administrans
-============
+===
 
 https://trans-cec.github.io/
 
-URL IPFS: voir le lien dans l'encart "About" / "À propos de" sur [GitHub](https://github.com/trans-cec/trans-cec.github.io).
+URL IPFS: voir le lien dans l'encart "About" / "À propos de" sur [GitHub](https://github.com/administrans/administrans.github.io).
 
--------------------
+Administrans est un outil en ligne permettant de générer des fichiers pdf pour faire des attestations pour les changements de prénoms ainsi que des lettres pour demander les changements suite à un changement de prénom/mention genre.
+Il a pour but de faciliter les démarches administratives des personnes transgenre en France.
 
-*site-transadministratif* permet de générer des fichiers PDF à partir d'un formulaire Django en utilisant [django-tex](https://pypi.org/project/django-tex/).
+Cette version fonctionne 100% côté client et ne nécessite pas de serveur. Elle est basée sur https://administrans.fr/ (https://github.com/entropyqueen/trans-cec/)
 
-| Auteur                 | Licence     |
+Administrans, anciennement *trans-cec* permet de générer des fichiers PDF à partir d'un formulaire en utilisant [texlive.js](https://github.com/fzimmermann89/texlive.js/) (ou[django-tex](https://pypi.org/project/django-tex/) pour [la version avec serveur](https://github.com/entropyqueen/trans-cec)).
+Il s'agit d'un fork du project d'Emy Canton, lui-même un fork du projet Maria Climent-Pommeret.
+
+| Auteur.ice             | Licence     |
 |------------------------|-------------|
 | Maria Climent-Pommeret | Licence MIT |
 
+
+| Mainteneur.euse(s) | Tâche(s)                   | Contact |
+|--------------------|----------------------------|---------|
+| Suzanne Soy        | accepte les MR, c'est tout | [github](https://github.com/administrans/administrans/issues)    |
+| Emy Canton         | version avec serveur       | [github](https://github.com/entropyqueen/trans-cec/issues)    |
 
 Comment cela fonctionne
 -----------------------
@@ -25,125 +34,84 @@ Les différents modes :
 - par procuration (génère une procuration + la lettre de demande à faire envoyer
 par un.e cis de l'entourage qui pourra gérer les tracas administratifs, pour pas
 que vous ayez a gérer vous même cette merde)
-- les lettres si vous souhaitez le faire vous même.
+- [to come] les lettres si vous souhaitez le faire vous même.
 
 Checklist des papiers à changer
 -------------------------------
 
 Si changement de prénom à l'EC
-- carte de transport
+- Carte de transport
 - CNI/passeport
-- permis de conduire
-- impôts
-- médecins
-- mutuelle
-- carte de groupe sanguin/donneur.se d'organes
+- Permis de conduire
+- Impôts
+- Médecins
+- Mutuelle
+- Carte de groupe sanguin/donneur.se d'organes
 - MDPH
-- électricité/gaz/eau
-- opérateur téléphonique/Internet
-- carte d'électeur.rice
-- carte bancaire
-- carte vitale
-- Pôle Emploi
-- carte d'étudiant.e
-- diplômes
+- Électricité/gaz/eau
+- Opérateur téléphonique/Internet
+- Carte d'électeur.rice
+- Livret de famille
 
 Si changement de mention de sexe à l'État-Civil (pas encore pris en charge) :
 - CNI/passeport
-- permis de conduire
-- numéro INSEE
-- numéro de sécurité sociale et carte vitale
+- Permis de conduire
+- Numéro INSEE
+- Numéro de sécurité sociale
+- Livret de famille
 
-Requirements
-------------
-
-- Python>=3.6 (Latest tested with)
-- django-tex
-- jinja2-django-tags
-- texlive-full (pour la génération du PDF à partir de .tex)
-
-
-Déploiement
+Dépendances
 -----------
 
-[Regardez ici par exemple](https://maria.climent-pommeret.red/fr/blog/deploying-a-django-application/)
+Pour la version sans serveur, il n'y a aucune dépendance.
 
+Voir https://github.com/entropyqueen/trans-cec pour la version avec serveur.
+
+Déploiement
+----------
+
+Vous pouvez copier-coller l'ensmble des fichiers sur n'importe quel serveur web et avoir un miroir du site (HTTPs et non pas HTTP, de préférence).
+
+Le protocole [IPFS](https://ipfs.tech) permet à plusieurs personnes d'héberger un miroir de manière non-hiérarchique et distribuée. Si vous aimez partager et n'aimez pas la hiérarchie, vous pouvez lancer la commande suivante pour avoir l'addresse de hachage de ce site, ou bien juste regarder le lien "Homepage" / "Page d'accueil" dans la section "About" / "À propos de" de [GitHub](https://github.com/administrans/administrans.github.io), le lien est déjà là.
+
+```shell
+ipfs add --recursive --progress --hidden --ignore-rules-path=.ipfsignore --quieter .
+
+# Remplacez Qm...BlaBla par le code obtenu ci-dessus
+ipfs cid base32 Qm...BlaBla
+```
+
+Pour héberger un miroir IPFS, vous pouvez naviguer sur l'adresse IPFS et cliquer sur [icône IPFS] → [Import to Files on My Node], [si votre navigateur le supporte](https://docs.ipfs.tech/install/ipfs-companion/). Ou bien, dans votre ligne de commande, tapez:
+
+```shell
+# Remplacez bafy...blabla le code obtenu ci-dessus / le code dans l'adresse dans l'encart sur GitHub
+ipfs pin add --progress bafy...blabla
+```
 
 Contribuer ?
 ------------
 
-OUI SVP ! Comme je peux pas ouvrir à tout va le gitlab, envoyez-moi un mail (avec un sujet explicite) at maria AT climent-pommeret DOT red, je vous créerais un compte !
+OUI SVP ! Pour cela, n'hésitez pas à faire des issues github ou bien ouvrir directement des PR sur github 
 
-Pour contribuer au code, en dehors des petites modifications qui peuvent être faites
-directement via l'éditeur intégré à Gitlab (Web IDE), il vous faudra installer
-une copie locale du projet.
+Pour cela les dépendances système requises sont :
 
-Pour cela les dépendances système requises sont:
+- de la bonne volonté
 
-- git
-- python3.7
-- python3.7-venv
-- texlive-full
-- python3-pip
-
-Commencez par forker le dépôt en visitant https://gitlab.climent-pommeret.red/Chopopope/site-transadministratif/forks/new.
-
-Ensuite, clonez ce nouveau dépôt avec git:
-
-    git clone https://gitlab.climent-pommeret.red/<pseudo GitLab>/site-transadministratif.git
-
-(remplacez `<pseudo GitLab>` par votre pseudo Gitlab).
-
-Placez-vous dans le dossier nouvellement créé:
-
-    cd site-transadministratif
-
-À ce stade, vous avez récupéré le code source du projet, félicitations !
-
-Il vous reste à configurer et faire fonctionner votre copie locale.
-
-La première étape est de créer un environnement virtuel python afin d'installer les dépendances du projet:
-
-    python3 -m venv virtualenv
-
-Ensuite, installez les dépendances python requises pour faire fonctionne le projet:
-
-    virtualenv/bin/pip install -r requirements.txt
-
-Créez votre fichier de configuration:
-
-    cp mysite/mysite/localsettings.py.dist mysite/mysite/localsettings.py
-
-Éditez le fichier `mysite/mysite/localsettings.py` et ajoutez une valeur pour `SECRET_KEY`, par exemple `SECRET_KEY = 'dev'`.
-
-Appliquez les migrations
-
-    virtualenv/bin/python mysite/manage.py migrate
-
-Lancez le serveur de développement:
-
-    virtualenv/bin/python mysite/manage.py runserver
-
-Le projet est démarré et accessible à l'adresse http://127.0.0.1:8000/ :)
-
-Lancer les tests
-----------------
-
-Des tests unitaires sont disponibles pour ce projet. Si vous modifier du code, vous pouvez
-les lancer pour vérifier que vous n'avez rien cassé:
-
-    pytest mysite/tests
+Vouz pouvez travailler sur votre machine en utilisant `git` et votre éditeur favori, ou bien utiliser les [codespaces](https://docs.github.com/en/codespaces) pour éditer directement depuis votre compte GitHub, *sans rien installer*.
 
 Ont contribué
 -------------
 
-Un grand merci à toutes ces personnes qui ont fait des tests, bugs reports, merge requests, corrections orthographiques et montré du soutien \o/ :
+Un grand merci à toutes ces personnes qui ont fait des tests, bugs reports, merge requests, corrections orthographiques
+et montré du soutien \o/ :
 
+- [Emy Canton](https://entropyqueen.github.io/)
 - [Alice Climent-Pommeret](https://alice.climent-pommeret.red/fr)
+- [Sasha Emily Chelsea Murgia](https://www.chelsea486mhz.fr)
 - Aurore Moisy-Mabille
-- [Eliot Berriot](https://eliotberriot.com/)
+- [Agate Berriot](https://agate.blue/)
 - Une autre [Alice](https://bidule.menf.in/users/alice)
-- [Emy Canton](https://github.com/entropyqueen)
-- Misc
 - [Freyja Wildes](https://social.art-software.fr/@freyja_wildes)
 - [Suzanne Soy](https://suzanne.soy)
+- Misc
+

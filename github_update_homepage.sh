@@ -41,4 +41,4 @@ curl -L \
   -H "Authorization: Bearer $API_TOKEN_FOR_UPDATE_HOMEPAGE"\
   -H "X-GitHub-Api-Version: 2022-11-28" \
   https://api.github.com/repos/trans-cec/trans-cec.github.io \
-  -d '{"name":"trans-cec.github.io", "homepage":"https://'"$h"'.ipfs.dweb.link/"}' > /dev/null
+  -d '{"name":"trans-cec.github.io", "homepage":"https://dweb.link/ipfs/'"$h"'"}' > /dev/null
