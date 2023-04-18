@@ -68,9 +68,16 @@ Pour la version sans serveur, il n'y a aucune dépendance.
 Voir https://github.com/entropyqueen/trans-cec pour la version avec serveur.
 
 Déploiement
-----------
+-----------
 
 Vous pouvez copier-coller l'ensmble des fichiers sur n'importe quel serveur web et avoir un miroir du site (HTTPs et non pas HTTP, de préférence).
+
+En général, rien à configurer, rien à lancer.
+
+Dans le rare cas où vous changez [les paquets LaTeX supplémentaires](https://github.com/administrans/trans-cec.github.io/tree/main/extra-packages) ou [l'icône de favoris](https://github.com/administrans/trans-cec.github.io/blob/main/favicon.png), alors lancez `./deploy.sh` (ce script génère un `.ico` 16x16 à partir du `favicon.png`, puis extrait `extra-packages/*.zip` dans `texlive.js/texlive/texmf-dist/` et régénère `texlive.lst` et les fichiers listes `ls-R`, pensez à faire un `git commit` dans ce *submodule*)
+
+Miroirs IPFS
+------------
 
 Le protocole [IPFS](https://ipfs.tech) permet à plusieurs personnes d'héberger un miroir de manière non-hiérarchique et distribuée. Si vous aimez partager et n'aimez pas la hiérarchie, vous pouvez lancer la commande suivante pour avoir l'addresse de hachage de ce site, ou bien juste regarder le lien "Homepage" / "Page d'accueil" dans la section "About" / "À propos de" de [GitHub](https://github.com/administrans/administrans.github.io), le lien est déjà là.
 
