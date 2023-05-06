@@ -117,7 +117,7 @@ et montré du soutien \o/ :
 - [Alice Climent-Pommeret](https://alice.climent-pommeret.red/fr)
 - [Sasha Emily Chelsea Murgia](https://www.chelsea486mhz.fr)
 - Aurore Moisy-Mabille
-- [Agate Berriot](https://agate.blue/)
+- Agate Berriot
 - Une autre [Alice](https://bidule.menf.in/users/alice)
 - [Freyja Wildes](https://social.art-software.fr/@freyja_wildes)
 - [Suzanne Soy](https://suzanne.soy)
